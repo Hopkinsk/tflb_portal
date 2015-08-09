@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Curation</title>
+
+    <!-- Application styles. -->
+    <!-- build:[href] /css/styles.min.css -->
+    <link rel="stylesheet" href="/app/styles/index.css">
+    <!-- /build --> 
+
+    <!-- Logged in -->
+      <!--  -->
+      <script>
+        window.server_session = {
+            timeout: 15,       
+            timeout_warning: 1,
+            csrf: "ABC123", 
+            user: { 
+              username: "grayling",
+              name: "Dr. Grayling",
+              id: "USER1"
+            } 
+        };
+      </script>
+      <!-- -->
+</head>
+
+<body>
+    <div id="header-region"></div>
+
+    <div class="container-fluid">
+        <!-- Application container. -->
+        <main role="main" id="main-region"></main>
+    </div>
+
+<!--[if lt IE 9]>
+    <div style="margin: 30px">
+        <p>Apologies, but your browser is currently unsupported by this website.</p>
+        <p>Please visit this website with a modern browser such as Chrome, Internet Explorer 10 or 11, Firefox or Safari.</p>    
+    </div>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+
+    <!-- Application source. -->
+    <!-- build:[src] /source.min.js -->
+    <script data-main="/app/main" src="/vendor/bower/requirejs/require.js"></script>
+    <!-- /build -->
+
+<!--<![endif]-->
+
+</body>
+
+</html>
