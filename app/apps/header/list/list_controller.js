@@ -15,7 +15,7 @@ define(["app", "apps/header/list/headers"], function(App, Headers){
                     var trigger = model.get("navigationTrigger");
                     App.trigger(trigger);
                 });
-
+                console.log("HERE", App);
                 App.headerRegion.show(headers);
             });
         },

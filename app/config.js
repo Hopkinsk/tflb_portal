@@ -21,7 +21,9 @@ require.config({
         "bootstrap": "../vendor/bower/bootstrap/dist/js/bootstrap",
         "jquery-ui": "../vendor/bower/jquery-ui/jquery-ui.min",
         "bootstrap-dialog": "../vendor/bower/bootstrap3-dialog/src/js/bootstrap-dialog",
- 
+        "moment": "../vendor/bower/moment/min/moment.min",
+        "clndr": "../vendor/bower/clndr/clndr.min",
+
 
     },
 
@@ -55,7 +57,10 @@ require.config({
         },
         "tpl": ["text"],
         "bootstrap": ["jquery"],
-
+        "clndr": {
+            deps: ["moment", "jquery", "underscore"],
+            exports: "clndr"
+        }
 
     }
 });

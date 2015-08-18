@@ -46,9 +46,9 @@ define(["app",
         },
         serializeData: function(){
             var user = {};
-            if(App.getCurrentUser()){
-                user = App.getCurrentUser();
-            }
+            // if(App.getCurrentUser()){
+            //     user = App.getCurrentUser();
+            // }
             return {
                 user: user
             };

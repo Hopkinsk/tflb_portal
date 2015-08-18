@@ -17,19 +17,10 @@ define(["app", "backbone.picky"], function(App){
 
         var initializeHeaders = function(){
             var headers = [
-                { name: "Curation", url: "curation", navigationTrigger: "curation:show" },
                 // { name: "Home", url: "home", navigationTrigger: "home:show" },
-                //{ name: "Curated Findings", url: "curatedFindings", navigationTrigger: "curatedFindings:show" },
-                //{ name: "Variant Curation", url: "variants", navigationTrigger: "variants:show" },
-                //{ name: "Gene Portal", url: "geneCuration", navigationTrigger: "geneCuration:show" },    
-                { name: "Admin", url: "admin", navigationTrigger: "admin:show" },
-                { name: "Trial Portal", url: "trials", navigationTrigger: "trials:list" }
+
             ];
 
-            // if (App.isAdmin()){
-            //     headers.push({ name: "Admin", url: "admin", navigationTrigger: "admin:show" });
-            //     headers.push({ name: "Trial Portal", url: "trials", navigationTrigger: "trials:list" });
-            // }
             Entities.headers = new Entities.HeaderCollection(headers);
         };
 
