@@ -1,10 +1,18 @@
 @clndr-border: 1px solid #000;
+@inactive: #BCBCBC;
+
+@inactiveFont: #DDDDDD;
+@inactiveFontSize: 20px;
 
 .noselect
 {
     -webkit-user-select: none; /* Chrome/Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+ */
+}
+
+.hidden {
+    display: none;
 }
 
 .clndr-controls {
@@ -105,6 +113,7 @@
             border-top: @clndr-border;
             width: 100%;
             height: inherit;
+            background: white;
 
             &:hover { background: #eee; }
 
@@ -129,7 +138,9 @@
 
             &.inactive, &.my-inactive
             {
-                background: #ddd;
+                background: @inactive;
+                color: @inactiveFont;
+                font-size: @inactiveFontSize;
             }
 
             &:last-child
@@ -145,6 +156,13 @@
                 padding: 8px;
                 font-size: 12px;
                 text-align: right;
+
+
+                .day-number
+                {
+
+                font-size: 30px;
+                }
             }
         }
 
@@ -154,7 +172,8 @@
             border-top: @clndr-border;
             width: 100%;
             height: inherit;
-            background: #eee;
+            background: @inactive;
+            color: @inactiveFont;
 
             &:hover { background: #ddd; }
 
@@ -178,6 +197,7 @@
         }
     }
 }
+
 
 
 

@@ -1,24 +1,62 @@
 <div class='clndr-controls col-sm-12'> 
-  <div class='clndr-control-button'><span class='clndr-previous-button'> previous</span></div>
+  <div class='clndr-control-button js-previous-month'><span class='clndr-previous-button'> previous</span></div>
+  <div class="js-finish-study finish-study hidden"><button class="btn btn-default"> Finish </button></div>
+
   <div class='col-sm-4 month'><h3> <%= month %> </h3> <%= year %></div>
   <div class='clndr-control-button rightalign'><span class='clndr-next-button'>next</span></div>
 </div>
 <table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>
-  <thead>
+  
+  <!-- WEEKDAY HEADER -->
+  <thead>  
     <tr class='header-days'>
       <% for(var i = 0; i < daysOfTheWeek.length; i++) { %>
       <td class='header-day'><%= daysOfTheWeek[i] %></td>
       <% } %>
     </tr>
   </thead>
+
+  <!-- CALENDAR -->
   <tbody>
     <% for(var i = 0; i < numberOfRows; i++){ %>
+    
     <tr>
+
+
+
       <% for(var j = 0; j < 7; j++){ %>
+      <!-- DAYS -->
       <% var d = j + i * 7; %>
-      <td class='<%= days[d].classes %>'><div class='day-contents'><%= days[d].day %>
-      </div></td>
+      <td class='<%= days[d].classes %>'>
+
+        <div class='day-contents' data-day=<%= days[d].day %> data-test="test">
+
+         
+
+          <% _.each(days[d].events, function(event){ %>
+          
+            <% if(event.type == "personal"){ %>
+            <span class="event-personal pull-left"> <%= event.title %> </span>
+            
+            <% } else if(event.type == "alcohol") { %>
+            
+            <div class="js-alcohol-icon pull-left"> <%= event.type %> </div> <br>
+            <% } else if(event.type == "marijuana"){ %> 
+            <div class="js-marijuana-icon pull-left"> <%= event.type %> </div>
+
+            <% } %>
+
+
+          <% }) %>
+
+          <span class="day-number">  <%= days[d].day %> </span>
+         </div>
+
+
+      </td>
       <% } %>
+
+
     </tr>
     <% } %>
   </tbody>

@@ -8,24 +8,73 @@ define(["app", "backbone"], function(App, Backbone){
 
     Entities.studyEvent = Backbone.Model.extend({
         url: Entities.urls.studyEvent
+    });
 
+    Entities.Day = Backbone.Model.extend({
+       // url: Entities.urls.studyEvent
+
+       getNumberOfDrinks: function(){
+            var drinksCount = 0;
+            _.each(this.attributes.events, function(evt){
+                if(evt.type == "alcohol"){
+                    drinksCount = evt.drinksCount;
+                };
+            });
+            return drinksCount;
+       },
+
+       getMarijuanaUse: function(){
+        console.log("HERE");
+            var used = false;
+            _.each(this.attributes.events, function(evt){
+                console.log(evt);
+                if(evt.type == "marijuana"){
+                    console.log("return true..");
+                    used = true;
+                }
+            });
+            return used;
+       },
+
+       getPersonalEvents: function(){
+            var events = [];
+            _.each(this.events, function(evt){
+                if(evt.type == "personal"){
+                    events.push(evt.title);
+                }
+            });
+            return events;
+       }
+    });
+
+    Entities.Events = Backbone.Collection.extend({
+        url: Entities.urls.events
     });
 
     Entities.study = Backbone.Model.extend({
         url: Entities.urls.study,
 
+
+        createDay: function(data){
+            return new Entities.Day(data);
+        },
+
         getEvents: function(){
+            //var events = new Entities.Events();
             var events = [];
             _.each(this.get('personal'), function(evt){
                 events.push(evt);
+               // events.add(evt);
             });
 
             _.each(this.get('marijuana'), function(evt){
                 events.push(evt);
+               // events.add(evt);
             });
 
             _.each(this.get('alcohol'), function(evt){
                 events.push(evt);
+                //events.add(evt);
             });
 
             return events;

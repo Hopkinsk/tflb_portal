@@ -5,6 +5,7 @@
     	{
     		"date" : "2015-08-10",
     		"dayNumber" : 1,
+            "type" : "personal",
     		"title" : "Birthday"
     	}
     ],
@@ -16,7 +17,6 @@
     		"drinksCount" : 3,
     		"type" : "alcohol"
     	}
-
     ],
 
     "marijuana" : [
