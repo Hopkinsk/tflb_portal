@@ -1,10 +1,45 @@
-<div class='clndr-controls col-sm-12'> 
-  <div class='clndr-control-button js-previous-month'><span class='clndr-previous-button'> previous</span></div>
+
+<div class='js-clndr-controls clndr-controls col-sm-4 col-sm-offset-5'> 
+  <h3> 
+    <button class="btn btn-default clndr-previous-button js-previous-month glyphicon glyphicon-chevron-left"> </button>
+    
+    <%= month %>
+     <small> <%= year %> </small>
+    <button class="btn btn-default clndr-next-button glyphicon glyphicon-chevron-right"> </button>
+   </h3> 
+</div>
+
+
+<!-- <div class='js-clndr-controls clndr-controls col-sm-6 col-sm-offset-3'> 
+  <div class='clndr-control-button js-previous-month'>
+    <span class="col-sm-2">
+    <button class="btn btn-default clndr-previous-button js-previous-month "> previous </button>
+    </span>
+  </div>
+
+
   <div class="js-finish-study finish-study hidden"><button class="btn btn-default"> Finish </button></div>
 
-  <div class='col-sm-4 month'><h3> <%= month %> </h3> <%= year %></div>
-  <div class='clndr-control-button rightalign'><span class='clndr-next-button'>next</span></div>
-</div>
+  <div class='month col-sm-2'><h3> <%= month %> </h3> <%= year %></div>
+
+
+  <div class='clndr-control-button rightalign'>
+<span class="col-sm-2">
+   <button class="btn btn-default clndr-next-button"> next</button>
+</span>
+  </div>
+
+</div> -->
+
+
+  <button class="btn btn-primary js-event-mode"> Event </button>
+
+
+<!-- <div class='js-event-controls event-controls col-sm-3 col-sm-offset-5'>
+Select a day to add an event.
+</div> -->
+
+
 <table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>
   
   <!-- WEEKDAY HEADER -->
@@ -32,24 +67,35 @@
         <div class='day-contents' data-day=<%= days[d].day %> data-test="test">
 
          
-
+           <span class="day-number pull-right">  <%= days[d].day %> </span>
           <% _.each(days[d].events, function(event){ %>
           
             <% if(event.type == "personal"){ %>
             <span class="event-personal pull-left"> <%= event.title %> </span>
             
-            <% } else if(event.type == "alcohol") { %>
+            <% } else if(event.type == "alcohol" && event.drinks > 0) { %>
             
-            <div class="js-alcohol-icon pull-left"> <%= event.type %> </div> <br>
-            <% } else if(event.type == "marijuana"){ %> 
-            <div class="js-marijuana-icon pull-left"> <%= event.type %> </div>
+            
+              <img style=" max-width:100px; margin-top: 2px;" class="alcohol-icon pull-left " src="app/styles/images/alcohol.png">
+
+              <% } %>
+              <br>
+            
+            
+            <% if(event.type == "marijuana" && event.use){ %> 
+             <img style=" max-width:100px; margin-top: 2px;" class="marijuana-icon pull-left " src="app/styles/images/marijuana.png">
+
+   <!--          <div class="marijuana-icon js-marijuana-icon pull-left"> </div> -->
+
 
             <% } %>
 
+           
+          
 
           <% }) %>
 
-          <span class="day-number">  <%= days[d].day %> </span>
+        
          </div>
 
 

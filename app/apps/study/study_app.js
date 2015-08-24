@@ -1,24 +1,27 @@
 define(["app", "marionette"], function(App, Marionette){
     var Router = Marionette.AppRouter.extend({
         appRoutes: {
-            "study" : "show",
+            "study/:id" : "show",
         }
     });
 
     var API = {
-        show: function(currentStudy){
+        show: function(studyId){
+             //if there is no study redirect back to homepage 
+
+             console.log("show ", studyId);
             require(["apps/study/controller"], function(Controller){
                 App.startSubApp(null);
-                Controller.show(currentStudy);
+                Controller.show(studyId);
                 //App.execute("set:active:header", "home");
             });
         },
     };
 
 
-    App.on("study:show", function(currentStudy){
-        App.navigate("study");
-        API.show(currentStudy);
+    App.on("study:show", function(studyId){
+        App.navigate("study" + encodeURIComponent(studyId));
+        API.show(studyId);
     });
 
     App.addInitializer(function(){

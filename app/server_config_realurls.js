@@ -5,16 +5,14 @@ define(function(require, exports, module) {
 		logout: "/j_spring_security_logout",
 		keepAlive: "/keepAlive/monitor",
 		study: function(){
-			if(this.id === undefined){
-				return "/study/create";
-			} else {
-				return "/study/update/" + encodeURIComponent(this.id);
-			}
-
+			return "/study/" + encodeURIComponent(this.id);
 		},
 		monitorStudy: function(){
-        	return "/study/monitor";
-        }        
+			return "/study/monitor";
+		},
+		studyDay: function(){
+			return "/day/" + encodeURIComponent(this.id);
+		}        
 	};
 
 	return Urls;    

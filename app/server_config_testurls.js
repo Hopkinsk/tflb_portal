@@ -9,8 +9,9 @@ define(function(require, exports, module) {
         study: function(){
              return "/app/mockdata/study/" + encodeURIComponent(this.id) + ".json";
         },
-        monitorStudy: function(){
-        	return "/app/mockdata/monitor/currentStudy.json";
+
+        studyDay: function(){
+            return "/app/mockdata/day/" + encodeURIComponent(this.id)  + ".json";
         }
     };
 

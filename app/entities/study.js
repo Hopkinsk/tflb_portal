@@ -1,4 +1,4 @@
-define(["app", "backbone"], function(App, Backbone){
+define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
     var Entities = App.module("Entities");
 
@@ -11,25 +11,23 @@ define(["app", "backbone"], function(App, Backbone){
     });
 
     Entities.Day = Backbone.Model.extend({
-       // url: Entities.urls.studyEvent
+        url: Entities.urls.studyDay,
 
        getNumberOfDrinks: function(){
-            var drinksCount = 0;
+            var drinks = 0;
             _.each(this.attributes.events, function(evt){
                 if(evt.type == "alcohol"){
-                    drinksCount = evt.drinksCount;
-                };
+                    drinks = evt.drinks;
+                }
             });
-            return drinksCount;
+            return drinks;
        },
 
        getMarijuanaUse: function(){
-        console.log("HERE");
             var used = false;
             _.each(this.attributes.events, function(evt){
                 console.log(evt);
                 if(evt.type == "marijuana"){
-                    console.log("return true..");
                     used = true;
                 }
             });
@@ -56,6 +54,11 @@ define(["app", "backbone"], function(App, Backbone){
 
 
         createDay: function(data){
+            console.log("create day");
+
+            data.date = moment(data.date).format('L');
+            data.study_id = this.id;
+            data.dayNumber = 5;
             return new Entities.Day(data);
         },
 
@@ -81,18 +84,12 @@ define(["app", "backbone"], function(App, Backbone){
         }
     });
 
-    var initializeCurrentStudy = function(data){
-        Entities.currentStudy = new Entities.study(data);
-    };
 
     var API = {
         saveStudy: function(data){
             var defer = $.Deferred();
-            if(!Entities.currentStudy){
-                initializeCurrentStudy(null);
-            }
-
-            Entities.currentStudy.save(
+            var study = new Entities.study(data);
+            study.save(
                 data,
                 {
                     wait: true,
@@ -111,34 +108,26 @@ define(["app", "backbone"], function(App, Backbone){
             return defer.promise();
         },
 
-        monitorStudy: function(){
+        getStudy: function(id){
             var defer = $.Deferred();
-
-            var monitor = new Entities.monitorStudy()
-            monitor.fetch(
+            var study = new Entities.study({id: id});
+            study.fetch(
                 {
                     wait: true,
                     patch: true,
                     dataType: "json",
                     success: function(model, response){
-                        if(response.study_id != null){
-                            initializeCurrentStudy(response);
-                            defer.resolve(Entities.currentStudy);
-                        }
-                        defer.resolve(false);
-                        
+                        //set entities.currentStudy to response
+                        defer.resolve(model);
                     },
                     error: function(model, xhr){
-                        console.log("error");
                         defer.resolve(false, xhr, model);
                     }
                 }
             );
 
             return defer.promise();
-        }
-
-
+        },
         // saveFinding: function(finding, data){
 
         //     var defer = $.Deferred();
@@ -176,14 +165,12 @@ define(["app", "backbone"], function(App, Backbone){
         // },
     };
 
-
+    App.reqres.setHandler("study:show", function(id){
+        return API.getStudy(id);
+    });
 
     App.reqres.setHandler("study:save", function(data){
         return API.saveStudy(data);
-    });
-
-    App.reqres.setHandler("study:monitor", function(){
-        return API.monitorStudy();
     });
 
     return;

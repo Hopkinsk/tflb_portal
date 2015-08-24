@@ -35,10 +35,9 @@ define([
           var studyId = this.ui.studyIdInput.val();
           //TODO: validate studyId
 
-
           var saveStudy = App.request("study:save", {"studyId": studyId} );
           $.when(saveStudy).done(function(study, xhr){          
-            App.trigger('study:show');
+            App.trigger('study:show', studyId);
           });
         }
 

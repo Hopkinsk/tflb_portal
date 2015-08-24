@@ -1,9 +1,9 @@
-@clndr-border: 1px solid #000;
+@clndr-border: 2px solid @darkAccent;
 @inactive: #BCBCBC;
 
 @inactiveFont: #DDDDDD;
 @inactiveFontSize: 20px;
-
+@eventModeZindex: 10000000;
 .noselect
 {
     -webkit-user-select: none; /* Chrome/Safari */
@@ -11,13 +11,34 @@
     -ms-user-select: none; /* IE10+ */
 }
 
+
 .hidden {
     display: none;
 }
 
+.alcohol-icon, {
+    width: 25px;
+}
+.marijuana-icon {
+    width: 30px;
+}
+
+
+.event-personal {
+    font-size: 16px;
+}
+
+
+.event-controls {
+    position: relative;
+    z-index: @eventModeZindex;
+    display: none;
+    background: white;
+}
+
 .clndr-controls {
     .clearfix;
-    width: 100%;
+    //width: 100%;
     position: relative;
     margin-bottom: 10px;
 
@@ -31,12 +52,12 @@
     .clndr-control-button
     {
         float: left;
-        width: 33%;
+        //width: 33%;
 
         &.rightalign
         {
             text-align: right;
-            width: 34%;
+            //width: 34%;
         }
         .clndr-next-button
         {
@@ -80,10 +101,19 @@
     {
         height: 30px;
         font-size: 10px;
-        background: @lightAccent;
+        background: @darkAccent;
+
+        &.event-mode {
+            position: relative;
+            z-index: @eventModeZindex;
+        }
 
         .header-day
         {
+            &.event-mode {
+                position: relative;
+                z-index: @eventModeZindex;
+            }
             vertical-align: middle;
             text-align: center;
             border-left: @clndr-border;
@@ -117,10 +147,27 @@
 
             &:hover { background: #eee; }
 
+            &.event-mode {
+                position: relative;
+                z-index: @eventModeZindex;
+            }
             &.today, &.my-today
             {
-                background: #9AD6E3;
-                &:hover { background: darken(#9AD6E3, 10%); }
+                //background: #9AD6E3;
+                .day-number {
+                    width: 39px;
+                    height: 39px;
+                    padding: 1px;
+                    border-radius: 50%;
+                    background: @darkAccent;
+                    border: 2px solid @darkAccent;
+                    color: white;
+                    text-align: center;
+                    font-size: 21px;
+                }
+
+
+                &:hover { background: #eee; }
                 &.event
                 {
                     background: mix(#B4E09F, #9AD6E3);
@@ -129,10 +176,10 @@
 
             &.event, &.my-event
             {
-                background: #B4E09F;
+                background: white;
                 &:hover
                 {
-                    background: darken(#B4E09F, 10%);
+                  background: #eee;
                 }
             }
 
@@ -141,6 +188,10 @@
                 background: @inactive;
                 color: @inactiveFont;
                 font-size: @inactiveFontSize;
+                &.event-mode {
+                    position: relative;
+                    z-index: 1;
+                }
             }
 
             &:last-child
@@ -154,9 +205,9 @@
                 // width: 100%;
                 // height: 100%;
                 padding: 8px;
-                font-size: 12px;
+                font-size: 24px;
                 text-align: right;
-
+                font
 
                 .day-number
                 {
@@ -174,9 +225,10 @@
             height: inherit;
             background: @inactive;
             color: @inactiveFont;
-
-            &:hover { background: #ddd; }
-
+            &.event-mode {
+                position: relative;
+                z-index: 1;
+            }
             &:last-child
             {
                 border-right: @clndr-border;

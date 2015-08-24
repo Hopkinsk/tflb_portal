@@ -27,9 +27,13 @@ define(["app", "apps/study/views"], function(App, Views ){
     };
 
     return {
-        show: function(currentStudy){
-            require([], function(){
-                display(currentStudy);
+        show: function(studyId){
+
+            require(["entities/study"], function(){
+                  var fetchStudy = App.request("study:show", studyId );
+                  $.when(fetchStudy).done(function(study, xhr){          
+                    display(study);
+                  });
             });
         },
     };

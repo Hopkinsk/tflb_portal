@@ -127,10 +127,10 @@ define(function(require, exports, module) {
                     }
 
                     Backbone.history.start();
-                      App.trigger("home:show");
-                    // if (App.getCurrentRoute() === ""){
-                    //     App.trigger("home:show");
-                    // }
+
+                    if (App.getCurrentRoute() === ""){
+                        App.trigger("home:show");
+                    }
                 }
             );
         }

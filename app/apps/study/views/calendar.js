@@ -3,9 +3,10 @@ define(["app",
         "clndr",
         "moment",
         "tpl!apps/study/templates/calendar.tpl",
-        "tpl!apps/study/templates/input.tpl"
+        "tpl!apps/study/templates/input.tpl",
+        "text!apps/study/templates/clndr.html"
         ],
-        function(App, Marionette, clndr, moment, calendarTpl, inputTpl){
+        function(App, Marionette, clndr, moment, calendarTpl, inputTpl, clndrTpl){
 
    var Input = Marionette.ItemView.extend({
         template: inputTpl,
@@ -32,10 +33,11 @@ define(["app",
         },
         initialize: function(options){
             this.currentNumberOfDrinks = this.model.getNumberOfDrinks();
+            this.marijuana = this.model.getMarijuanaUse();
             this.$dayEl = options.$dayEl;
         },
         onRender: function(){
-            if(this.model.getMarijuanaUse()){
+            if(this.marijuana){
                 this.ui.yesMarijuana.addClass("active");
             } else {
                 this.ui.noMarijuana.addClass("active");
@@ -44,9 +46,11 @@ define(["app",
         },
         navigatePrevDay: function(evt){
             this.$dayEl.prev('.day').click();
+            this.saveDay();
         },
         navigateNextDay: function(evt){
             this.$dayEl.next('.day').click();
+            this.saveDay();
         },
         onIncreaseDrink: function(evt){
             this.currentNumberOfDrinks++;
@@ -59,7 +63,7 @@ define(["app",
         },
         numberOfDrinksChanged: function(){
             this.ui.numberOfDrinks.html(this.currentNumberOfDrinks);
-            if(this.currentNumberOfDrinks == 0){
+            if(this.currentNumberOfDrinks === 0){
                 this.ui.decreaseDrink.prop('disabled', true);
             } else {
                 this.ui.decreaseDrink.prop('disabled', false);
@@ -71,14 +75,24 @@ define(["app",
         toggleMarijuanaUse: function(evt){
             this.ui.yesMarijuana.toggleClass("active");
             this.ui.noMarijuana.toggleClass("active");
+            //if true go false
+            this.marijuana = !this.marijuana;
         },
         onReturnToCalendar: function(evt){
-            this.saveInput();
+            this.saveDay();
             this.trigger('close');
         },
-        saveInput: function(){
+        saveDay: function(){
 
-
+            console.log("save day!");
+            console.log(this.model);
+            this.model.set({
+                marijuana: this.marijuana,
+                drinks: this.currentNumberOfDrinks,
+               // title: 
+            });
+            this.model.save();
+           // this.trigger("day:save", this.model)
         },
 
         serializeData: function(){
@@ -95,11 +109,15 @@ define(["app",
         template: calendarTpl,
 
         ui: {
-            addEvent: '.js-add-event'
+            addEvent: '.js-add-event',
+            eventMode: '.js-event-mode',
+            cldnrControls: '.js-clndr-controls',
+            eventControls: '.js-event-controls'
         },
 
         events: {
-            'click @ui.addEvent' : 'onAddEvent'
+            'click @ui.addEvent' : 'onAddEvent',
+            'click @ui.eventMode' : 'onEventMode'
         },
 
         regions: {
@@ -108,36 +126,44 @@ define(["app",
 
         initialize: function(){
             this.cal = [];
-            this.generateCalendar();
-            console.log("month", moment().subtract(91, 'days').format('M'));
             this.endMonth = moment().subtract(91, 'days').format('M');
-
-
+            this.eventMode = false;
+            this.clndrTpl = clndrTpl;
+        },
+        onRender: function(){
+            this.generateCalendar();
         },
         generateCalendar: function(){
+            
             var that=this;
-            $.get('app/apps/study/templates/clndr.html', function(clndrTpl) {
-                var _that = that;
-                that.cal = $('.js-calendar').clndr({
-                    template: clndrTpl,
-                    startWithMonth: moment(),
-                    useTouchEvents: false,
-                    daysOfTheWeek: ['SUN', 'MON', 'TUES', 'WED', 'THUR', 'FRI', 'SAT'],
-                    clickEvents: {
-                        click: function(target){ 
-                            _that.showInputView(target);
-                        },
-                        previousMonth: function(month){ 
-                            _that.onPreviousMonth(month);
-                        },
+            this.cal = this.$('.js-calendar').clndr({
+                template: that.clndrTpl,
+                startWithMonth: moment(),
+                useTouchEvents: false,
+                daysOfTheWeek: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
+                clickEvents: {
+                    click: function(target){ 
+                        if(this.eventMode){
+                            that.showEventInputView(target);
+                        } else {
+                            that.showInputView(target);
+                        }
                     },
-                    events: _that.model.getEvents(),
-                    constraints: {
-                        startDate: moment().subtract(91, 'days'), 
-                        endDate: moment()
-                    }
-                });
-             });
+                    previousMonth: function(month){ 
+                       that.onPreviousMonth(month);
+                    },
+                },
+                events: that.model.getEvents(),
+                constraints: {
+                    startDate: moment().subtract(91, 'days'), 
+                    endDate: moment()
+                }
+            });
+
+        },
+        showEventInputView: function(day){
+            console.log("SHOW EVENT INPUT VIEW");
+            console.log("show event input view");
 
         },
         showInputView: function(day){
@@ -154,9 +180,21 @@ define(["app",
                 that.disableOverlay();
             });
         },
+        onEventMode: function(evt){
+            this.enableOverlay();
+            $('.day, .header-days, .header-day').toggleClass('event-mode');
+            
+            this.eventMode = true;
+            this.$('.js-clndr-controls').hide();
+            this.$('.js-event-controls').show();
+            
+        },
+        toggleEventMode: function(){
 
+
+        },
         enableOverlay: function(){
-            if($('.js-body-overlay').length == 0){
+            if($('.js-body-overlay').length === 0){
                 $('body').addClass('stop-scrolling');
                 overlay = $('<div class="js-body-overlay"></div>').prependTo('body');
                 overlay.addClass('disable-overlay');
