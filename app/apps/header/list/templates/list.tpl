@@ -1,10 +1,8 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <span class="navbar-brand" title="">
-                <img style="max-width:100px; margin-top: -7px;" src="app/styles/images/bch_logo.png">
-            </span>
-        </div>
+        <div class="js-header-brand navbar-brand bch-logo col-sm-2">
+        </div>        
+
           <ul class="nav navbar-nav"></ul>
         <div class="user pull-right">
             <div class="info">
@@ -16,3 +14,4 @@
         </div>
     </div>
 </nav>
+

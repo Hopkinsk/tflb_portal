@@ -1,7 +1,8 @@
 define(["app", "marionette"], function(App, Marionette){
     var Router = Marionette.AppRouter.extend({
         appRoutes: {
-            "study/:id" : "show",
+            "study/:id" : "show"
+           // "study/complete" : "complete"
         }
     });
 
@@ -9,7 +10,7 @@ define(["app", "marionette"], function(App, Marionette){
         show: function(studyId){
              //if there is no study redirect back to homepage 
 
-             console.log("show ", studyId);
+            console.log("show ", studyId);
             require(["apps/study/controller"], function(Controller){
                 App.startSubApp(null);
                 Controller.show(studyId);
@@ -20,7 +21,7 @@ define(["app", "marionette"], function(App, Marionette){
 
 
     App.on("study:show", function(studyId){
-        App.navigate("study" + encodeURIComponent(studyId));
+        App.navigate("study/" + encodeURIComponent(studyId));
         API.show(studyId);
     });
 

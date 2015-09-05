@@ -1,38 +1,41 @@
+<span class="header-logo pull-left" title="">
+  <img style="max-width:100px; margin-top: -7px;" src="app/styles/images/bch_logo.png">
+</span>
 
-<div class='js-clndr-controls clndr-controls col-sm-4 col-sm-offset-5'> 
+<div class='js-event-instructions col-sm-4 col-sm-offset-4 hidden'> 
+<span class="event-instructions"><h3> Select a day to edit Events </h3> </span>
+</div>
+
+ 
+<div class='js-clndr-controls clndr-controls col-sm-4 col-sm-offset-4'> 
   <h3> 
-    <button class="btn btn-default clndr-previous-button js-previous-month glyphicon glyphicon-chevron-left"> </button>
-    
-    <%= month %>
-     <small> <%= year %> </small>
-    <button class="btn btn-default clndr-next-button glyphicon glyphicon-chevron-right"> </button>
+    <button class="btn btn-default js-next-month clndr-next-button hidden"> 
+      <i class="glyphicon glyphicon-chevron-left"> <!-- <span class="js-nextMonth">  </span> --> </i> 
+    </button>
+      
+      <span class="js-month"><%= month %></span> 
+      <small class="js-year"><%= year %></small>
+      <button class="btn btn-default clndr-previous-button js-previous-month">
+       <!--  <span class="js-lastMonth">  --> </span> <i class="glyphicon glyphicon-chevron-right"></i>
+      </button>
    </h3> 
 </div>
 
-
-<!-- <div class='js-clndr-controls clndr-controls col-sm-6 col-sm-offset-3'> 
-  <div class='clndr-control-button js-previous-month'>
-    <span class="col-sm-2">
-    <button class="btn btn-default clndr-previous-button js-previous-month "> previous </button>
-    </span>
-  </div>
+<button class="js-instructions instructions-btn btn  btn-lg  glyphicon glyphicon-question-sign pull-right"></button><br>
+<button class="btn btn-primary event-mode js-event-mode pull-right" type="button"> Event Mode </button>
 
 
-  <div class="js-finish-study finish-study hidden"><button class="btn btn-default"> Finish </button></div>
-
-  <div class='month col-sm-2'><h3> <%= month %> </h3> <%= year %></div>
-
-
-  <div class='clndr-control-button rightalign'>
-<span class="col-sm-2">
-   <button class="btn btn-default clndr-next-button"> next</button>
-</span>
-  </div>
-
-</div> -->
+<div class="col-sm-3">     
+  <div class="js-finish-study finish-study hidden"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#finishStudy">
+Finished
+</button></div>
+<!-- Button trigger modal -->
 
 
-  <button class="btn btn-primary js-event-mode"> Event </button>
+</div>
+
+
+
 
 
 <!-- <div class='js-event-controls event-controls col-sm-3 col-sm-offset-5'>
@@ -62,24 +65,24 @@ Select a day to add an event.
       <% for(var j = 0; j < 7; j++){ %>
       <!-- DAYS -->
       <% var d = j + i * 7; %>
-      <td class='<%= days[d].classes %>'>
+      <td class='<%= days[d].classes %>' >
 
         <div class='day-contents' data-day=<%= days[d].day %> data-test="test">
 
-         
-           <span class="day-number pull-right">  <%= days[d].day %> </span>
+           <span class="day-number pull-right"><%= days[d].day %></span>
+
+
           <% _.each(days[d].events, function(event){ %>
-          
+           
             <% if(event.type == "personal"){ %>
-            <span class="event-personal pull-left"> <%= event.title %> </span>
-            
+                <span class="event-personal-label pull-left">  <%= event.title %> </span> <br>
             <% } else if(event.type == "alcohol" && event.drinks > 0) { %>
-            
-            
+            </ul>
+              <!-- <div class="alcohol-icon pull-left"></div> -->
               <img style=" max-width:100px; margin-top: 2px;" class="alcohol-icon pull-left " src="app/styles/images/alcohol.png">
 
               <% } %>
-              <br>
+           
             
             
             <% if(event.type == "marijuana" && event.use){ %> 
@@ -89,21 +92,41 @@ Select a day to add an event.
 
 
             <% } %>
-
-           
-          
-
           <% }) %>
 
-        
+<!--           <button class="btn btn-md btn-default add-event pull-right glyphicon glyphicon-pencil"></span>
+ -->
          </div>
-
 
       </td>
       <% } %>
-
-
     </tr>
     <% } %>
   </tbody>
 </table>"
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="finishStudy" tabindex="-1" role="dialog" aria-labelledby="finishStudy">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+          <div class="modal-header"> Confirm Completion </div>
+      <div class="modal-body text-center">
+        <br>
+      Are you finished entering your alcohol and/or marijuana use over the past 90 days?
+      </div>
+      <br>
+      <div class="modal-footer">
+        <div class="">
+        <button type="button" class="btn btn-default col-sm-6" data-dismiss="modal">No, I'd like to continue working.</button>
+      </div>
+      <div class="">
+        <button type="button" class="btn btn-primary js-confirm-finish col-sm-6">Yes, I'm finished.</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

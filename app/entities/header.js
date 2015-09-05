@@ -17,8 +17,8 @@ define(["app", "backbone.picky"], function(App){
 
         var initializeHeaders = function(){
             var headers = [
-                // { name: "Home", url: "home", navigationTrigger: "home:show" },
-
+                 { name: "Home", url: "home", navigationTrigger: "home:show" },
+                 { name: "Admin", url: "admin", navigationTrigger: "admin:show" }
             ];
 
             Entities.headers = new Entities.HeaderCollection(headers);

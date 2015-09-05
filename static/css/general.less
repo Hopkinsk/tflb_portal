@@ -3,7 +3,10 @@
 @lightShade: #EBF2FF;
 
 body {
-	background: white !important;
+    &.study {
+        background: white !important;
+    }
+	background: #D8D8D8 !important;
 }
 
 .no-gutter {
@@ -27,4 +30,18 @@ body {
     width: 100%;
     overflow: hidden;
     //display: none;
+}
+
+.modal-overlay {
+    
+    position: absolute;
+    z-index: @eventModeZindex;
+    top: 10%;
+
+}
+
+.study-complete-tag {
+    
+    padding: 6px;
+    border-radius: 5px;
 }

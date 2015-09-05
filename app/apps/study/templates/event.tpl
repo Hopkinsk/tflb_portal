@@ -1,0 +1,1 @@
+<span class="event-personal"> <%= obj.title %> <button class="js-delete-event delete-event-btn glyphicon glyphicon-remove-circle"></button> </span><br><br>

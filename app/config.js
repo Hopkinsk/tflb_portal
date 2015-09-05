@@ -23,7 +23,7 @@ require.config({
         "bootstrap-dialog": "../vendor/bower/bootstrap3-dialog/src/js/bootstrap-dialog",
         "moment": "../vendor/bower/moment/min/moment.min",
         "clndr": "../vendor/bower/clndr/clndr.min",
-
+        "qtip": "../vendor/bower/qtip2/jquery.qtip.min"
 
     },
 
@@ -57,9 +57,13 @@ require.config({
         },
         "tpl": ["text"],
         "bootstrap": ["jquery"],
-        "clndr": {
-            deps: ["moment", "jquery", "underscore"],
-            exports: "clndr"
+        // "clndr": {
+        //     deps: ["moment", "jquery", "underscore"],
+        //     exports: "clndr"
+        //},
+        "qtip": {
+            deps: ["jquery"],
+            exports: "qtip"
         }
 
     }

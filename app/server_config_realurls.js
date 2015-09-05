@@ -7,12 +7,15 @@ define(function(require, exports, module) {
 		study: function(){
 			return "/study/" + encodeURIComponent(this.id);
 		},
-		monitorStudy: function(){
-			return "/study/monitor";
-		},
 		studyDay: function(){
 			return "/day/" + encodeURIComponent(this.id);
-		}        
+		},
+		personalEvent: function(){
+            return "/event/" + encodeURIComponent(this.id);
+        },
+		studyList: function(){
+            return "/study/list";
+        }        
 	};
 
 	return Urls;    

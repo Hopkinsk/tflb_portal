@@ -1,5 +1,11 @@
-<div class="col-sm-12 user-instructions">
-<h4 class="text-center"> Instructions </h4>
+<div class="col-sm-10 col-sm-offset-1 modal-overlay ">
+
+<div class="panel panel-default  user-instructions ">
+
+<div class="panel-body">
+
+	<button class="btn btn-default js-close-instructions pull-right"> Back to Calendar </button> 
+<h4 class=""> Instructions </h4>
 
 <p> To help us evaluate your alcohol and marijuana use, we need to get an idea of what your use was like in the past 90 days. To do this, we would like you to fill out a calendar. </p>
 
@@ -33,5 +39,6 @@ If you’ve had special occasions such as a birthday, a party, or celebration in
 If you have regular drinking or marijuana use patterns you can use these dates to help recall your use. For example, you may have a daily or weekend/weekday pattern, or use more in the summer or on trips.
 </p>
 
-<button class="btn btn-default js-instructions-continue pull-right"> Begin Study </button>
+</div>
+</div>
 </div>

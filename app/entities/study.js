@@ -6,8 +6,17 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         url: Entities.urls.monitorStudy,
     });
 
-    Entities.studyEvent = Backbone.Model.extend({
-        url: Entities.urls.studyEvent
+    Entities.personalEvent = Backbone.Model.extend({
+        url: Entities.urls.personalEvent,
+        getUrlPath: function(){
+            return '/';
+        }
+    });
+
+    Entities.personalEvents = Backbone.Collection.extend({
+        url: Entities.urls.personalEvent,
+        model: Entities.personalEvent
+
     });
 
     Entities.Day = Backbone.Model.extend({
@@ -26,7 +35,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
        getMarijuanaUse: function(){
             var used = false;
             _.each(this.attributes.events, function(evt){
-                console.log(evt);
                 if(evt.type == "marijuana"){
                     used = true;
                 }
@@ -36,12 +44,22 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
        getPersonalEvents: function(){
             var events = [];
-            _.each(this.events, function(evt){
+            _.each(this.attributes.events, function(evt){
                 if(evt.type == "personal"){
                     events.push(evt.title);
                 }
             });
             return events;
+       },
+       getPersonalEventsCollection: function(){
+            var personal = [];
+            var that=this;
+            _.each(this.attributes.events, function(evt){
+                if(evt.type == "personal"){
+                    personal.push(evt);
+                }
+            });
+            return new Entities.personalEvents(personal);
        }
     });
 
@@ -54,38 +72,67 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
 
         createDay: function(data){
-            console.log("create day");
-
             data.date = moment(data.date).format('L');
             data.study_id = this.id;
             data.dayNumber = 5;
+
+            console.log("CREATE DAY");
+            console.log(data);
             return new Entities.Day(data);
         },
 
         getEvents: function(){
-            //var events = new Entities.Events();
             var events = [];
             _.each(this.get('personal'), function(evt){
                 events.push(evt);
-               // events.add(evt);
             });
 
             _.each(this.get('marijuana'), function(evt){
                 events.push(evt);
-               // events.add(evt);
             });
 
             _.each(this.get('alcohol'), function(evt){
                 events.push(evt);
-                //events.add(evt);
             });
 
             return events;
         }
     });
 
+    Entities.studyListItem = Backbone.Model.extend({
+        url: Entities.urls.study
+
+    });
+
+    Entities.studyList = Backbone.Collection.extend({
+        model: Entities.studyListItem,
+        url: Entities.urls.studyList
+
+    });
+
 
     var API = {
+        getStudies: function(){
+            var defer = $.Deferred();
+            var studyList = new Entities.studyList();
+            studyList.fetch(
+                {
+                    wait: true,
+                    patch: true,
+                    dataType: "json",
+                    success: function(collection, response){
+                        //set entities.currentStudy to response
+                        defer.resolve(collection);
+                    },
+                    error: function(model, xhr){
+                        defer.resolve(false, xhr, model);
+                    }
+                }
+            );
+
+            return defer.promise();
+        },
+
         saveStudy: function(data){
             var defer = $.Deferred();
             var study = new Entities.study(data);
@@ -128,42 +175,16 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
             return defer.promise();
         },
-        // saveFinding: function(finding, data){
+        exportStudies: function(data){
 
-        //     var defer = $.Deferred();
-        //     if(!finding){
-        //         finding = new Entities.finding();
-        //         if (data && data.id){
-        //             finding.id = data.id;
-        //         }
-        //     }
 
-        //     if (finding.saving){
-        //         defer.resolve(false, { text: "Already saving this Curated Finding"} );
-        //     } else {
 
-        //         finding.saving = true;
-        //         finding.save(
-        //             data,
-        //             {
-        //                 wait: true,
-        //                 patch: true,
-        //                 dataType: "json",
-        //                 success: function(model){
-        //                     finding.saving = false;
-        //                     defer.resolve(model);
-        //                 },
-        //                 error: function(model, xhr){
-        //                     finding.saving = false;
-        //                     defer.resolve(false, xhr, model);
-        //                 }
-        //             }
-        //             );
-
-        //         return defer.promise();
-        //     }
-        // },
+        }
     };
+
+    App.reqres.setHandler("study:list", function(){
+        return API.getStudies();
+    });
 
     App.reqres.setHandler("study:show", function(id){
         return API.getStudy(id);
@@ -171,6 +192,10 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
     App.reqres.setHandler("study:save", function(data){
         return API.saveStudy(data);
+    });
+
+    App.reqres.setHandler("studies:export", function(data){
+        return API.exportStudies(data);
     });
 
     return;

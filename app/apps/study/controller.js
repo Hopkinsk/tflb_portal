@@ -1,19 +1,38 @@
 define(["app", "apps/study/views"], function(App, Views ){
 
 
+    var displayStudyComplete = function(currentStudy){
+        console.log("display study complete");
+        console.log(currentStudy);
+
+        var studyComplete = new Views.StudyComplete({
+            model: currentStudy
+        });
+
+        mainView.contentRegion.show(studyComplete);
+    };
+
     var displayCalendar = function(currentStudy){
         var calendar = new Views.Calendar({
             model: currentStudy
         });
+        calendar.on('study:complete', function(){
+            displayStudyComplete(currentStudy);
+
+        });
         mainView.contentRegion.show(calendar);
     };
 
-    var displayInstructions = function(){
+    var displayInstructions = function(currentStudy){
+        mainView = new Views.Main();
+        App.mainRegion.show(mainView);
+
+
         var instructions = new Views.Instructions();
         mainView.contentRegion.show(instructions);
 
         instructions.on('study:start', function(){
-            displayCalendar();
+            displayCalendar(currentStudy);
         });
     };
 
@@ -21,18 +40,29 @@ define(["app", "apps/study/views"], function(App, Views ){
         mainView = new Views.Main();
         App.mainRegion.show(mainView);
 
-       // displayInstructions();
-       displayCalendar(currentStudy);
+       //displayInstructions(currentStudy);
+        $('body').addClass('study');
+        displayCalendar(currentStudy);
+      // displayStudyComplete(currentStudy);
 
     };
 
+    // var displayInstructions = function(currentStudy){
+    //     mainView = new Views.Main();
+    //     App.mainRegion.show(mainView);
+
+
+    // };
+
     return {
         show: function(studyId){
-
+            $('#header-region').addClass('hidden');
             require(["entities/study"], function(){
                   var fetchStudy = App.request("study:show", studyId );
-                  $.when(fetchStudy).done(function(study, xhr){          
-                    display(study);
+                  $.when(fetchStudy).done(function(currentStudy, xhr){          
+                   display(currentStudy);
+
+                  // displayInstructions(currentStudy);
                   });
             });
         },

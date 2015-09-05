@@ -1,0 +1,46 @@
+{
+    "id": 1,
+    "study_id": 1234,
+    "adminPassphrase": "admin",
+    "personal" : [
+    	{
+            "id" : "123",
+    		"date" : "09/02/2015",
+    		"dayNumber" : 1,
+            "type" : "personal",
+    		"title" : "Birthday"
+    	},
+        {
+            "id" : "124",
+            "date" : "08/10/2015",
+            "dayNumber" : 1,
+            "type" : "personal",
+            "title" : "Party"
+        },
+        {
+            "id" : "125",
+            "date" : "08/07/2015",
+            "dayNumber" : 1,
+            "type" : "personal",
+            "title" : "Birthday"
+        }
+    ],
+
+    "alcohol" : [
+    	{
+    		"date" : "08/13/2015",
+    		"dayNumber" : 1,
+    		"drinks" : 3,
+    		"type" : "alcohol"
+    	}
+    ],
+
+    "marijuana" : [
+    	{
+    		"date" : "08/13/2015",
+    		"dayNumber" : 1,
+    		"use" : true,
+    		"type" : "marijuana"
+    	}
+    ]
+}

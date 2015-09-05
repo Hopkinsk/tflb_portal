@@ -107,7 +107,8 @@ define(function(require, exports, module) {
         if (Backbone.history){
             require([
                 "apps/home/home_app",
-                "apps/study/study_app"
+                "apps/study/study_app",
+                "apps/admin/admin_app"
                 ], 
                 function () {    
                     //App.interceptUnauthorized();  
