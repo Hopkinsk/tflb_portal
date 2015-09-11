@@ -6531,11 +6531,22 @@ button.close {
   }
 }
 .navbar,
+.nav {
+  margin: -1px;
+  margin-bottom: 30px;
+}
+.navbar,
+.navbar-brand {
+  margin: -1px;
+}
+.navbar,
 .navbar-brand,
 .navbar-nav li a {
-  height: 70px;
+  height: 84px;
   background-color: white;
   border-bottom: solid 2px gray;
+  line-height: 37px;
+  font-size: 15px;
 }
 .user {
   padding: 20px 0px 0px 0px;
@@ -6547,7 +6558,7 @@ button.close {
 .bch-logo {
   background-image: url('../images/bch_logo.png');
   background-repeat: no-repeat;
-  background-size: 144px 65px;
+  background-size: 151px 78px;
 }
 .new-participant-panel {
   border-color: #003087 !important;
@@ -6567,6 +6578,12 @@ body {
 }
 body.study {
   background: white !important;
+}
+body.event-mode {
+  background: #444343 !important;
+}
+button {
+  outline: none;
 }
 .no-gutter {
   padding-right: 0;
@@ -6607,15 +6624,82 @@ body.study {
 .hidden {
   display: none;
 }
+.clndr-bch-logo {
+  background-image: url('../images/bch_logo.png');
+  background-repeat: no-repeat;
+  background-size: 157px 77px;
+  height: 102px;
+}
+.clndr-bch-logo.event-mode {
+  background-image: url('../images/bch_logo_inverse.png');
+}
 .alcohol-icon {
-  width: 25px;
+  left: 3px;
+  bottom: 3px;
+  position: absolute;
+  background-size: 30px;
+  width: 30px;
+  height: 38px;
+  background-image: url('../images/alcohol.png');
+  background-repeat: no-repeat;
+}
+.alcohol-icon.event-mode {
+  display: none;
 }
 .marijuana-icon {
+  right: 3px;
+  bottom: 3px;
+  position: absolute;
+  background-size: 30px;
   width: 30px;
+  height: 30px;
+  background-image: url('../images/marijuana.png');
+  background-repeat: no-repeat;
 }
-.event-mode {
+.marijuana-icon.event-mode {
+  display: none;
+}
+.event-mode-btn {
+  margin-top: 23px;
+  margin-right: -16px;
+  background: #CDDBF5;
+  color: #003087;
+  height: 37px;
+  width: 129px;
+  border: solid 1px;
+  border-radius: 5px;
+}
+.event-mode-btn.cal-return {
+  margin-top: 20px;
+  font-weight: 500;
+  background: white;
+}
+.event-mode-btn.cal-return .glyphicon-calendar {
+  font-size: 12px;
+}
+.event-instructions {
+  font-size: 20px;
+  background: white;
+  color: #003087;
+  border: solid 3px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 21px;
+  height: 61px;
+}
+.finish-study-btn {
+  background: #C3EAD3;
+  color: #113821;
+  border: solid 1px #113821;
+  height: 57px;
+  width: 165px;
+  border-radius: 5px;
+  padding: 1px;
+  font-size: 15px;
   margin-top: 10px;
-  margin-right: -38px;
+  margin-left: 60px;
 }
 .add-event {
   position: absolute;
@@ -6628,26 +6712,41 @@ body.study {
   color: #6B6B6B;
   border: 1px solid #8A8A8A;
 }
+.event-label-bullet {
+  height: 5px;
+  width: 5px;
+  background: #003087;
+  border-radius: 5px;
+  float: left;
+  margin-top: 6px;
+  margin-right: 5px;
+}
 .event-personal-label {
-  font-size: 17px;
+  font-size: 13px;
   font-family: helvetica;
-  color: #3D3D3D;
+  color: #003087;
+  font-weight: 400;
+  display: inline-block;
+  float: left;
+  clear: left;
+}
+.event-personal-label.event-mode {
   font-weight: 600;
-}
-.event-personal {
-  font-size: 16px;
-  background-color: lightblue;
-  padding: 8px;
-  border-radius: 16px;
-}
-.event-personal .delete-event-btn {
-  background: transparent;
-  border: none;
-  outline: none;
 }
 .event-controls {
   display: none;
   background: white;
+}
+.iter-months-btn {
+  background: white;
+  color: #003087;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  font-size: 33px;
+  margin-top: 15px;
+  margin-right: 16px;
 }
 .clndr {
   margin-top: 20px;
@@ -6739,6 +6838,7 @@ body.study {
   text-align: center;
   border-left: 2px solid #003087;
   border-top: 2px solid #003087;
+  font-size: 14px;
   color: #fff;
 }
 .clndr-table .header-days .header-day.event-mode {
@@ -6749,7 +6849,7 @@ body.study {
   border-right: 2px solid #003087;
 }
 .clndr-table tr {
-  height: 85px;
+  height: 106px;
 }
 .clndr-table tr td {
   vertical-align: top;
@@ -6771,15 +6871,17 @@ body.study {
 }
 .clndr-table tr .day.today .day-number,
 .clndr-table tr .day.my-today .day-number {
-  width: 39px;
-  height: 39px;
-  padding: 1px;
-  border-radius: 50%;
-  background: #003087;
-  border: 2px solid #003087;
-  color: white;
-  text-align: center;
-  font-size: 21px;
+  /*
+                    width: 39px;
+                    height: 39px;
+                    padding: 1px;
+                    border-radius: 50%;
+                    background: #CDDBF5;
+                    border: 1px solid #003087;
+                    color: white;
+                    text-align: center;
+                    font-size: 21px;
+                    */
 }
 .clndr-table tr .day.today:hover,
 .clndr-table tr .day.my-today:hover {
@@ -6862,9 +6964,57 @@ body.study {
 .clndr-table tr:last-child .my-empty {
   border-bottom: 2px solid #003087;
 }
+.event-icons-wrapper {
+  margin-bottom: 24px;
+}
+.event-list-item {
+  font-size: 23px;
+  border: none;
+  border-bottom: solid 1px #C1BABA;
+  padding: 10px 0px 5px 0px;
+  list-style-type: none;
+}
+.event-list-item .event-list-bullet {
+  background: #cddbf5;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-right: 10px;
+  margin-top: 6px;
+  border-radius: 3px;
+}
+.event-list-item .event-remove-btn {
+  font-size: 21px;
+  float: right;
+  color: #9E9595;
+  margin-top: 9px;
+  margin-right: 8px;
+  outline: none;
+}
+.evt-clndr-return-btn {
+  background: #003087;
+  color: white;
+  font-size: 26px;
+  border: none;
+  height: 50px;
+  margin-top: 23px;
+  border-radius: 5px;
+}
+.event-title-input {
+  font-size: 22px;
+  height: 37px;
+}
+.add-event-btn {
+  font-size: 21px;
+  background: #cddbf5;
+  border: solid 1px #003087;
+  font-weight: 500;
+  border-radius: 0px 5px 5px 0px;
+  color: #524E4E;
+}
 .calendar-input {
   z-index: 1000;
-  top: 10%;
+  top: 17%;
   position: absolute;
 }
 .js-marijuana-btn .js-yes-marijuana.active,
@@ -6872,29 +7022,38 @@ body.study {
   background: red !important;
 }
 .standard-drink-img {
-  border-top: solid gray 1px;
-  border-bottom: solid gray 1px;
   height: 232px;
   width: 578px;
   background-image: url('../images/standardDrink.png');
   background-repeat: no-repeat;
+  background-size: 529px;
+  position: relative;
+  bottom: 0;
+  margin-left: 196px;
 }
 .drink-btn {
-  margin: 0 32px 20px 32px;
+  margin: 0 46px 20px 46px;
   border: solid #003087 1px;
-  background-color: #4d6eab;
+  background-color: #003087;
   color: white;
   width: 125px;
+  height: 47px;
+  border-radius: 11px;
 }
 .marijuana-btn {
   margin: 0 32px 20px 32px;
   border: solid #003087 1px;
-  background-color: #4d6eab;
+  background-color: #003087;
   color: white;
   width: 82px;
   width: 182px;
   font-size: 22px;
   font-weight: 500;
+  height: 47px;
+  border-radius: 11px;
+}
+.marijuana-btn.active {
+  background-color: gray;
 }
 .marijuana-input {
   margin-top: 17px;
@@ -6904,7 +7063,7 @@ body.study {
   font-weight: 600;
 }
 .input-header {
-  background-color: #4d6eab !important;
+  background-color: #003087 !important;
   color: white !important;
   font-size: 22px;
   font-weight: 500;
@@ -6933,12 +7092,12 @@ body.study {
   font-size: 17px;
   height: 50px;
   border-radius: 17px;
-  background-color: #4D6EAB;
+  background-color: #003087;
 }
 .js-calendar-return {
   height: 50px;
   border-radius: 17px;
-  background-color: #4D6EAB;
+  background-color: #003087;
   font-size: 27px;
 }
 .user-instructions {
@@ -6954,12 +7113,23 @@ body.study {
 }
 .instructions-btn {
   background: transparent;
-  margin-top: -12px !important;
-  margin-right: -16px !important;
+  margin-top: -20px !important;
+  margin-right: -142px !important;
+  height: 40px;
+  font-size: 24px;
+  width: 48px;
+  border: none;
 }
 .study-complete-panel {
   margin-top: 60px;
 }
 .admin-enter {
   margin-top: 10px;
+}
+.no-border {
+  border: none !important;
+}
+.study-complete-panel {
+  background: #D5D8DE;
+  color: #585353;
 }

@@ -23,8 +23,8 @@ require.config({
         "bootstrap-dialog": "../vendor/bower/bootstrap3-dialog/src/js/bootstrap-dialog",
         "moment": "../vendor/bower/moment/min/moment.min",
         "clndr": "../vendor/bower/clndr/clndr.min",
-        "qtip": "../vendor/bower/qtip2/jquery.qtip.min"
-
+        "qtip": "../vendor/bower/qtip2/jquery.qtip.min",
+        "jquery-file-download" : "../vendor/bower/jquery-file-download/src/Scripts/jquery.fileDownload"
     },
 
     map: {

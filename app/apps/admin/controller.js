@@ -13,6 +13,10 @@ define(["app", "apps/admin/views"], function(App, Views ){
         });
         mainView.tableRegion.show(studiesTable);
 
+
+        // var passphrase = new Views.Passphrase({
+        //     model: 
+        // });
     };
 
     return {

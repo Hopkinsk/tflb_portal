@@ -36,12 +36,14 @@ define([
        onStartStudy: function(evt){
           var studyId = this.ui.studyIdInput.val();
           //TODO: validate studyId
+          var that=this;
           var saveStudy = App.request("study:save", {"studyId": studyId, "date": moment().format('MM/DD/YYYY')} );
           $.when(saveStudy).done(function(study, xhr){  
             if(study){
               App.trigger('study:show', study.get('id'));
             } else {
-              //TODO SHOW ERROR
+               that.$('.js-invalid').removeClass('hidden');
+               that.$('.js-invalid').html(xhr.responseText);
             }  
           });
         }

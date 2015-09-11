@@ -1,1 +1,2 @@
-<span class="event-personal"> <%= obj.title %> <button class="js-delete-event delete-event-btn glyphicon glyphicon-remove-circle"></button> </span><br><br>
+<div class="event-list-bullet"> </div> <%= obj.title %> <i class="js-delete-event glyphicon glyphicon-remove event-remove-btn"></i>
+

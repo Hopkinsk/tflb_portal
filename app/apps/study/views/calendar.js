@@ -28,6 +28,8 @@ define(["app",
 
 
    var Event = Marionette.ItemView.extend({
+    tagName: 'li',
+    className: 'event-list-item',
     template: eventTpl,
     ui: {
         deleteEvent: '.js-delete-event'
@@ -166,6 +168,7 @@ define(["app",
             this.currentNumberOfDrinks = this.model.getNumberOfDrinks();
             this.marijuana = this.model.getMarijuanaUse();
             this.$dayEl = options.$dayEl;
+            this.calendar = options.cal;
         },
         onRender: function(){
             if(this.marijuana){
@@ -215,15 +218,31 @@ define(["app",
         },
         saveDay: function(){
 
-            console.log("save day!");
-            console.log(this.model);
             this.model.set({
                 marijuana: this.marijuana,
                 drinks: this.currentNumberOfDrinks,
-               // title: 
             });
             this.model.save();
-           // this.trigger("day:save", this.model)
+
+            var that=this;
+            this.calendar.removeEvents(function(event){
+                return (event.date == that.model.get('date') && event.type != 'personal');
+            });
+
+            if(this.currentNumberOfDrinks > 0){
+                this.calendar.addEvents([{
+                    date: this.model.get('date'),
+                    type: "alcohol",
+                    drinks: this.currentNumberOfDrinks
+                }]);    
+            }
+            if(this.marijuana){
+                this.calendar.addEvents([{
+                    date: this.model.get('date'),
+                    type: "marijuana",
+                    use: this.marijuana
+                }]);     
+            }
         },
 
         serializeData: function(){
@@ -263,23 +282,20 @@ define(["app",
 
         initialize: function(){
             this.cal = [];
-            this.endMonth = moment().subtract(91, 'days').format('M');
-            this.startMonth = moment().format('M');
+            this.endMonth = moment(this.model.get('date'), "MM-DD-YYYY").subtract(90, 'days').format('M');
+            this.startMonth = moment(this.model.get('date'), "MM-DD-YYYY").format('M');
             this.eventMode = false;
             this.clndrTpl = clndrTpl;
         },
         onRender: function(){
             this.generateCalendar();
             this.setAdjacentMonths(moment());
-
-
         },
 
         onInstructionsMode: function(evt){
             console.log("instruction mode");
             this.enableOverlay();
             this.instructionsView = new Instructions();
-
             this.inputRegion.show(this.instructionsView);
             
 
@@ -295,7 +311,7 @@ define(["app",
             var that=this;
             this.cal = this.$('.js-calendar').clndr({
                 template: that.clndrTpl,
-                startWithMonth: moment(),
+                startWithMonth: moment(that.model.get('date'), "MM-DD-YYYY"), //that.startDate, //moment(),
                 useTouchEvents: false,
                 daysOfTheWeek: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
                 showAdjacentMonths: false,
@@ -304,8 +320,8 @@ define(["app",
                         if(that.eventMode){
                             that.showEventInputView(target);
                         } else {
-                          //  that.showEventInputView(target);
-                            that.showInputView(target);
+                           // that.showEventInputView(target);
+                           that.showInputView(target);
                         }
                     },
                     previousMonth: function(month){ 
@@ -318,8 +334,8 @@ define(["app",
                 },
                 events: that.model.getEvents(),
                 constraints: {
-                    startDate: moment().subtract(91, 'days'), 
-                    endDate: moment()
+                    startDate: moment(that.model.get('date'), "MM-DD-YYYY").subtract(90, 'days'),  //moment().subtract(90, 'days'), 
+                    endDate: moment(that.model.get('date'), "MM-DD-YYYY")//moment()
                 }
             });
 
@@ -327,6 +343,8 @@ define(["app",
         },
         showEventInputView: function(day){
             this.enableOverlay();
+
+
             var dayModel = this.model.createDay(day);
             this.eventView = new Events({
                 model: dayModel,
@@ -350,8 +368,10 @@ define(["app",
             this.enableOverlay();
             this.inputView = new Input({
                 model: this.model.createDay(day),
-                $dayEl: $(day.element)
+                $dayEl: $(day.element),
+                cal: this.cal
             });
+
 
             this.inputRegion.show(this.inputView);
             var that=this;
@@ -365,12 +385,19 @@ define(["app",
 
             if(this.eventMode){
                 this.eventMode = false;
-                this.$('.js-clndr-controls').show();
-                this.$('.js-event-instructions').toggleClass('hidden');
+                $('body').removeClass('event-mode');
+                this.$('.js-event-mode-header').addClass('hidden');
+                this.$('.js-cal-mode-header').removeClass('hidden');
+                this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').removeClass('event-mode');
+
+
             } else {
                 this.eventMode = true;
-                this.$('.js-clndr-controls').hide();
-                this.$('.js-event-instructions').toggleClass('hidden');
+                $('body').addClass('event-mode');
+                this.$('.js-event-mode-header').removeClass('hidden');
+                this.$('.js-cal-mode-header').addClass('hidden');
+                this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
+
             }
 
 
@@ -412,7 +439,6 @@ define(["app",
             this.setAdjacentMonths(month);
         },
         setAdjacentMonths: function(month){
-            console.log("ENXT");
 
             this.$('.js-nextMonth').html(month.add(1, "month").format('MMMM'));
             
@@ -428,7 +454,9 @@ define(["app",
             console.log('finish study');
     
             //TODO: save the model as complete
-            this.trigger('study:complete', this.model);
+           // this.trigger('study:complete', this.model);
+             //App.navigate("study/" + encodeURIComponent(studyId));
+             App.trigger("study:complete", this.model);
         }
     });
 

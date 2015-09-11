@@ -74,10 +74,11 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         createDay: function(data){
             data.date = moment(data.date).format('L');
             data.study_id = this.id;
-            data.dayNumber = 5;
 
-            console.log("CREATE DAY");
-            console.log(data);
+            var diff = moment(data.date).diff(this.get('date'), 'days');
+            diff = Math.abs(diff) + 1;
+            data.dayNumber = diff;
+
             return new Entities.Day(data);
         },
 
@@ -96,18 +97,32 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
             });
 
             return events;
+        },
+
+        getSafetyStatus: function(){
+            var triggered = false;
+            _.each(this.get('alcohol'), function(evt){
+                if(evt.drinks > 9){
+                    triggered = true;
+                }
+            }); 
+
+            return triggered;
         }
+    });
+
+    Entities.csvExport = Backbone.Model.extend({
+        url: Entities.urls.exportStudies
+
     });
 
     Entities.studyListItem = Backbone.Model.extend({
         url: Entities.urls.study
-
     });
 
     Entities.studyList = Backbone.Collection.extend({
         model: Entities.studyListItem,
         url: Entities.urls.studyList
-
     });
 
 
@@ -143,8 +158,7 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     patch: true,
                     dataType: "json",
                     success: function(model, response){
-                        //set entities.currentStudy to response
-                        defer.resolve(model);
+                        defer.resolve(model);                        
                     },
                     error: function(model, xhr){
                         defer.resolve(false, xhr, model);
@@ -175,8 +189,26 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
             return defer.promise();
         },
-        exportStudies: function(data){
+        exportStudies: function(ids){
+            var defer = $.Deferred();
+            var study = new Entities.csvExport();
+            study.fetch(
+                {
+                    wait: true,
+                    data: {
+                        ids: JSON.stringify(ids),
+                    },
+                    success: function(model, response){
+                        //set entities.currentStudy to response
+                        defer.resolve(model);
+                    },
+                    error: function(model, xhr){
+                        defer.resolve(false, xhr, model);
+                    }
+                }
+            );
 
+            return defer.promise();
 
 
         }

@@ -1,46 +1,58 @@
-<span class="header-logo pull-left" title="">
-  <img style="max-width:100px; margin-top: -7px;" src="app/styles/images/bch_logo.png">
-</span>
+<div class="js-cal-mode-header">
+  <span class="clndr-bch-logo col-sm-5"></span>
 
-<div class='js-event-instructions col-sm-4 col-sm-offset-4 hidden'> 
-<span class="event-instructions"><h3> Select a day to edit Events </h3> </span>
-</div>
+  <div class='js-clndr-controls clndr-controls col-sm-4'> 
+    
 
- 
-<div class='js-clndr-controls clndr-controls col-sm-4 col-sm-offset-4'> 
-  <h3> 
-    <button class="btn btn-default js-next-month clndr-next-button hidden"> 
-      <i class="glyphicon glyphicon-chevron-left"> <!-- <span class="js-nextMonth">  </span> --> </i> 
-    </button>
-      
+
+      <button class="pull-left iter-months-btn js-next-month clndr-next-button hidden glyphicon glyphicon-circle-arrow-left"> 
+      </button>
+    
+     <h3 class="pull-left"> 
       <span class="js-month"><%= month %></span> 
       <small class="js-year"><%= year %></small>
-      <button class="btn btn-default clndr-previous-button js-previous-month">
-       <!--  <span class="js-lastMonth">  --> </span> <i class="glyphicon glyphicon-chevron-right"></i>
-      </button>
-   </h3> 
+     </h3> 
+     
+    <button class="pull-left iter-months-btn clndr-previous-button js-previous-month glyphicon glyphicon-circle-arrow-right">
+      </span> 
+     </button>
+
+  <button type="button" class="js-finish-study finish-study-btn hidden" data-toggle="modal" data-target="#finishStudy">
+    Study Complete
+  </button>
+
+ </div>
+
+ <div class="col-sm-3">
+
+
+  <button class="event-mode-btn js-event-mode pull-right" type="button"> Add Events </button>
+  <button class="js-instructions instructions-btn glyphicon glyphicon-question-sign pull-right"></button><br>
+
 </div>
 
-<button class="js-instructions instructions-btn btn  btn-lg  glyphicon glyphicon-question-sign pull-right"></button><br>
-<button class="btn btn-primary event-mode js-event-mode pull-right" type="button"> Event Mode </button>
-
-
-<div class="col-sm-3">     
-  <div class="js-finish-study finish-study hidden"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#finishStudy">
-Finished
-</button></div>
-<!-- Button trigger modal -->
-
-
 </div>
 
 
 
+<div class="js-event-mode-header hidden">
+  <span class="clndr-bch-logo event-mode col-sm-4"></span>
+
+  <div class="col-sm-4 js-event-instructions">
+    <div class="panel panel-default event-instructions">
+
+      Select a Day to Edit Events
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <button class="event-mode-btn cal-return js-event-mode pull-right" type="button"> 
+      Back to Calendar </button>
+    <button class="js-instructions instructions-btn glyphicon glyphicon-question-sign pull-right"></button><br>
+  </div>
+</div>
 
 
-<!-- <div class='js-event-controls event-controls col-sm-3 col-sm-offset-5'>
-Select a day to add an event.
-</div> -->
 
 
 <table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>
@@ -75,23 +87,19 @@ Select a day to add an event.
           <% _.each(days[d].events, function(event){ %>
            
             <% if(event.type == "personal"){ %>
-                <span class="event-personal-label pull-left">  <%= event.title %> </span> <br>
+               <div class="event-personal-label pull-left">  <div class="event-label-bullet"></div> <%= event.title %></div>
             <% } else if(event.type == "alcohol" && event.drinks > 0) { %>
-            </ul>
-              <!-- <div class="alcohol-icon pull-left"></div> -->
-              <img style=" max-width:100px; margin-top: 2px;" class="alcohol-icon pull-left " src="app/styles/images/alcohol.png">
+
+
+                <div class="alcohol-icon pull-left"></div>
 
               <% } %>
-           
-            
-            
-            <% if(event.type == "marijuana" && event.use){ %> 
-             <img style=" max-width:100px; margin-top: 2px;" class="marijuana-icon pull-left " src="app/styles/images/marijuana.png">
-
-   <!--          <div class="marijuana-icon js-marijuana-icon pull-left"> </div> -->
-
-
+          
+              <% if(event.type == "marijuana" && event.use){ %> 
+                <div class="marijuana-icon pull-left"></div>
             <% } %>
+
+
           <% }) %>
 
 <!--           <button class="btn btn-md btn-default add-event pull-right glyphicon glyphicon-pencil"></span>

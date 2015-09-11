@@ -16,10 +16,7 @@ define(["app", "apps/study/views"], function(App, Views ){
         var calendar = new Views.Calendar({
             model: currentStudy
         });
-        calendar.on('study:complete', function(){
-            displayStudyComplete(currentStudy);
 
-        });
         mainView.contentRegion.show(calendar);
     };
 
@@ -50,8 +47,6 @@ define(["app", "apps/study/views"], function(App, Views ){
     // var displayInstructions = function(currentStudy){
     //     mainView = new Views.Main();
     //     App.mainRegion.show(mainView);
-
-
     // };
 
     return {
@@ -66,6 +61,18 @@ define(["app", "apps/study/views"], function(App, Views ){
                   });
             });
         },
+        studyComplete: function(study){
+            if(study){
+                //displayStudyComplete(study);
+                displayStudyComplete(study);
+
+            } else {
+                displayStudyComplete(null);
+
+                //TODO: redirect
+            }
+        },
+
     };
 });
 

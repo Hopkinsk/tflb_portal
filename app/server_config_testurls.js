@@ -17,7 +17,11 @@ define(function(require, exports, module) {
         },
         studyList: function(){
             return "/app/mockdata/studies/all.json";
-        }
+        },
+        exportStudies: function(){
+
+            return "/app/mockdata/study/export";
+        } 
     };
 
     return Urls;    

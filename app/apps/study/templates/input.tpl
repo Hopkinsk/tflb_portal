@@ -3,29 +3,29 @@
 		<div class="panel-heading input-header text-center"> <%= obj.dateString %> </div>
 			<% _.each(obj.personalEvents, function(event){ %>
 
-	            ~ <%= event.title %> ~
+	          <!--   <%= event.title %> -->
 	         <% }) %>
 		<div class="panel-body">
 
 			<div class="drink-input row col-sm-12">
 				<span class="drinks-label"># Standard Drinks</span> 
 				<span class="">
-					<button class="btn btn-lg btn-default drink-btn js-decrease-drink glyphicon glyphicon-minus" type="button"> </button> 
+					<button class="drink-btn js-decrease-drink glyphicon glyphicon-minus" type="button"> </button> 
 					<span class="js-numberOfDrinks"></span> 
-					<button class="btn btn-lg btn-default drink-btn js-increase-drink glyphicon glyphicon-plus" type="button"> </button> 
+					<button class="drink-btn js-increase-drink glyphicon glyphicon-plus" type="button"> </button> 
 				</span>
 			</div>
 
 			<div class="row">
- 			<img class="col-sm-8 col-sm-offset-2 standard-drink-img pull-left ">
+ 			<div class="col-sm-7 col-sm-offset-3 standard-drink-img pull-left "></div>
  			</div>
 
 			<div class="marijuana-input row">
 				<span class="marijuana-label"> Marijuana </span> 
 				<span class="">
-					<button class="btn btn-lg btn-default marijuana-btn js-marijuana-btn js-no-marijuana"> No  </button> 
+					<button class="marijuana-btn js-marijuana-btn js-no-marijuana"> No  </button> 
 				</span>
-				<button class="btn btn-lg btn-default marijuana-btn js-marijuana-btn js-yes-marijuana"> Yes </button> 
+				<button class="marijuana-btn js-marijuana-btn js-yes-marijuana"> Yes </button> 
 				
 				
 			</div>

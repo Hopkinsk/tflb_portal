@@ -11,11 +11,15 @@ define(function(require, exports, module) {
 			return "/day/" + encodeURIComponent(this.id);
 		},
 		personalEvent: function(){
-            return "/event/" + encodeURIComponent(this.id);
-        },
+			return "/event/" + encodeURIComponent(this.id);
+		},
 		studyList: function(){
-            return "/study/list";
-        }        
+			return "/study/list";
+		},
+		exportStudies: function(){
+
+			return "/study/export";
+		}        
 	};
 
 	return Urls;    

@@ -1,20 +1,27 @@
-
-
-<div class="col-sm-5 col-sm-offset-3 calendar-input">
-
+<div class="col-sm-8 col-sm-offset-2 calendar-input">
 	<div class="panel panel-default">
-		<div class="panel-heading"> <%= obj.dateString %> </div>
+		<div class="panel-heading input-header text-center"> <%= obj.dateString %> </div>
 		<div class="panel-body">
 
-		<div class="js-events-list"></div>
-		 <div class="input-group">
-		      <input type="text" class="js-event-input form-control" placeholder="Event Title">
-		      <span class="input-group-btn">
-		        <button class="btn btn-success gylphicon glyphicon-plus js-add-event" type="button"></button>
-		      </span>
-		  </div><!-- /input-group -->
-	</div>
 
-	 <button class="btn btn-primary js-save " type="button">Back to Calendar</button>
+			<ul class="js-events-list event-icons-wrapper col-sm-8 col-sm-offset-2 list-group">
+
+
+			</ul>
+
+			 <div class="input-group col-sm-8 col-sm-offset-2">
+			      <input type="text" class="js-event-input event-title-input form-control" placeholder="Event Title">
+			      <span class="input-group-btn">
+			        <button class=" js-add-event add-event-btn" type="button">Create Event</button>
+			      </span>
+			  </div><!-- /input-group -->
+			  <button type="button" class="col-sm-6 col-sm-offset-3 evt-clndr-return-btn js-save">
+			  	<i class="glyphicon cal-icon glyphicon-calendar"></i> Calendar</button>
+
+		</div>
 	</div>
 </div>
+
+
+
+

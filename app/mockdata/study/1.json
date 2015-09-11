@@ -1,7 +1,9 @@
 {
     "id": 1,
     "study_id": 1234,
+    "safetyTriggered" : false,
     "adminPassphrase": "admin",
+    "date" : "09/05/2015",
     "personal" : [
     	{
             "id" : "123",
@@ -11,33 +13,38 @@
     		"title" : "Birthday"
     	},
         {
-            "id" : "124",
-            "date" : "08/10/2015",
+            "id" : "126",
+            "date" : "09/03/2015",
             "dayNumber" : 1,
             "type" : "personal",
-            "title" : "Party"
-        },
-        {
-            "id" : "125",
-            "date" : "08/07/2015",
-            "dayNumber" : 1,
-            "type" : "personal",
-            "title" : "Birthday"
+            "title" : "Movie Night"
         }
     ],
 
     "alcohol" : [
     	{
-    		"date" : "08/13/2015",
+    		"date" : "09/04/2015",
     		"dayNumber" : 1,
     		"drinks" : 3,
     		"type" : "alcohol"
-    	}
+    	},
+        {
+            "date" : "09/05/2015",
+            "dayNumber" : 1,
+            "drinks" : 10,
+            "type" : "alcohol"
+        },
+        {
+            "date" : "09/03/2015",
+            "dayNumber" : 1,
+            "drinks" : 9,
+            "type" : "alcohol"
+        }
     ],
 
     "marijuana" : [
     	{
-    		"date" : "08/13/2015",
+    		"date" : "09/04/2015",
     		"dayNumber" : 1,
     		"use" : true,
     		"type" : "marijuana"

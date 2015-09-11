@@ -12,21 +12,107 @@
 }
 
 
+
+
 .hidden {
     display: none;
 }
 
-.alcohol-icon, {
-    width: 25px;
-}
-.marijuana-icon {
-    width: 30px;
+.clndr-bch-logo {
+    
+    background-image: url('../images/bch_logo.png');
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-size: 157px 77px;
+    height: 102px;
+    &.event-mode {
+         background-image: url('../images/bch_logo_inverse.png');
+    }
 }
 
-.event-mode {
-    margin-top: 10px;
-    margin-right: -38px;
+.alcohol-icon, {
+    left: 3px;
+    bottom: 3px;
+    position: absolute;
+    background-size: 30px;
+    width: 30px;
+    height: 38px;
+    background-image: url('../images/alcohol.png');
+    background-repeat: no-repeat;
+
+    &.event-mode {
+        display: none;
+    }
 }
+.marijuana-icon {
+    right: 3px;
+    bottom: 3px;
+    position: absolute;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../images/marijuana.png');
+    background-repeat: no-repeat;
+
+    &.event-mode {
+        display: none;
+    }
+}
+
+.event-mode-btn {
+    margin-top: 23px;
+    margin-right: -16px;
+    background: #CDDBF5;
+    color: @darkAccent;
+    height: 37px;
+    width: 129px;
+    border: solid 1px;
+    border-radius: 5px;
+
+    &.cal-return {
+        margin-top: 20px;
+        font-weight: 500;
+        background: white;
+
+        .glyphicon-calendar {
+            font-size: 12px;
+
+        }
+    }
+}
+
+
+.event-instructions {
+    font-size: 20px;
+    background: white;
+    color: #003087;
+    border: solid 3px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+    height: 61px;
+    font-size: 21px;
+    height: 61px;
+
+}
+
+
+
+.finish-study-btn {
+    background: #C3EAD3;
+    color: #113821;
+    border: solid 1px #113821;
+    height: 57px;
+    width: 165px;
+    border-radius: 5px;
+    padding: 1px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 60px;
+}
+
+
 .add-event {
     position: absolute;
     right: 4px;
@@ -38,30 +124,52 @@
     color: #6B6B6B;
     border: 1px solid #8A8A8A;
 }
-.event-personal-label {
-        font-size: 17px;
-    font-family: helvetica;
-    color: #3D3D3D;
-    font-weight: 600;
-}
-.event-personal {
-    font-size: 16px;
-    font-size: 16px;
-    background-color: lightblue;
-    padding: 8px;
-    border-radius: 16px;
 
-    .delete-event-btn {
-        background: transparent;
-        border: none;
-        outline: none;
+.event-label-bullet {
+    height: 5px;
+    width: 5px;
+    background: #003087;
+    border-radius: 5px;
+    float: left;
+    margin-top: 6px;
+    margin-right: 5px;
+
+
+}
+.event-personal-label {
+    font-size: 13px;
+    font-family: helvetica;
+    color: @darkAccent;
+    font-weight: 400;
+    display: inline-block;
+    float: left;
+    clear: left;
+
+    &.event-mode {
+        font-weight: 600;
     }
 }
+
 
 .event-controls {
     display: none;
     background: white;
 }
+
+
+.iter-months-btn {
+    
+    background: white;
+    color: #003087;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 33px;
+    margin-top: 15px;
+    margin-right: 16px;
+}
+
 
 .clndr {
     margin-top: 20px;
@@ -72,6 +180,8 @@
     //width: 100%;
     position: relative;
     margin-bottom: 10px;
+    //margin-left: 148px;
+
 
     .month
     {
@@ -149,7 +259,7 @@
             text-align: center;
             border-left: @clndr-border;
             border-top: @clndr-border;
-
+            font-size: 14px;
             color: #fff;
 
             &:last-child
@@ -161,7 +271,7 @@
 
     tr
     {
-        height: 85px;
+        height: 106px;
 
         td
         {
@@ -187,15 +297,17 @@
             {
                 //background: #9AD6E3;
                 .day-number {
+                    /*
                     width: 39px;
                     height: 39px;
                     padding: 1px;
                     border-radius: 50%;
-                    background: @darkAccent;
-                    border: 2px solid @darkAccent;
+                    background: #CDDBF5;
+                    border: 1px solid #003087;
                     color: white;
                     text-align: center;
                     font-size: 21px;
+                    */
                 }
 
 

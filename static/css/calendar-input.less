@@ -1,9 +1,70 @@
 @blue: #4D6EAB;
 
+.event-icons-wrapper {
+	margin-bottom: 24px;
+
+
+}
+.event-list-item {
+	
+	font-size: 23px;
+    border: none;
+    border-bottom: solid 1px #C1BABA;
+    padding: 10px 0px 5px 0px;
+    list-style-type: none;
+	.event-list-bullet {
+		background: @lightBlue;
+	    width: 20px;
+	    height: 20px;
+	    float: left;
+	    margin-right: 10px;
+	    margin-top: 6px;
+		border-radius: 3px;
+	}
+
+	.event-remove-btn {
+	    font-size: 21px;
+	    float: right;
+	    color: #9E9595;
+	    margin-top: 9px;
+	    margin-right: 8px;
+	    outline: none;
+
+	}
+}
+
+.evt-clndr-return-btn {
+	
+    background: #003087;
+    color: white;
+    font-size: 26px;
+    border: none;
+    height: 50px;
+    margin-top: 23px;
+    border-radius: 5px;
+}
+
+.event-title-input {
+	font-size: 22px;
+    height: 37px;
+}
+
+.add-event-btn {
+    font-size: 21px;
+    background: @lightBlue;
+    border: solid 1px @darkAccent;
+    font-weight: 500;
+    border-radius: 0px 5px 5px 0px;
+    color: #524E4E;
+
+}
+
+
 .calendar-input {
 	z-index: 1000;
-	top: 10%;
+	top: 17%;
 	position: absolute;
+
 }
 
 .js-marijuana-btn {
@@ -16,35 +77,48 @@
 } 
 
 .standard-drink-img {
-	border-top: solid gray 1px;
-	border-bottom: solid gray 1px;
+	//border-top: solid gray 1px;
+	//border-bottom: solid gray 1px;
 
     height: 232px;
     width: 578px;
     background-image: url('../images/standardDrink.png');
-   background-repeat: no-repeat;
+    background-repeat: no-repeat;
+
+   	background-size: 529px;
+    position: relative;
+    bottom: 0;
+    margin-left: 196px;
 }
 
 .drink-btn {
 	
-	margin: 0 32px 20px 32px;
+	margin: 0 46px 20px 46px;
 	border: solid @darkAccent 1px;
-	background-color: @blue;
+	background-color: @darkAccent;
 	color: white;
 	width: 125px;
+	height: 47px;
+    border-radius: 11px;
 }
 
 .marijuana-btn {
-		margin: 0 32px 20px 32px;
+	margin: 0 32px 20px 32px;
 	border: solid @darkAccent 1px;
-	background-color: @blue;
+	background-color: @darkAccent;
 	color: white;
 	width: 82px;
     width: 182px;
     font-size: 22px;
     font-weight: 500;
+	height: 47px;
+    border-radius: 11px;
 
+    &.active {
+    	background-color: gray;
+    }
 }
+
 
 .drink-input {
 	
@@ -72,11 +146,11 @@
 }
 
 .input-header {
-	background-color: @blue !important;
+	background-color: @darkAccent !important;
 	color: white !important;
-	    font-size: 22px;
+	font-size: 22px;
     font-weight: 500;
-        padding: 10px 15px;
+    padding: 10px 15px;
 }
 
 .drinks-label {
@@ -111,12 +185,12 @@
     font-size: 17px;
     height: 50px;
     border-radius: 17px;
-        background-color: #4D6EAB;
+    background-color: @darkAccent;
 }
 
 .js-calendar-return {
 	 height: 50px;
 	border-radius: 17px;
-	background-color: #4D6EAB;
+	background-color: @darkAccent;
 	font-size: 27px;
 }

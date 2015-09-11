@@ -27,18 +27,28 @@ define([
       },
       initialize: function(){
         this.passphrase = this.model.get('adminPassphrase');
+        this.safetyTriggered = this.model.getSafetyStatus(); 
+        console.log("SAFETY TRIGGER", this.safetyTriggered);
       },
       onAdminLogin: function(evt){
         this.$('.js-invalid-login').addClass('hidden');
+        
         var password = this.$('.js-login-input').val();
         if(password != this.passphrase){
+          console.log("NOT EQAL");
           this.$('.js-invalid-login').toggleClass('hidden');
         } else {
-          this.$('.js-invalid-login').removeClass('hidden');
           App.trigger('home:show');
+          this.$('.js-invalid-login').removeClass('hidden');
 
         }
-      }
+      },
+
+      serializeData: function(){
+          return {
+            safetyTriggered: this.safetyTriggered
+          };
+        }
     }),
 
     Instructions: Instructions,

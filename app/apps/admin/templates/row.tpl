@@ -12,6 +12,6 @@
 <span class="study-complete-tag alert-success">Complete</span>
 <% } else { %>
 
-<button class="btn btn-sm alert-danger"> Continue </button>
+<button class="btn btn-sm alert-danger js-continue-study"> Continue </button>
 <% } %>
 </td>

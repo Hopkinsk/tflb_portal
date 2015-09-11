@@ -1,9 +1,9 @@
 [
 
 {
-	"id" : "123",
-	"studyId" : "1",
-	"complete" : "1",
+	"id" : "1",
+	"studyId" : "123",
+	"complete" : "0",
 	"date" : "08/01/2015"
 },
 {

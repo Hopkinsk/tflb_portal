@@ -13,6 +13,8 @@ define(["app", "apps/home/views"], function(App, Views ){
     return {
         show: function(){
             require(["entities/study"], function(){
+                $('body').removeClass('study');
+                $('#header-region').removeClass('hidden');
                 display();
 
                 // var monitor = App.request("study:monitor");

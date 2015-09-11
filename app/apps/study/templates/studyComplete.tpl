@@ -1,42 +1,28 @@
-<!-- <div class="col-sm-12">
-<span class="header-logo pull-left" title="">
-  <img style="max-width:100px; margin-top: -7px;" src="app/styles/images/bch_logo.png">
-</span>
-</div>
- -->
- <div class="header-navbar">
-<nav class="navbar navbar-default" role="navigation">
+
+<div class="header-navbar">
+<nav class="navbar navbar-default no-border" role="navigation">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <span class="navbar-brand" title="">
-                <img style="max-width:100px; margin-top: -7px;" src="app/styles/images/bch_logo.png">
-            </span>
+        <div class="js-header-brand navbar-brand no-border bch-logo col-sm-2">
+        </div>       
 
             <div class="pull-right admin-enter">
-            	<button type="button" class="btn btn-default admin-enter-btn pull-right" data-toggle="modal" data-target=".bs-example-modal-sm"> Admin</button>
-       		 </div>
-        </div>
+              <button type="button" class="btn btn-default admin-enter-btn pull-right" data-toggle="modal" data-target=".bs-example-modal-sm"> Admin <% if(obj.safetyTriggered){ %><span class="glyphicon glyphicon-flag"></span> <% } %> </button>
+           </div>
+
+
+
     </div>
 </nav>
 </div>
 
-<div class="container study-complete-panel">
-<div class="col-sm-12">
-<div class="panel panel-default">
-<div class="panel-heading">
-	Study Complete </div>
-	<div class="panel-body">
+<div class="container col-sm-9 col-sm-offset-2">
+<div class="panel panel-default study-complete-panel">
 
 		<h4 class="text-center"> Please notify the study administrator that the study is complete. </h4>
-	</div>
-
-
-</div>
 </div>
 
 
 <!-- Small modal -->
-
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
