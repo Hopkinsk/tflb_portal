@@ -5,7 +5,8 @@
     
 
 
-      <button class="pull-left iter-months-btn js-next-month clndr-next-button hidden glyphicon glyphicon-circle-arrow-left"> 
+      <button class="pull-left js-next-month clndr-next-button hidden iter-months-btn"> 
+        <span class="iter-months-btn glyphicon glyphicon-circle-arrow-left"></span> 
       </button>
     
      <h3 class="pull-left"> 
@@ -13,8 +14,8 @@
       <small class="js-year"><%= year %></small>
      </h3> 
      
-    <button class="pull-left iter-months-btn clndr-previous-button js-previous-month glyphicon glyphicon-circle-arrow-right">
-      </span> 
+    <button class="pull-left js-previous-month clndr-previous-button iter-months-btn">
+      <span class="iter-months-btn glyphicon glyphicon-circle-arrow-right"></span> 
      </button>
 
   <button type="button" class="js-finish-study finish-study-btn hidden" data-toggle="modal" data-target="#finishStudy">
@@ -24,13 +25,9 @@
  </div>
 
  <div class="col-sm-3">
-
-
   <button class="event-mode-btn js-event-mode pull-right" type="button"> Add Events </button>
   <button class="js-instructions instructions-btn glyphicon glyphicon-question-sign pull-right"></button><br>
-
 </div>
-
 </div>
 
 
@@ -101,11 +98,7 @@
 
 
           <% }) %>
-
-<!--           <button class="btn btn-md btn-default add-event pull-right glyphicon glyphicon-pencil"></span>
- -->
          </div>
-
       </td>
       <% } %>
     </tr>

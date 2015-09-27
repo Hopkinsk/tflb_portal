@@ -111,12 +111,32 @@ define(["app",
             //         $("#error-modal").dialog({ modal: true });
             //     }
             // });
-
+           // var $link = $("#dataLink");
             var fetch = App.request("studies:export", ids);
-            $.when(fetch).done(function(file, xhr){  
+            $.when(fetch).done(function(csvContent, xhr){  
                 console.log("DONE");
-                console.log(file);
+                console.log(csvContent);
+                
+                
+               // console.log($link);
+
+                //var encodedUri = encodeURI(csvContent);
+               // window.open(encodedUri);
+
+
+                var a         = document.createElement('a');
+                a.href        = 'data:attachment/csv;charset=utf-8;base64,' + window.btoa(csvContent);
+                a.target      = '_blank';
+                a.download    = 'myFile.csv';
+
+                document.body.appendChild(a);
+                a.click();
+
             });
+
+
+
+
 
         },
         

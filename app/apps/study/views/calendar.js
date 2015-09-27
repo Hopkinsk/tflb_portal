@@ -4,13 +4,12 @@ define(["app",
         "qtip",
         "moment",
         "tpl!apps/study/templates/calendar.tpl",
-        "tpl!apps/study/templates/input.tpl",
         "tpl!apps/study/templates/instructionsCalendar.tpl",
         "text!apps/study/templates/clndr.html",
-        "tpl!apps/study/templates/events.tpl",
-        "tpl!apps/study/templates/event.tpl"
+        "apps/study/views/events",
+        "apps/study/views/input"
         ],
-        function(App, Marionette, clndr, qtip, moment, calendarTpl, inputTpl, instructionsTpl, clndrTpl, eventsTpl, eventTpl ){
+        function(App, Marionette, clndr, qtip, moment, calendarTpl, instructionsTpl, clndrTpl, Events, Input){
 
    var Instructions = Marionette.ItemView.extend({
         template: instructionsTpl,
@@ -27,239 +26,10 @@ define(["app",
    });
 
 
-   var Event = Marionette.ItemView.extend({
-    tagName: 'li',
-    className: 'event-list-item',
-    template: eventTpl,
-    ui: {
-        deleteEvent: '.js-delete-event'
-    },
-    events: {
-        'click @ui.deleteEvent' : 'onDeleteEvent'
-    },
-    onDeleteEvent: function(evt){
-        console.log("delete event!");
-        console.log(this.model);
-        this.trigger('removeEvent');
-        this.model.destroy();
-
-    },
-    serializeData: function(){
-        var data = Marionette.ItemView.prototype.serializeData.call(this);
-        console.log("serializing event");
-        console.log(data);
-        return data;
-    }
-   });
-
-
-    var Events = Marionette.CompositeView.extend({
-        template: eventsTpl,
-        childView: Event,
-        childViewContainer: '.js-events-list',
-        ui: {
-            save: '.js-save',
-            eventInput: '.js-event-input',
-            addEvent: '.js-add-event'
-        },
-
-        events: {
-            'click @ui.save' : 'onSave',
-            'click @ui.addEvent' : 'onAddEvent'
-        },
-        childEvents: {
-            'removeEvent' : 'onRemoveEvent'
-        },
-        initialize: function(options){
-            this.calendar = options.cal;
-        },
-        onAddEvent: function(evt){
-            console.log("ADD EVENT");
-            console.log(this.model);
-
-
-            this.collection.create({
-                title: this.ui.eventInput.val(),
-                date: this.model.get('date'),
-                type: "personal",
-                study_id: this.model.get('study_id')
-            });
-            this.calendar.addEvents([{
-                date: this.model.get('date'),
-                type: "personal",
-                title: this.ui.eventInput.val()
-            }]);
-
-            this.ui.eventInput.val("");
-        },
-        onRemoveEvent: function(child){
-            this.EventToDelete = child.model;
-            var that=this;
-            this.calendar.removeEvents(function(event){
-                return (event.date == that.EventToDelete.get('date') && event.title == that.EventToDelete.get('title'));
-            });
-        },
-        onSave: function(evt){
-            this.trigger('close');
-        },
-
-        createEventsForCalendar: function(){
-            var events = [];
-            var that=this;
-            this.collection.each(function(evt){
-                if(evt.get('added')){
-                      events.push({
-                        date: that.model.get('date'),
-                        type: "personal",
-                        title: evt.get('title')
-                    });                  
-                  }
-            });
-            return events;
-        },
-
-        createTitleArray: function(){
-            var titles = [];
-            this.collection.each(function(model){
-                titles.push(model.get('title'));
-            });
-            return titles;
-        },
-
-        serializeData: function(){
-            var data = Marionette.ItemView.prototype.serializeData.call(this);
-            data.dateString = moment(this.model.get('date')._i).format("dddd, MMMM Do YYYY");
-            return data;
-        }
-
-    });
-
-
-    // events view is a collection view of events with the input 
-    // model is the day and collection is the personal events 
-    // save personal event, triggers to collection view which saves the day with the updated titles 
-    // gets a collection of study events that hit 
-
-
-   var Input = Marionette.ItemView.extend({
-        template: inputTpl,
-        ui: {
-            returnToCalendar: '.js-calendar-return',
-            increaseDrink: '.js-increase-drink',
-            decreaseDrink: '.js-decrease-drink',
-            yesMarijuana: '.js-yes-marijuana',
-            noMarijuana: '.js-no-marijuana',
-            numberOfDrinks: '.js-numberOfDrinks',
-            prevDay: '.js-prev-day',
-            nextDay: '.js-next-day'
-        },
-
-        events: {
-            'click @ui.addEvent' : 'onAddEvent',
-            'click @ui.returnToCalendar' : 'onReturnToCalendar',
-            'click @ui.increaseDrink' : 'onIncreaseDrink',
-            'click @ui.decreaseDrink' : 'onDecreaseDrink',
-            'click @ui.yesMarijuana, @ui.noMarijuana' : 'toggleMarijuanaUse',
-            'click @ui.prevDay': 'navigatePrevDay',
-            'click @ui.nextDay': 'navigateNextDay'
-
-        },
-        initialize: function(options){
-            this.currentNumberOfDrinks = this.model.getNumberOfDrinks();
-            this.marijuana = this.model.getMarijuanaUse();
-            this.$dayEl = options.$dayEl;
-            this.calendar = options.cal;
-        },
-        onRender: function(){
-            if(this.marijuana){
-                this.ui.yesMarijuana.addClass("active");
-            } else {
-                this.ui.noMarijuana.addClass("active");
-            }
-            this.ui.numberOfDrinks.html(this.currentNumberOfDrinks);
-        },
-        navigatePrevDay: function(evt){
-            this.$dayEl.prev('.day').click();
-            this.saveDay();
-        },
-        navigateNextDay: function(evt){
-            this.$dayEl.next('.day').click();
-            this.saveDay();
-        },
-        onIncreaseDrink: function(evt){
-            this.currentNumberOfDrinks++;
-            this.numberOfDrinksChanged();
-        },
-
-        onDecreaseDrink: function(evt){
-            this.currentNumberOfDrinks--;
-            this.numberOfDrinksChanged();
-        },
-        numberOfDrinksChanged: function(){
-            this.ui.numberOfDrinks.html(this.currentNumberOfDrinks);
-            if(this.currentNumberOfDrinks === 0){
-                this.ui.decreaseDrink.prop('disabled', true);
-            } else {
-                this.ui.decreaseDrink.prop('disabled', false);
-            }
-            if(this.currentNumberOfDrinks >= 10){
-                //TODO toggle safety flag 
-            }
-        },
-        toggleMarijuanaUse: function(evt){
-            this.ui.yesMarijuana.toggleClass("active");
-            this.ui.noMarijuana.toggleClass("active");
-            //if true go false
-            this.marijuana = !this.marijuana;
-        },
-        onReturnToCalendar: function(evt){
-            this.saveDay();
-            this.trigger('close');
-        },
-        saveDay: function(){
-
-            this.model.set({
-                marijuana: this.marijuana,
-                drinks: this.currentNumberOfDrinks,
-            });
-            this.model.save();
-
-            var that=this;
-            this.calendar.removeEvents(function(event){
-                return (event.date == that.model.get('date') && event.type != 'personal');
-            });
-
-            if(this.currentNumberOfDrinks > 0){
-                this.calendar.addEvents([{
-                    date: this.model.get('date'),
-                    type: "alcohol",
-                    drinks: this.currentNumberOfDrinks
-                }]);    
-            }
-            if(this.marijuana){
-                this.calendar.addEvents([{
-                    date: this.model.get('date'),
-                    type: "marijuana",
-                    use: this.marijuana
-                }]);     
-            }
-        },
-
-        serializeData: function(){
-            var data = Marionette.ItemView.prototype.serializeData.call(this);
-            data.personalEvents = this.model.getPersonalEvents();
-            data.dateString = moment(this.model.get('date')._i).format("dddd, MMMM Do YYYY");
-            return data;
-        }
-
-   });
-
-
     var Calendar = Marionette.LayoutView.extend({
         template: calendarTpl,
 
         ui: {
-            addEvent: '.js-add-event',
             eventMode: '.js-event-mode',
             cldnrControls: '.js-clndr-controls',
             eventControls: '.js-event-controls',
@@ -270,7 +40,6 @@ define(["app",
         },
 
         events: {
-            'click @ui.addEvent' : 'onAddEvent',
             'click @ui.eventMode' : 'onEventMode',
             'click @ui.instructionsMode' : 'onInstructionsMode',
             'click @ui.confirmFinish' : 'onFinishStudy'
@@ -284,6 +53,8 @@ define(["app",
             this.cal = [];
             this.endMonth = moment(this.model.get('date'), "MM-DD-YYYY").subtract(90, 'days').format('M');
             this.startMonth = moment(this.model.get('date'), "MM-DD-YYYY").format('M');
+            this.startDate =  moment(this.model.get('date'), "MM-DD-YYYY").subtract(90, 'days');
+            this.endDate = moment(this.model.get('date'), "MM-DD-YYYY");
             this.eventMode = false;
             this.clndrTpl = clndrTpl;
         },
@@ -293,7 +64,6 @@ define(["app",
         },
 
         onInstructionsMode: function(evt){
-            console.log("instruction mode");
             this.enableOverlay();
             this.instructionsView = new Instructions();
             this.inputRegion.show(this.instructionsView);
@@ -305,7 +75,28 @@ define(["app",
                 that.disableOverlay();
             });  
         },
+        onEventMode: function(evt){
 
+            if(this.eventMode){
+                this.eventMode = false;
+                $('body').removeClass('event-mode');
+                this.$('.js-event-mode-header').addClass('hidden');
+                this.$('.js-cal-mode-header').removeClass('hidden');
+                this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').removeClass('event-mode');
+
+            } else {
+                this.eventMode = true;
+                $('body').addClass('event-mode');
+                this.$('.js-event-mode-header').removeClass('hidden');
+                this.$('.js-cal-mode-header').addClass('hidden');
+                this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
+            }
+
+            //correct: 
+            //this.enableOverlay();
+            //$('.day, .header-days, .header-day').toggleClass('event-mode');
+            
+        },
         generateCalendar: function(){
             
             var that=this;
@@ -332,20 +123,28 @@ define(["app",
                     lastMonth: "last",
                     nextMonth: "next"
                 },
+                doneRendering: function(){ 
+                    console.log("CLNDR JUST RENDERED");
+                    if(that.eventMode){
+                        $('body').addClass('event-mode');
+                        that.$('.js-event-mode-header').removeClass('hidden');
+                        that.$('.js-cal-mode-header').addClass('hidden');
+                        that.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
+                    }
+                },
                 events: that.model.getEvents(),
                 constraints: {
-                    startDate: moment(that.model.get('date'), "MM-DD-YYYY").subtract(90, 'days'),  //moment().subtract(90, 'days'), 
-                    endDate: moment(that.model.get('date'), "MM-DD-YYYY")//moment()
+                    startDate: that.startDate.clone(), 
+                    endDate: that.endDate.clone()
                 }
             });
-
-
         },
         showEventInputView: function(day){
             this.enableOverlay();
 
 
             var dayModel = this.model.createDay(day);
+            console.log(Events);
             this.eventView = new Events({
                 model: dayModel,
                 collection: dayModel.getPersonalEventsCollection(), 
@@ -359,6 +158,12 @@ define(["app",
             this.eventView.on('close', function(){
                 that.eventView.destroy();
                 that.disableOverlay();
+                that.eventMode = false;
+                $('body').removeClass('event-mode');
+                that.$('.js-event-mode-header').addClass('hidden');
+                that.$('.js-cal-mode-header').removeClass('hidden');
+                that.$('.event-personal-label, .marijuana-icon, .alcohol-icon').removeClass('event-mode');
+
             });  
 
         },
@@ -369,7 +174,9 @@ define(["app",
             this.inputView = new Input({
                 model: this.model.createDay(day),
                 $dayEl: $(day.element),
-                cal: this.cal
+                cal: this.cal,
+                startDate: this.startDate.clone(),
+                endDate: this.endDate.clone()
             });
 
 
@@ -380,32 +187,7 @@ define(["app",
                 that.disableOverlay();
             });
         },
-        onEventMode: function(evt){
 
-
-            if(this.eventMode){
-                this.eventMode = false;
-                $('body').removeClass('event-mode');
-                this.$('.js-event-mode-header').addClass('hidden');
-                this.$('.js-cal-mode-header').removeClass('hidden');
-                this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').removeClass('event-mode');
-
-
-            } else {
-                this.eventMode = true;
-                $('body').addClass('event-mode');
-                this.$('.js-event-mode-header').removeClass('hidden');
-                this.$('.js-cal-mode-header').addClass('hidden');
-                this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
-
-            }
-
-
-            //correct: 
-            //this.enableOverlay();
-            //$('.day, .header-days, .header-day').toggleClass('event-mode');
-            
-        },
         toggleEventMode: function(){
 
 

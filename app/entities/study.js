@@ -74,11 +74,9 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         createDay: function(data){
             data.date = moment(data.date).format('L');
             data.study_id = this.id;
-
             var diff = moment(data.date).diff(this.get('date'), 'days');
             diff = Math.abs(diff) + 1;
             data.dayNumber = diff;
-
             return new Entities.Day(data);
         },
 
@@ -192,21 +190,38 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         exportStudies: function(ids){
             var defer = $.Deferred();
             var study = new Entities.csvExport();
-            study.fetch(
-                {
-                    wait: true,
-                    data: {
-                        ids: JSON.stringify(ids),
-                    },
-                    success: function(model, response){
-                        //set entities.currentStudy to response
-                        defer.resolve(model);
-                    },
-                    error: function(model, xhr){
-                        defer.resolve(false, xhr, model);
-                    }
-                }
-            );
+            
+
+              $.ajax({
+                 type: 'GET',
+                 data:{ids: JSON.stringify(ids)},
+                 datatype: 'json',
+                 url: study.url(),
+                 async: true,
+                 cache: false,
+                 success: function(response){
+
+                    console.log("SUCCESS AJAX");
+                    console.log(response);
+                    defer.resolve(response);
+                 }
+                });
+
+            // study.fetch(
+            //     {
+            //         wait: true,
+            //         data: {
+            //             ids: JSON.stringify(ids),
+            //         },
+            //         success: function(model, response){
+            //             //set entities.currentStudy to response
+            //             defer.resolve(model);
+            //         },
+            //         error: function(model, xhr){
+            //             defer.resolve(false, xhr, model);
+            //         }
+            //     }
+            // );
 
             return defer.promise();
 

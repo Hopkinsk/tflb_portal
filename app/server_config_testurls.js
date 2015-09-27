@@ -20,7 +20,7 @@ define(function(require, exports, module) {
         },
         exportStudies: function(){
 
-            return "/app/mockdata/study/export";
+            return "/app/mockdata/study/export.csv";
         } 
     };
 

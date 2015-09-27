@@ -6582,6 +6582,9 @@ body.study {
 body.event-mode {
   background: #444343 !important;
 }
+@media only screen and (device-width: 768px) {
+  /* For general iPad layouts */
+}
 button {
   outline: none;
 }
@@ -6739,14 +6742,16 @@ button {
 }
 .iter-months-btn {
   background: white;
-  color: #003087;
   border: none;
   width: 30px;
   height: 30px;
   border-radius: 4px;
   font-size: 33px;
-  margin-top: 15px;
+  margin-top: 8px;
   margin-right: 16px;
+}
+.iter-months-btn .glyphicon {
+  color: #003087;
 }
 .clndr {
   margin-top: 20px;
@@ -7104,8 +7109,40 @@ button {
   color: #003087;
   font-size: 14px;
   background-color: white;
-  height: 500px;
-  overflow-y: scroll;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+@media only screen and (device-width: 768px) {
+  .user-instructions {
+    overflow: hidden;
+    height: 768px;
+  }
+}
+.user-instructions .continue-btn {
+  width: 145px;
+  height: 46px;
+  font-size: 20px;
+  font-weight: 500;
+  background: #003087;
+  color: white;
+}
+.user-instructions .continue-btn .arrow {
+  margin-left: 10px;
+}
+.user-instructions .js-begin-study-btn {
+  width: 145px;
+  height: 46px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.user-instructions .title {
+  font-weight: 600;
+}
+.user-instructions .sub-title {
+  font-size: 16px;
+}
+.user-instructions p {
+  margin-left: 20px;
 }
 .js-instructions-continue {
   background: #003087;
@@ -7119,6 +7156,12 @@ button {
   font-size: 24px;
   width: 48px;
   border: none;
+}
+.instructions-text {
+  font-size: 18px;
+}
+.underline {
+  text-decoration: underline;
 }
 .study-complete-panel {
   margin-top: 60px;

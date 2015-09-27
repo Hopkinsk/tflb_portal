@@ -57,7 +57,7 @@ define(["app", "apps/study/views"], function(App, Views ){
                   $.when(fetchStudy).done(function(currentStudy, xhr){          
                    display(currentStudy);
 
-                  // displayInstructions(currentStudy);
+                   //displayInstructions(currentStudy);
                   });
             });
         },
