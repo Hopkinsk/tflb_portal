@@ -5,11 +5,10 @@
 
 	          <!--   <%= event.title %> -->
 	         <% }) %>
-		<div class="panel-body">
-
-			<div class="drink-input row col-sm-12">
+		<div class="content">
+			<div class="drink-input col-sm-12">
 				<span class="drinks-label"># Standard Drinks</span> 
-				<span class="">
+				<span class="alcohol-btn-group">
 					<button class="drink-btn js-decrease-drink glyphicon glyphicon-minus" type="button"> </button> 
 					<span class="js-numberOfDrinks"></span> 
 					<button class="drink-btn js-increase-drink glyphicon glyphicon-plus" type="button"> </button> 
@@ -17,48 +16,40 @@
 			</div>
 
 			<div class="row">
- 			<div class="col-sm-7 col-sm-offset-3 standard-drink-img pull-left "></div>
+ 			<div class="col-sm-12 standard-drink-img"></div>
  			</div>
 
-			<div class="marijuana-input row">
+			<div class="marijuana-input">
 				<span class="marijuana-label"> Marijuana </span> 
-				<span class="">
-					<button class="marijuana-btn js-marijuana-btn js-no-marijuana"> No  </button> 
-				</span>
-				<button class="marijuana-btn js-marijuana-btn js-yes-marijuana"> Yes </button> 
+				<span class="marijuana-btn-group">
+					<button class="marijuana-btn js-marijuana-btn js-no-marijuana">No</button> 
+					<button class="marijuana-btn js-marijuana-btn js-yes-marijuana">Yes</button> 
 				
-				<div class="checkbox daily-mj-checkbox ">
-  					<label><input type="checkbox" class="" value="" data-toggle="modal" data-target=".bs-example-modal-sm">I smoke Marijuana Daily.</label>
-				</div>
-			</div>
+					<span class="checkbox daily-mj-checkbox text-center">
+	  					<label>
+	  						<input type="checkbox" class="js-daily-chkbox " value=""<%= obj.dailyMJ == true ? "checked":"" %> >I smoke Marijuana Daily.
+	  					</label>
+					</span>
 
-			<div class="btn-group col-sm-12">
-			  <button type="button" class="btn btn-lg col-sm-3 btn-primary iter-day-btn js-prev-day">
-			  
-			  	<i class="glyphicon glyphicon-chevron-left prev-day"></i>	Previous Day
-			  	</button>
-			  <button type="button" class="btn btn-lg col-sm-6 btn-primary js-calendar-return">
-			  	<i class="glyphicon cal-icon glyphicon-calendar"></i> Calendar</button>
-			  <button type="button" class="btn btn-lg col-sm-3 btn-primary iter-day-btn js-next-day">
-			  	Next Day
-			  	<i class="glyphicon glyphicon-chevron-right prev-day"></i>
-			  	</button>
+				</span>
 			</div>
+		</div>
+		<div class="btn-group panel-footer col-sm-12">
+		  <button type="button" class="col-sm-3 iter-day-btn js-prev-day"> Previous Day </button>
+		  <button type="button" class="col-sm-6 js-calendar-return"> <i class="glyphicon cal-icon glyphicon-calendar"></i> Calendar</button>
+		  	<button type="button" class="col-sm-3 iter-day-btn js-next-day"> Next Day </button>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-    	Are you sure you want to select this option? Selecting "I smoke marijuana daily" will set marijuana use to "true" for every day on the calendar. 
+<div class="dailyMJ-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content alert-wrapper">
+    	<div class="modal-body">
+    	Selecting "I smoke marijuana daily" will set marijuana use to "true" for every day on the calendar. 
+    	</div>
       <div class="modal-footer">
-        <div class="">
-        <button type="button" class="btn btn-default col-sm-6" data-dismiss="modal">Cancel</button>
-      </div>
-      <div class="">
-        <button type="button" class="btn btn-primary js-daily-mj col-sm-6 " data-dismiss="modal">Confirm</button>
-      </div>
+        <button type="button" class="btn btn-default col-sm-6 alert-btn right" data-dismiss="modal">Ok, I understand.</button>
       </div>    	
     </div>
   </div>

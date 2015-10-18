@@ -13,7 +13,6 @@
 
 
 
-
 .hidden {
     display: none;
 }
@@ -30,20 +29,32 @@
     }
 }
 
-.alcohol-icon, {
-    left: 3px;
-    bottom: 3px;
-    position: absolute;
-    background-size: 30px;
-    width: 30px;
-    height: 38px;
-    background-image: url('../images/alcohol.png');
-    background-repeat: no-repeat;
+.alcohol-icon-wrapper {
+
+    .alcohol-icon {
+        left: 3px;
+        bottom: 3px;
+        position: absolute;
+        background-size: 30px;    
+        width: 30px;
+        height: 38px;
+        background-image: url('../images/alcohol.png');
+        background-repeat: no-repeat;
+    }
+
+    .drinks-number {
+        left: 3px;
+        bottom: -2px;
+        position: absolute;
+        color: black;
+        margin-left: 23px;
+    }
 
     &.event-mode {
         display: none;
     }
 }
+
 .marijuana-icon {
     right: 3px;
     bottom: 3px;
@@ -110,6 +121,10 @@
     font-size: 15px;
     margin-top: 10px;
     margin-left: 60px;
+    
+    @media only screen and (device-width: 1024px) {
+        background: red;
+    }
 }
 
 

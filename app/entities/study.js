@@ -35,7 +35,7 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
        getMarijuanaUse: function(){
             var used = false;
             _.each(this.attributes.events, function(evt){
-                if(evt.type == "marijuana"){
+                if(evt.type == "marijuana" && evt.use === true){
                     used = true;
                 }
             });
@@ -60,7 +60,15 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                 }
             });
             return new Entities.personalEvents(personal);
-       }
+       },
+       
+       save: function(attrs, options){
+            delete this.attributes.events;
+            delete this.attributes.element;
+            // Proxy the call to the original save function
+            return Backbone.Model.prototype.save.call(this, attrs, options);       
+        }
+       
     });
 
     Entities.Events = Backbone.Collection.extend({
@@ -149,6 +157,7 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         saveStudy: function(data){
             var defer = $.Deferred();
             var study = new Entities.study(data);
+            console.log("about to save");
             study.save(
                 data,
                 {
@@ -156,9 +165,11 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     patch: true,
                     dataType: "json",
                     success: function(model, response){
+                        console.log("save success");
                         defer.resolve(model);                        
                     },
                     error: function(model, xhr){
+                        console.log("save error");
                         defer.resolve(false, xhr, model);
                     }
                 }
@@ -177,6 +188,7 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     dataType: "json",
                     success: function(model, response){
                         //set entities.currentStudy to response
+
                         defer.resolve(model);
                     },
                     error: function(model, xhr){

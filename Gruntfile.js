@@ -210,9 +210,9 @@ module.exports = function(grunt) {
 
                     {
                         expand: true,
-                        cwd: "static/fonts/",
+                        cwd: "static/css/fonts/",
                         src: "**",
-                        dest: "dist/fonts/"
+                        dest: "dist/css/fonts/"
                     },
 
                     {
@@ -266,9 +266,9 @@ module.exports = function(grunt) {
                     },
                     {
                         expand: true,
-                        cwd: "dist/fonts/",
+                        cwd: "dist/css/fonts/",
                         src: "**",
-                        dest: "dist_bundle/fonts/"
+                        dest: "dist_bundle/css/fonts/"
                     },
 
                     {

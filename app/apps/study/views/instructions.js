@@ -24,7 +24,6 @@ define(["app",
             this.ui.page1.addClass('hidden');
         },
         onStartStudy: function(evt){
-            console.log("start study!");
             this.trigger('study:start');
         },
         serializeData: function(){

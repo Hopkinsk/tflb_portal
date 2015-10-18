@@ -16,7 +16,6 @@ define(["app",
         ui: {
             close: '.js-close-instructions'
         },
-
         events: {
             'click @ui.close' : 'onCloseView'
         },
@@ -51,16 +50,38 @@ define(["app",
 
         initialize: function(){
             this.cal = [];
-            this.endMonth = moment(this.model.get('date'), "MM-DD-YYYY").subtract(90, 'days').format('M');
+            this.endMonth = moment(this.model.get('date'), "MM-DD-YYYY").subtract(89, 'days').format('M');
             this.startMonth = moment(this.model.get('date'), "MM-DD-YYYY").format('M');
-            this.startDate =  moment(this.model.get('date'), "MM-DD-YYYY").subtract(90, 'days');
+            this.startDate =  moment(this.model.get('date'), "MM-DD-YYYY").subtract(89, 'days');
             this.endDate = moment(this.model.get('date'), "MM-DD-YYYY");
             this.eventMode = false;
             this.clndrTpl = clndrTpl;
+            this.dailyMJ = this.model.get('dailyMarijuana');
         },
+
         onRender: function(){
             this.generateCalendar();
             this.setAdjacentMonths(moment());
+            this.setDailyMarijuana();
+        },
+
+        setDailyMarijuana: function(){
+            if(this.dailyMJ){
+                var events = [];
+                var dayNumber = 90;
+                var startDate = this.startDate.clone();
+                for (var m = startDate; m.isBefore(this.endDate.clone().add(1, 'days')); startDate.add(1, 'days')) { 
+                    events.push({
+                        date: m.clone(),
+                        formattedDate: m.clone().format('L'),
+                        type: "marijuana",
+                        use: true,
+                        dayNumber: dayNumber                  
+                    });
+                    dayNumber--;
+                }
+                this.cal.addEvents(events);
+            }
         },
 
         onInstructionsMode: function(evt){
@@ -75,6 +96,7 @@ define(["app",
                 that.disableOverlay();
             });  
         },
+
         onEventMode: function(evt){
 
             if(this.eventMode){
@@ -91,11 +113,6 @@ define(["app",
                 this.$('.js-cal-mode-header').addClass('hidden');
                 this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
             }
-
-            //correct: 
-            //this.enableOverlay();
-            //$('.day, .header-days, .header-day').toggleClass('event-mode');
-            
         },
         generateCalendar: function(){
             
@@ -124,7 +141,6 @@ define(["app",
                     nextMonth: "next"
                 },
                 doneRendering: function(){ 
-                    console.log("CLNDR JUST RENDERED");
                     if(that.eventMode){
                         $('body').addClass('event-mode');
                         that.$('.js-event-mode-header').removeClass('hidden');
@@ -144,7 +160,6 @@ define(["app",
 
 
             var dayModel = this.model.createDay(day);
-            console.log(Events);
             this.eventView = new Events({
                 model: dayModel,
                 collection: dayModel.getPersonalEventsCollection(), 
@@ -169,14 +184,14 @@ define(["app",
         },
 
         showInputView: function(day){
-
             this.enableOverlay();
             this.inputView = new Input({
                 model: this.model.createDay(day),
                 $dayEl: $(day.element),
                 cal: this.cal,
                 startDate: this.startDate.clone(),
-                endDate: this.endDate.clone()
+                endDate: this.endDate.clone(),
+                dailyMarijuana: this.dailyMJ
             });
 
 
@@ -192,6 +207,7 @@ define(["app",
 
 
         },
+        
         enableOverlay: function(){
             if($('.js-body-overlay').length === 0){
                 $('body').addClass('stop-scrolling');
@@ -204,6 +220,7 @@ define(["app",
             $('body').removeClass('stop-scrolling');
             overlay.remove();
         },
+
         onPreviousMonth: function(month){
             
             if(month.format('M') == this.endMonth){
@@ -220,20 +237,18 @@ define(["app",
             }
             this.setAdjacentMonths(month);
         },
-        setAdjacentMonths: function(month){
 
+        setAdjacentMonths: function(month){
             this.$('.js-nextMonth').html(month.add(1, "month").format('MMMM'));
-            
             var last = month.subtract(2, "month");
             this.$('.js-lastMonth').html(last.format('MMMM'));
-            
-
         },
+
         onAddEvent: function(evt){
             this.trigger('event:add');
         },
+
         onFinishStudy: function(evt){
-            console.log('finish study');
     
             //TODO: save the model as complete
            // this.trigger('study:complete', this.model);

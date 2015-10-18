@@ -21,7 +21,8 @@ define(["app",
             numberOfDrinks: '.js-numberOfDrinks',
             prevDay: '.js-prev-day',
             nextDay: '.js-next-day',
-            dailyMJ: '.js-daily-mj'
+            dailyMJ: '.js-daily-chkbox',
+            dailyMJModal: '.dailyMJ-modal'
         },
 
         events: {
@@ -32,18 +33,21 @@ define(["app",
             'click @ui.yesMarijuana, @ui.noMarijuana' : 'toggleMarijuanaUse',
             'click @ui.prevDay': 'navigatePrevDay',
             'click @ui.nextDay': 'navigateNextDay',
-            'click @ui.dailyMJ' : 'onDailyMJ'
+            'click @ui.dailyMJ' : 'onDalyMJ'
 
         },
+
         initialize: function(options){
             this.currentNumberOfDrinks = this.model.getNumberOfDrinks();
             this.marijuana = this.model.getMarijuanaUse();
+            this.dailyMJ = options.dailyMarijuana; //TODO: change to get from model
             this.$dayEl = options.$dayEl;
             this.calendar = options.cal;
-            console.log(options);
             this.startDate = options.startDate;
             this.endDate = options.endDate;
+            this.modelChanged = false;
         },
+
         onRender: function(){
             if(this.marijuana){
                 this.ui.yesMarijuana.addClass("active");
@@ -63,12 +67,15 @@ define(["app",
         onIncreaseDrink: function(evt){
             this.currentNumberOfDrinks++;
             this.numberOfDrinksChanged();
+            this.modelChanged = true;
         },
 
         onDecreaseDrink: function(evt){
             this.currentNumberOfDrinks--;
             this.numberOfDrinksChanged();
+            this.modelChanged = true;
         },
+
         numberOfDrinksChanged: function(){
             this.ui.numberOfDrinks.html(this.currentNumberOfDrinks);
             if(this.currentNumberOfDrinks === 0){
@@ -80,76 +87,110 @@ define(["app",
                 //TODO toggle safety flag 
             }
         },
+
         toggleMarijuanaUse: function(evt){
             this.ui.yesMarijuana.toggleClass("active");
             this.ui.noMarijuana.toggleClass("active");
             //if true go false
             this.marijuana = !this.marijuana;
-        },
-        onDailyMJ: function(evt){
-            var events = []
-            var dayNumber = 90;
-            for (var m = this.startDate.subtract(1, 'days'); m.isBefore(this.endDate.clone().add(1, 'days')); this.startDate.add(1, 'days')) {                
-                console.log("adding to: ", m);
-                events.push({
-                    date: m.clone(),
-                    type: "marijuana",
-                    use: true,
-                    dayNumber: dayNumber                  
-                });
-                dayNumber--;
-            }
-
-            console.log("adding events: ", events);
-            this.calendar.addEvents(events);
-            
-            this.model.set({
-                dailyMarijuana: true,
-                days: events
-            });
-            this.model.save(); 
-
+            this.modelChanged = true;
 
         },
+
         onReturnToCalendar: function(evt){
             this.saveDay();
             this.trigger('close');
         },
+        onDalyMJ: function(evt){
+            if(this.ui.dailyMJ.prop('checked')){
+                this.ui.dailyMJModal.modal('show');
+            }
+        },
+        //todo: edge case: enter alc and daily mj same time 
         saveDay: function(){
-            console.log("save day!");
-            console.log(this.marijuana);
+            
+            if(this.$('.js-daily-chkbox').prop('checked')){
+                if(!this.dailyMJ){
+                    console.log("turning on daily mj");
+                    this.changeDailyMarijuana(true);                    
+                }
+
+            } else {
+                if(this.dailyMJ){
+                    console.log("turning off daily mj");
+                    this.changeDailyMarijuana(false);
+                    this.marijuana = false;
+                }        
+            }
 
             this.model.set({
                 marijuana: this.marijuana,
                 drinks: this.currentNumberOfDrinks,
             });
-            this.model.save();
 
-            // var that=this;
-            // this.calendar.removeEvents(function(event){
-            //     return (event.date == that.model.get('date') && event.type != 'personal');
-            // });
+            if(this.modelChanged){
+                this.model.save();
 
-            if(this.currentNumberOfDrinks > 0){
-                this.calendar.addEvents([{
-                    date: this.model.get('date'),
-                    type: "alcohol",
-                    drinks: this.currentNumberOfDrinks
-                }]);    
+                var that=this;
+                this.calendar.removeEvents(function(event){
+                    return (event.date == that.model.get('date') && event.type != 'personal');
+                });
+
+                if(this.currentNumberOfDrinks > 0){
+                    this.calendar.addEvents([{
+                        date: this.model.get('date'),
+                        type: "alcohol",
+                        drinks: this.currentNumberOfDrinks
+                    }]);    
+                }
+                if(this.marijuana){
+                    this.calendar.addEvents([{
+                        date: this.model.get('date'),
+                        type: "marijuana",
+                        use: this.marijuana
+                    }]);     
+                }             
             }
-            if(this.marijuana){
-                this.calendar.addEvents([{
-                    date: this.model.get('date'),
-                    type: "marijuana",
-                    use: this.marijuana
-                }]);     
-            }
+
+
+            
         },
+
+        changeDailyMarijuana: function(use){
+            if(!use){
+                var that=this;
+                this.calendar.removeEvents(function(event){
+                    return (event.type == 'marijuana');
+                });                
+            }
+            //if model wasnt already set to dailyMarijuana: true then do this 
+            var events = [];
+            var dayNumber = 90;
+            var startDate = this.startDate.clone();
+            for (var m = startDate; m.isBefore(this.endDate.clone().add(1, 'days')); startDate.add(1, 'days')) { 
+                events.push({
+                    date: m.clone(),
+                    formattedDate: m.clone().format('L'),
+                    type: "marijuana",
+                    use: use,
+                    dayNumber: dayNumber                  
+                });
+                dayNumber--;
+            }
+            this.calendar.addEvents(events);
+            console.log("saving ", use);
+            this.model.save({
+                dailyMarijuana: use,
+                days: events
+            }); 
+        },
+
 
         serializeData: function(){
             var data = Marionette.ItemView.prototype.serializeData.call(this);
             data.personalEvents = this.model.getPersonalEvents();
             data.dateString = moment(this.model.get('date')._i).format("dddd, MMMM Do YYYY");
+            data.dailyMJ = this.dailyMJ;
             return data;
         }
    });

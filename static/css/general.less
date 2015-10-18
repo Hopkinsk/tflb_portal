@@ -25,6 +25,42 @@ button {
     outline: none;
 }
 
+.alert-wrapper {
+
+    .alert-header {
+        font-weight: 500;
+        font-size: 20px;
+        background: @darkAccent;
+        color: white;
+    }
+    .alert-body {
+        font-weight: 400;
+        font-size: 18px;
+    }
+    .alert-btn-group {
+
+        .alert-btn {
+            width: 118px;
+            height: 37px;
+            border: solid 2px @darkAccent;
+            border-radius: 4px;
+            font-size: 20px;
+
+            &.left {
+                background-color: white;
+                color: black;
+
+            }
+
+            &.right {
+                background-color: @darkAccent;
+                color: white;
+            }
+        }
+    }    
+}
+
+
 .no-gutter {
     padding-right:0;
     padding-left:0;

@@ -9,11 +9,12 @@
 	
 	font-size: 23px;
     border: none;
-    border-bottom: solid 1px #C1BABA;
     padding: 10px 0px 5px 0px;
     list-style-type: none;
+    border-bottom: solid 1px #cccccc;
+
 	.event-list-bullet {
-		background: @lightBlue;
+		background: @darkAccent;
 	    width: 20px;
 	    height: 20px;
 	    float: left;
@@ -29,7 +30,6 @@
 	    margin-top: 9px;
 	    margin-right: 8px;
 	    outline: none;
-
 	}
 }
 
@@ -51,146 +51,206 @@
 
 .add-event-btn {
     font-size: 21px;
-    background: @lightBlue;
+    background: @darkAccent;
     border: solid 1px @darkAccent;
     font-weight: 500;
     border-radius: 0px 5px 5px 0px;
-    color: #524E4E;
-
+    color: white;
+	width: 43px;
 }
 
 
 .calendar-input {
 	z-index: 1000;
 	top: 17%;
+	@media only screen and (device-width: 1024px) {
+	 	top: 3%;
+	}
 	position: absolute;
+	.panel {
+		border: solid @darkAccent 3px;
+		border-radius: 7px;
 
-}
+		.input-header {
+		    border-bottom: solid #003087 3px !important;
+		    background-color: #003087 !important;
+		    color: white !important;
+		    font-size: 22px;
+		    font-weight: 500;
+		    padding: 10px 15px;
+		}
+		.content {
+			text-align: center;
+		     @media only screen and (device-width: 1024px) {
+		    	text-align: normal;
+		    }
+		}
+		.panel-footer {
+	    	padding: 0px;
+	    	background-color: #cccccc;
+	    	border: 3px solid @darkAccent;
+	    
 
-.js-marijuana-btn {
-	
+			.iter-day-btn {
+			    border-right: solid white 5px;
+			    border-left: solid white 5px;
+			    border: solid @darkAccent 2px;
+			    font-size: 17px;
+			    height: 50px;
+			    background-color: @darkAccent;
+			    color: white;
+			    font-weight: 500;
+			    @media only screen and (device-width: 1024px) {
+			    	font-size: 19px;
+			    }
 
-	.js-yes-marijuana.active, .js-no-marijuana.active {
-		background: red !important;
+			}
 
+			.js-calendar-return {
+				border: none;
+				border-left: solid white 4px !important;
+				border-right: solid white 4px !important;
+				height: 50px;
+				//border-radius: 17px;
+				background-color: @darkAccent;
+				font-size: 27px;
+				font-weight: 500;
+				color: white;
+				padding: 4px;
+			}
+    	}
+	}
+
+	.standard-drink-img {
+	    height: 232px;
+	    width: 578px;
+	    background-image: url('../images/standardDrink.png');
+	    background-repeat: no-repeat;
+	   	background-size: 529px;
+	    position: relative;
+	    bottom: 0;
+	    left: 24%;
+	    margin-top: 20px;
+
+	     @media only screen and (device-width: 1024px) {
+	    	left: 12%;
+	    }
+	}
+
+	.drink-input {
+		margin-left: 20px;
+		color: @darkAccent;
+		@media (min-width: 768px) {
+			margin-left: 0px;
+		}
+
+		.drinks-label {
+			font-size: 28px;
+		    font-weight: 500;
+		    margin-top: 16px;
+		    margin-left: 77px;
+		    margin-right: 17px;
+
+		     @media only screen and (device-width: 1024px) {
+			    margin-left: 10px;
+			    font-size: 20px;
+			    margin-right: 0px;
+		    }
+		}
+		.js-numberOfDrinks {
+		    font-size: 47px;
+		    font-weight: 600;
+		    color: @darkAccent;
+    		margin-left: 18px;
+    		margin-right: -2px;
+		}
+		.alcohol-btn-group {
+			margin-left: 10px;
+			.drink-btn {	
+				margin: 0 46px 20px 46px;
+				border: solid @darkAccent 1px;
+				background-color: #cccccc;
+				color: @darkAccent;
+				width: 125px;
+				height: 47px;
+			    border-radius: 11px;
+
+			     @media only screen and (device-width: 1024px) {
+			    	margin: 0 0px 0px 17px;
+
+			    }
+			}
+		}
+	}
+
+	.marijuana-input {
+		margin-top: 17px;
+		margin-left: 20px;
+		color: @darkAccent;
+		 @media only screen and (device-width: 1024px) {
+			margin-left: 56px;
+			margin-top: 5px;
+		}
+
+		.marijuana-label {
+			font-size: 28px;
+    		font-weight: 500;
+    		margin-top: 16px;
+    		margin-right: 97px;
+
+    		 @media only screen and (device-width: 1024px) {
+			    margin-left: 10px;
+			    font-size: 20px;
+			    margin-right: 0px;
+		    }
+		}
+		.marijuana-btn-group {
+			margin-left: 24px;
+			.marijuana-btn {
+				margin: 0 32px 20px 32px;
+				border: solid @darkAccent 1px;
+				background-color: #cccccc;
+				color: @darkAccent;
+				width: 82px;
+			    width: 182px;
+			    font-size: 22px;
+			    font-weight: 500;
+				height: 47px;
+			    border-radius: 11px;
+			     @media only screen and (device-width: 1024px) {
+			    	margin: 0 0px 0px 17px;
+			    }
+			    
+			    &.active {
+			    	background-color: @darkAccent;
+			    	color: white;
+			    }
+			}
+
+			.daily-mj-checkbox {
+			   	margin-left: 148px;
+			    margin-top: 15px;
+			    font-size: 22px;
+			    font-weight: 400;
+			    color: @darkAccent;
+			}
+		}
 	}
 } 
 
-.standard-drink-img {
-	//border-top: solid gray 1px;
-	//border-bottom: solid gray 1px;
-
-    height: 232px;
-    width: 578px;
-    background-image: url('../images/standardDrink.png');
-    background-repeat: no-repeat;
-
-   	background-size: 529px;
-    position: relative;
-    bottom: 0;
-    margin-left: 196px;
-}
-
-.drink-btn {
-	
-	margin: 0 46px 20px 46px;
-	border: solid @darkAccent 1px;
-	background-color: @darkAccent;
-	color: white;
-	width: 125px;
-	height: 47px;
-    border-radius: 11px;
-}
-
-.marijuana-btn {
-	margin: 0 32px 20px 32px;
-	border: solid @darkAccent 1px;
-	background-color: @darkAccent;
-	color: white;
-	width: 82px;
-    width: 182px;
-    font-size: 22px;
-    font-weight: 500;
-	height: 47px;
-    border-radius: 11px;
-
-    &.active {
-    	background-color: gray;
-    }
+.dailyMJ-modal {
+	//width: 400px;
+	//height: 500px;
+	.alert-wrapper {
+		padding: 20px;
+	}
 }
 
 
-.drink-input {
-	
-	//background: @lightAccent;
-}
-
-.marijuana-input {
-	margin-top: 17px;
-
-}
-
-.js-decrease-drink {
-	
-}
-
-.js-increase-drink {
-	
-}
-
-.js-numberOfDrinks {
-	
-    font-size: 47px;
-    font-weight: 600;
-
-}
-
-.input-header {
-	background-color: @darkAccent !important;
-	color: white !important;
-	font-size: 22px;
-    font-weight: 500;
-    padding: 10px 15px;
-}
-
-.drinks-label {
-	
-
-	font-size: 28px;
-    font-weight: 500;
-
-        margin-top: 16px;
-    margin-left: 77px;
-    margin-right: 17px;
-
-
-}
 
 .cal-icon {
 	font-size: 27px;
 }
 
-.marijuana-label {
-	    margin-left: 102px;
-	    	font-size: 28px;
-    font-weight: 500;
 
-        margin-top: 16px;
-            margin-right: 97px;
-}
 
-.iter-day-btn {
-    border-right: solid white 5px;
-    border-left: solid white 5px;
-    font-size: 17px;
-    height: 50px;
-    border-radius: 17px;
-    background-color: @darkAccent;
-}
-
-.js-calendar-return {
-	 height: 50px;
-	border-radius: 17px;
-	background-color: @darkAccent;
-	font-size: 27px;
-}

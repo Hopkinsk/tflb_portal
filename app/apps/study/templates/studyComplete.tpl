@@ -15,10 +15,13 @@
 </nav>
 </div>
 
-<div class="container col-sm-9 col-sm-offset-2">
+<div class="container col-sm-6 col-sm-offset-3">
 <div class="panel panel-default study-complete-panel">
 
-		<h4 class="text-center"> Please notify the study administrator that the study is complete. </h4>
+		<h4 class="text-center">
+     Please notify the study administrator that the study is complete. <br>
+     [ help links + resources ]
+   </h4>
 </div>
 
 

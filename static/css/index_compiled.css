@@ -256,8 +256,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('fonts/glyphicons-halflings-regular.eot');
+  src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -6588,6 +6588,31 @@ body.event-mode {
 button {
   outline: none;
 }
+.alert-wrapper .alert-header {
+  font-weight: 500;
+  font-size: 20px;
+  background: #003087;
+  color: white;
+}
+.alert-wrapper .alert-body {
+  font-weight: 400;
+  font-size: 18px;
+}
+.alert-wrapper .alert-btn-group .alert-btn {
+  width: 118px;
+  height: 37px;
+  border: solid 2px #003087;
+  border-radius: 4px;
+  font-size: 20px;
+}
+.alert-wrapper .alert-btn-group .alert-btn.left {
+  background-color: white;
+  color: black;
+}
+.alert-wrapper .alert-btn-group .alert-btn.right {
+  background-color: #003087;
+  color: white;
+}
 .no-gutter {
   padding-right: 0;
   padding-left: 0;
@@ -6636,7 +6661,7 @@ button {
 .clndr-bch-logo.event-mode {
   background-image: url('../images/bch_logo_inverse.png');
 }
-.alcohol-icon {
+.alcohol-icon-wrapper .alcohol-icon {
   left: 3px;
   bottom: 3px;
   position: absolute;
@@ -6646,7 +6671,14 @@ button {
   background-image: url('../images/alcohol.png');
   background-repeat: no-repeat;
 }
-.alcohol-icon.event-mode {
+.alcohol-icon-wrapper .drinks-number {
+  left: 3px;
+  bottom: -2px;
+  position: absolute;
+  color: black;
+  margin-left: 23px;
+}
+.alcohol-icon-wrapper.event-mode {
   display: none;
 }
 .marijuana-icon {
@@ -6703,6 +6735,11 @@ button {
   font-size: 15px;
   margin-top: 10px;
   margin-left: 60px;
+}
+@media only screen and (device-width: 1024px) {
+  .finish-study-btn {
+    background: red;
+  }
 }
 .add-event {
   position: absolute;
@@ -6975,12 +7012,12 @@ button {
 .event-list-item {
   font-size: 23px;
   border: none;
-  border-bottom: solid 1px #C1BABA;
   padding: 10px 0px 5px 0px;
   list-style-type: none;
+  border-bottom: solid 1px #cccccc;
 }
 .event-list-item .event-list-bullet {
-  background: #cddbf5;
+  background: #003087;
   width: 20px;
   height: 20px;
   float: left;
@@ -7011,22 +7048,75 @@ button {
 }
 .add-event-btn {
   font-size: 21px;
-  background: #cddbf5;
+  background: #003087;
   border: solid 1px #003087;
   font-weight: 500;
   border-radius: 0px 5px 5px 0px;
-  color: #524E4E;
+  color: white;
+  width: 43px;
 }
 .calendar-input {
   z-index: 1000;
   top: 17%;
   position: absolute;
 }
-.js-marijuana-btn .js-yes-marijuana.active,
-.js-marijuana-btn .js-no-marijuana.active {
-  background: red !important;
+@media only screen and (device-width: 1024px) {
+  .calendar-input {
+    top: 3%;
+  }
 }
-.standard-drink-img {
+.calendar-input .panel {
+  border: solid #003087 3px;
+  border-radius: 7px;
+}
+.calendar-input .panel .input-header {
+  border-bottom: solid #003087 3px !important;
+  background-color: #003087 !important;
+  color: white !important;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 10px 15px;
+}
+.calendar-input .panel .content {
+  text-align: center;
+}
+@media only screen and (device-width: 1024px) {
+  .calendar-input .panel .content {
+    text-align: normal;
+  }
+}
+.calendar-input .panel .panel-footer {
+  padding: 0px;
+  background-color: #cccccc;
+  border: 3px solid #003087;
+}
+.calendar-input .panel .panel-footer .iter-day-btn {
+  border-right: solid white 5px;
+  border-left: solid white 5px;
+  border: solid #003087 2px;
+  font-size: 17px;
+  height: 50px;
+  background-color: #003087;
+  color: white;
+  font-weight: 500;
+}
+@media only screen and (device-width: 1024px) {
+  .calendar-input .panel .panel-footer .iter-day-btn {
+    font-size: 19px;
+  }
+}
+.calendar-input .panel .panel-footer .js-calendar-return {
+  border: none;
+  border-left: solid white 4px !important;
+  border-right: solid white 4px !important;
+  height: 50px;
+  background-color: #003087;
+  font-size: 27px;
+  font-weight: 500;
+  color: white;
+  padding: 4px;
+}
+.calendar-input .standard-drink-img {
   height: 232px;
   width: 578px;
   background-image: url('../images/standardDrink.png');
@@ -7034,22 +7124,93 @@ button {
   background-size: 529px;
   position: relative;
   bottom: 0;
-  margin-left: 196px;
+  left: 24%;
+  margin-top: 20px;
 }
-.drink-btn {
+@media only screen and (device-width: 1024px) {
+  .calendar-input .standard-drink-img {
+    left: 12%;
+  }
+}
+.calendar-input .drink-input {
+  margin-left: 20px;
+  color: #003087;
+}
+@media (min-width: 768px) {
+  .calendar-input .drink-input {
+    margin-left: 0px;
+  }
+}
+.calendar-input .drink-input .drinks-label {
+  font-size: 28px;
+  font-weight: 500;
+  margin-top: 16px;
+  margin-left: 77px;
+  margin-right: 17px;
+}
+@media only screen and (device-width: 1024px) {
+  .calendar-input .drink-input .drinks-label {
+    margin-left: 10px;
+    font-size: 20px;
+    margin-right: 0px;
+  }
+}
+.calendar-input .drink-input .js-numberOfDrinks {
+  font-size: 47px;
+  font-weight: 600;
+  color: #003087;
+  margin-left: 18px;
+  margin-right: -2px;
+}
+.calendar-input .drink-input .alcohol-btn-group {
+  margin-left: 10px;
+}
+.calendar-input .drink-input .alcohol-btn-group .drink-btn {
   margin: 0 46px 20px 46px;
   border: solid #003087 1px;
-  background-color: #003087;
-  color: white;
+  background-color: #cccccc;
+  color: #003087;
   width: 125px;
   height: 47px;
   border-radius: 11px;
 }
-.marijuana-btn {
+@media only screen and (device-width: 1024px) {
+  .calendar-input .drink-input .alcohol-btn-group .drink-btn {
+    margin: 0 0px 0px 17px;
+  }
+}
+.calendar-input .marijuana-input {
+  margin-top: 17px;
+  margin-left: 20px;
+  color: #003087;
+}
+@media only screen and (device-width: 1024px) {
+  .calendar-input .marijuana-input {
+    margin-left: 56px;
+    margin-top: 5px;
+  }
+}
+.calendar-input .marijuana-input .marijuana-label {
+  font-size: 28px;
+  font-weight: 500;
+  margin-top: 16px;
+  margin-right: 97px;
+}
+@media only screen and (device-width: 1024px) {
+  .calendar-input .marijuana-input .marijuana-label {
+    margin-left: 10px;
+    font-size: 20px;
+    margin-right: 0px;
+  }
+}
+.calendar-input .marijuana-input .marijuana-btn-group {
+  margin-left: 24px;
+}
+.calendar-input .marijuana-input .marijuana-btn-group .marijuana-btn {
   margin: 0 32px 20px 32px;
   border: solid #003087 1px;
-  background-color: #003087;
-  color: white;
+  background-color: #cccccc;
+  color: #003087;
   width: 82px;
   width: 182px;
   font-size: 22px;
@@ -7057,56 +7218,30 @@ button {
   height: 47px;
   border-radius: 11px;
 }
-.marijuana-btn.active {
-  background-color: gray;
+@media only screen and (device-width: 1024px) {
+  .calendar-input .marijuana-input .marijuana-btn-group .marijuana-btn {
+    margin: 0 0px 0px 17px;
+  }
 }
-.marijuana-input {
-  margin-top: 17px;
+.calendar-input .marijuana-input .marijuana-btn-group .marijuana-btn.active {
+  background-color: #003087;
+  color: white;
 }
-.js-numberOfDrinks {
-  font-size: 47px;
-  font-weight: 600;
-}
-.input-header {
-  background-color: #003087 !important;
-  color: white !important;
+.calendar-input .marijuana-input .marijuana-btn-group .daily-mj-checkbox {
+  margin-left: 148px;
+  margin-top: 15px;
   font-size: 22px;
-  font-weight: 500;
-  padding: 10px 15px;
+  font-weight: 400;
+  color: #003087;
 }
-.drinks-label {
-  font-size: 28px;
-  font-weight: 500;
-  margin-top: 16px;
-  margin-left: 77px;
-  margin-right: 17px;
+.dailyMJ-modal .alert-wrapper {
+  padding: 20px;
 }
 .cal-icon {
   font-size: 27px;
 }
-.marijuana-label {
-  margin-left: 102px;
-  font-size: 28px;
-  font-weight: 500;
-  margin-top: 16px;
-  margin-right: 97px;
-}
-.iter-day-btn {
-  border-right: solid white 5px;
-  border-left: solid white 5px;
-  font-size: 17px;
-  height: 50px;
-  border-radius: 17px;
-  background-color: #003087;
-}
-.js-calendar-return {
-  height: 50px;
-  border-radius: 17px;
-  background-color: #003087;
-  font-size: 27px;
-}
 .user-instructions {
-  color: #003087;
+  color: #464646;
   font-size: 14px;
   background-color: white;
   padding-top: 20px;
@@ -7119,30 +7254,51 @@ button {
   }
 }
 .user-instructions .continue-btn {
-  width: 145px;
-  height: 46px;
-  font-size: 20px;
+  width: 153px;
+  height: 62px;
+  font-size: 26px;
   font-weight: 500;
   background: #003087;
   color: white;
 }
-.user-instructions .continue-btn .arrow {
-  margin-left: 10px;
-}
 .user-instructions .js-begin-study-btn {
-  width: 145px;
-  height: 46px;
-  font-size: 20px;
+  width: 203px;
   font-weight: 500;
+  margin-top: 39px;
 }
 .user-instructions .title {
   font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 24px;
+  color: #003087;
 }
 .user-instructions .sub-title {
-  font-size: 16px;
+  font-size: 20px;
+}
+.user-instructions .heading {
+  color: #003087;
 }
 .user-instructions p {
   margin-left: 20px;
+}
+.user-instructions .lg-text {
+  font-size: 20px;
+}
+.user-instructions .standard-drink-img {
+  height: 232px;
+  width: 578px;
+  background-image: url('../images/standardDrink.png');
+  background-repeat: no-repeat;
+  background-size: 529px;
+  position: relative;
+  bottom: 0;
+  left: 24%;
+  margin-top: 6px;
+}
+@media only screen and (device-width: 1024px) {
+  .user-instructions .standard-drink-img {
+    left: 24%;
+  }
 }
 .js-instructions-continue {
   background: #003087;
@@ -7173,6 +7329,9 @@ button {
   border: none !important;
 }
 .study-complete-panel {
-  background: #D5D8DE;
-  color: #585353;
+  background: #cccccc;
+  color: #003087;
+  border: solid 1px #003087;
+  height: 250px;
+  padding-top: 42px;
 }

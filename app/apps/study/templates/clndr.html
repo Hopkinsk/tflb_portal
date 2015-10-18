@@ -1,9 +1,7 @@
 <div class="js-cal-mode-header">
   <span class="clndr-bch-logo col-sm-5"></span>
 
-  <div class='js-clndr-controls clndr-controls col-sm-4'> 
-    
-
+  <div class='js-clndr-controls clndr-controls col-sm-5'> 
 
       <button class="pull-left js-next-month clndr-next-button hidden iter-months-btn"> 
         <span class="iter-months-btn glyphicon glyphicon-circle-arrow-left"></span> 
@@ -18,13 +16,13 @@
       <span class="iter-months-btn glyphicon glyphicon-circle-arrow-right"></span> 
      </button>
 
-  <button type="button" class="js-finish-study finish-study-btn hidden" data-toggle="modal" data-target="#finishStudy">
-    Study Complete
-  </button>
+    <button type="button" class="js-finish-study finish-study-btn hidden pull-right" data-toggle="modal" data-target="#finishStudy">
+      Study Complete
+    </button>
 
  </div>
 
- <div class="col-sm-3">
+ <div class="col-sm-2">
   <button class="event-mode-btn js-event-mode pull-right" type="button"> Add Events </button>
   <button class="js-instructions instructions-btn glyphicon glyphicon-question-sign pull-right"></button><br>
 </div>
@@ -88,7 +86,11 @@
             <% } else if(event.type == "alcohol" && event.drinks > 0) { %>
 
 
-                <div class="alcohol-icon pull-left"></div>
+                <div class="alcohol-icon-wrapper pull-left">
+                  <span class="alcohol-icon"></span>
+                  <div class="drinks-number"><%= event.drinks %></div> 
+                  
+                </div>
 
               <% } %>
           
@@ -113,20 +115,18 @@
 <!-- Modal -->
 <div class="modal fade" id="finishStudy" tabindex="-1" role="dialog" aria-labelledby="finishStudy">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-          <div class="modal-header"> Confirm Completion </div>
-      <div class="modal-body text-center">
+    <div class="modal-content alert-wrapper">
+      <div class="modal-header alert-header"> Study Complete </div>
+      <div class="modal-body text-center alert-body">
         <br>
       Are you finished entering your alcohol and/or marijuana use over the past 90 days?
       </div>
       <br>
       <div class="modal-footer">
-        <div class="">
-        <button type="button" class="btn btn-default col-sm-6" data-dismiss="modal">No, I'd like to continue working.</button>
-      </div>
-      <div class="">
-        <button type="button" class="btn btn-primary js-confirm-finish col-sm-6">Yes, I'm finished.</button>
-      </div>
+        <div class="alert-btn-group">
+          <button type="button" class="alert-btn left" data-dismiss="modal">No</button>
+           <button type="button" class="alert-btn right js-confirm-finish" data-dismiss="modal">Yes</button>
+        </div>
       </div>
     </div>
   </div>

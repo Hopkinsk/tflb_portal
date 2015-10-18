@@ -37,10 +37,10 @@ define(["app", "apps/study/views"], function(App, Views ){
         mainView = new Views.Main();
         App.mainRegion.show(mainView);
 
-       //displayInstructions(currentStudy);
+        //displayInstructions(currentStudy);
         $('body').addClass('study');
         displayCalendar(currentStudy);
-      // displayStudyComplete(currentStudy);
+        //displayStudyComplete(currentStudy);
 
     };
 
