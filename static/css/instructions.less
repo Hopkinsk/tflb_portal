@@ -18,6 +18,7 @@
         font-weight: 500;
         background: #003087;
         color: white;
+        margin-top: 17px;
 
     }
     .js-begin-study-btn {
@@ -32,10 +33,11 @@
         color: @darkAccent;
     }
     .sub-title {
-        font-size: 20px;
+        font-size: 16px;;
     }
     .heading {
         color: @darkAccent;
+        font-size: 21px;
     }
     p {
         margin-left: 20px;
@@ -44,11 +46,27 @@
         font-size: 20px;
     }
     .standard-drink-img {
-        height: 232px;
-        width: 578px;
+        height: 326px;
+        width: 687px;
         background-image: url('../images/standardDrink.png');
         background-repeat: no-repeat;
-        background-size: 529px;
+        background-size: 669px 261px;
+        position: relative;
+        bottom: 0;
+        margin-top: 32px;
+        margin-left: 234px;
+        
+         @media only screen and (device-width: 1024px) {
+            margin-left: 138px;
+        }
+    }
+
+    .input-img {
+        height: 368px;
+        width: 578px;
+        background-image: url('../images/input.png');
+        background-repeat: no-repeat;
+        background-size: 466px 408px;
         position: relative;
         bottom: 0;
         left: 24%;

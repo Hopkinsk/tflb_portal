@@ -2,7 +2,7 @@ define(["app", "marionette"], function(App, Marionette){
     var Router = Marionette.AppRouter.extend({
         appRoutes: {
             "study/:id" : "show",
-            "study/complete" : "studyComplete"
+            //"study/complete" : "studyComplete"
         }
     });
 
@@ -16,6 +16,7 @@ define(["app", "marionette"], function(App, Marionette){
                 //App.execute("set:active:header", "home");
             });
         },
+        /*
         studyComplete: function(study){
             require(["apps/study/controller"], function(Controller){
                 App.startSubApp(null);
@@ -23,6 +24,7 @@ define(["app", "marionette"], function(App, Marionette){
                 //App.execute("set:active:header", "home");
             });
         }
+        */
     };
 
 
@@ -31,11 +33,13 @@ define(["app", "marionette"], function(App, Marionette){
         API.show(studyId);
     });
 
+/*
     App.on("study:complete", function(study){
 
-        App.navigate("study/complete");// + encodeURIComponent(studyId) + "/complete");
+        //App.navigate("study/complete");// + encodeURIComponent(studyId) + "/complete");
         API.studyComplete(study);
     });
+*/
 
     App.addInitializer(function(){
         new Router({

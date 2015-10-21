@@ -9,7 +9,7 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr class="table-headers">
-        	<th class="table-header" ><input type="checkbox" class="js-select-all"> </th>
+        	<th class="table-header" ><input type="checkbox" class="js-select-all"> Select All </th>
         	<th class="table-header" >Participant ID</th>
         	<th class="table-header" >Study Date </th>
         	<th class="table-header" >Status</th>

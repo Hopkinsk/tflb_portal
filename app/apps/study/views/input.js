@@ -16,13 +16,16 @@ define(["app",
             returnToCalendar: '.js-calendar-return',
             increaseDrink: '.js-increase-drink',
             decreaseDrink: '.js-decrease-drink',
+            marijuanaBtns: '.js-marijuana-btn',
             yesMarijuana: '.js-yes-marijuana',
             noMarijuana: '.js-no-marijuana',
             numberOfDrinks: '.js-numberOfDrinks',
             prevDay: '.js-prev-day',
             nextDay: '.js-next-day',
-            dailyMJ: '.js-daily-chkbox',
-            dailyMJModal: '.dailyMJ-modal'
+            dailyMJCheckbox: '.js-dailyMJ-checkbox',
+            dailyMJWrapper: '.js-dailyMJ-wrapper',
+            dailyMJModal: '.dailyMJ-modal',
+            confirmDailyMJ: '.js-dailyMJ-confirm'
         },
 
         events: {
@@ -33,7 +36,8 @@ define(["app",
             'click @ui.yesMarijuana, @ui.noMarijuana' : 'toggleMarijuanaUse',
             'click @ui.prevDay': 'navigatePrevDay',
             'click @ui.nextDay': 'navigateNextDay',
-            'click @ui.dailyMJ' : 'onDalyMJ'
+            'click @ui.dailyMJCheckbox' : 'onSelectDailyMJ',
+            'click @ui.confirmDailyMJ': 'onConfirmDailyMJ'
 
         },
 
@@ -54,16 +58,20 @@ define(["app",
             } else {
                 this.ui.noMarijuana.addClass("active");
             }
+            this.toggleMarijuanaButtons(this.dailyMJ);
             this.ui.numberOfDrinks.html(this.currentNumberOfDrinks);
         },
+
         navigatePrevDay: function(evt){
             this.$dayEl.prev('.day').click();
             this.saveDay();
         },
+
         navigateNextDay: function(evt){
             this.$dayEl.next('.day').click();
             this.saveDay();
         },
+
         onIncreaseDrink: function(evt){
             this.currentNumberOfDrinks++;
             this.numberOfDrinksChanged();
@@ -94,6 +102,7 @@ define(["app",
             //if true go false
             this.marijuana = !this.marijuana;
             this.modelChanged = true;
+            console.log("mj toggled to: ", this.marijuana);
 
         },
 
@@ -101,23 +110,42 @@ define(["app",
             this.saveDay();
             this.trigger('close');
         },
-        onDalyMJ: function(evt){
-            if(this.ui.dailyMJ.prop('checked')){
+
+        onSelectDailyMJ: function(evt){
+            if(this.ui.dailyMJCheckbox.prop('checked')){
                 this.ui.dailyMJModal.modal('show');
+            } else {
+                this.toggleMarijuanaButtons(false);
             }
         },
+
+        onConfirmDailyMJ: function(evt){
+            this.ui.noMarijuana.removeClass('active');
+            this.ui.yesMarijuana.addClass('active');
+            this.toggleMarijuanaButtons(true);
+        },
+
+        toggleMarijuanaButtons: function(use){
+            if(use){
+                this.ui.noMarijuana.addClass('disabled');
+                this.ui.marijuanaBtns.prop('disabled', true);
+                this.ui.dailyMJWrapper.addClass('active');
+            } else {
+                this.ui.noMarijuana.removeClass('disabled');
+                this.ui.marijuanaBtns.prop('disabled', false);
+                this.ui.dailyMJWrapper.removeClass('active');
+            }
+        }, 
         //todo: edge case: enter alc and daily mj same time 
         saveDay: function(){
             
-            if(this.$('.js-daily-chkbox').prop('checked')){
+            if(this.$('.js-dailyMJ-checkbox').prop('checked')){
                 if(!this.dailyMJ){
-                    console.log("turning on daily mj");
                     this.changeDailyMarijuana(true);                    
                 }
 
             } else {
                 if(this.dailyMJ){
-                    console.log("turning off daily mj");
                     this.changeDailyMarijuana(false);
                     this.marijuana = false;
                 }        
@@ -133,7 +161,7 @@ define(["app",
 
                 var that=this;
                 this.calendar.removeEvents(function(event){
-                    return (event.date == that.model.get('date') && event.type != 'personal');
+                    return (event.formattedDate == that.model.get('date') && event.type != 'personal');
                 });
 
                 if(this.currentNumberOfDrinks > 0){
@@ -144,6 +172,7 @@ define(["app",
                     }]);    
                 }
                 if(this.marijuana){
+
                     this.calendar.addEvents([{
                         date: this.model.get('date'),
                         type: "marijuana",
@@ -178,12 +207,13 @@ define(["app",
                 dayNumber--;
             }
             this.calendar.addEvents(events);
-            console.log("saving ", use);
             this.model.save({
                 dailyMarijuana: use,
                 days: events
             }); 
+            this.trigger('changeDailyMarijuana', use);
         },
+
 
 
         serializeData: function(){

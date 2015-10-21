@@ -57,6 +57,7 @@ define(["app",
             this.eventMode = false;
             this.clndrTpl = clndrTpl;
             this.dailyMJ = this.model.get('dailyMarijuana');
+            console.log("setting daily Mj!");
         },
 
         onRender: function(){
@@ -141,6 +142,7 @@ define(["app",
                     nextMonth: "next"
                 },
                 doneRendering: function(){ 
+                     console.log("render calendar!");
                     if(that.eventMode){
                         $('body').addClass('event-mode');
                         that.$('.js-event-mode-header').removeClass('hidden');
@@ -197,10 +199,18 @@ define(["app",
 
             this.inputRegion.show(this.inputView);
             var that=this;
+            this.inputView.on('changeDailyMarijuana', function(use){
+                that.model.set({
+                    dailyMarijuana: use
+                });
+                that.dailyMJ = use;
+            });
+
             this.inputView.on('close', function(){
                 that.inputView.destroy();
                 that.disableOverlay();
             });
+
         },
 
         toggleEventMode: function(){
@@ -249,11 +259,27 @@ define(["app",
         },
 
         onFinishStudy: function(evt){
-    
+            var that=this;
+            this.model.save({"studyComplete": true},{
+                patch: true,
+                success: function(model){
+                    that.trigger('study:complete', model.get('safetyTriggered'));
+                },
+                error: function(){
+                    console.log("ERROR !!!");
+                }
+            });
+
+            /*
             //TODO: save the model as complete
-           // this.trigger('study:complete', this.model);
-             //App.navigate("study/" + encodeURIComponent(studyId));
-             App.trigger("study:complete", this.model);
+            var that=this;
+            var studyComplete = this.model.getSafetyTrigger();
+            $.when(safetyTriggered).done(function(safetyTrigger, xhr){ 
+                that.trigger('study:complete', this.model);
+            });
+            */
+            //App.trigger("study:complete", this.model);
+          
         }
     });
 

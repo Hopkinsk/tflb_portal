@@ -82,7 +82,7 @@
           <% _.each(days[d].events, function(event){ %>
            
             <% if(event.type == "personal"){ %>
-               <div class="event-personal-label pull-left">  <div class="event-label-bullet"></div> <%= event.title %></div>
+               <div class="event-personal-label pull-left"> <%= event.title %></div>
             <% } else if(event.type == "alcohol" && event.drinks > 0) { %>
 
 

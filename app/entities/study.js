@@ -75,6 +75,9 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         url: Entities.urls.events
     });
 
+    Entities.studySafetyTrigger = Backbone.Model.extend({
+        url: Entities.urls.studySafetyTrigger,
+    });
     Entities.study = Backbone.Model.extend({
         url: Entities.urls.study,
 
@@ -114,6 +117,25 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
             }); 
 
             return triggered;
+        },
+        getSafetyTrigger: function(){
+            console.log("get safety trigger!");
+            var defer = $.Deferred();
+
+            var safetyModel = new Entities.studySafetyTrigger({
+                id: this.id
+            });
+
+            safetyModel.fetch({
+                success: function(model, response){
+                    console.log("GOT SAFETY", model);
+                    defer.resolve(model.get('safetyTriggered'));
+                },
+                error: function(model, xhr){
+                    defer.resolve(false, xhr, model);
+                }                
+            });
+            return defer.promise();
         }
     });
 

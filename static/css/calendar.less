@@ -22,7 +22,7 @@
     background-image: url('../images/bch_logo.png');
     background-repeat: no-repeat;
     background-repeat: no-repeat;
-    background-size: 157px 77px;
+    background-size: 141px 77px;
     height: 102px;
     &.event-mode {
          background-image: url('../images/bch_logo_inverse.png');
@@ -32,21 +32,23 @@
 .alcohol-icon-wrapper {
 
     .alcohol-icon {
-        left: 3px;
+        left: -5px;
         bottom: 3px;
         position: absolute;
-        background-size: 30px;    
+        background-size: 36px 58px;
         width: 30px;
-        height: 38px;
-        background-image: url('../images/alcohol.png');
+        height: 43px;
+        background-image: url('../images/alcohol_2.png');
         background-repeat: no-repeat;
     }
 
     .drinks-number {
         left: 3px;
-        bottom: -2px;
+        bottom: 1px;
         position: absolute;
-        color: black;
+        color: #C7690F;
+        font-weight: 500;
+        font-size: 20px;
         margin-left: 23px;
     }
 
@@ -121,10 +123,6 @@
     font-size: 15px;
     margin-top: 10px;
     margin-left: 60px;
-    
-    @media only screen and (device-width: 1024px) {
-        background: red;
-    }
 }
 
 
@@ -154,7 +152,7 @@
 .event-personal-label {
     font-size: 13px;
     font-family: helvetica;
-    color: @darkAccent;
+    color: #777777;;
     font-weight: 400;
     display: inline-block;
     float: left;
@@ -313,21 +311,6 @@
             }
             &.today, &.my-today
             {
-                //background: #9AD6E3;
-                .day-number {
-                    /*
-                    width: 39px;
-                    height: 39px;
-                    padding: 1px;
-                    border-radius: 50%;
-                    background: #CDDBF5;
-                    border: 1px solid #003087;
-                    color: white;
-                    text-align: center;
-                    font-size: 21px;
-                    */
-                }
-
 
                 &:hover { background: #eee; }
                 &.event
@@ -367,17 +350,14 @@
             .day-contents
             {
                 box-sizing: border-box;
-                // width: 100%;
-                // height: 100%;
                 padding: 8px;
                 font-size: 24px;
                 text-align: right;
-                font
 
-                .day-number
-                {
-
-                font-size: 30px;
+                .day-number {
+                    margin-top: -6px;
+                    margin-right: -2px;
+                    font-size: 21px;
                 }
             }
         }

@@ -1,14 +1,12 @@
 define(["app", "apps/study/views"], function(App, Views ){
 
 
-    var displayStudyComplete = function(currentStudy){
+    var displayStudyComplete = function(currentStudy, safetyTriggered){
         console.log("display study complete");
-        console.log(currentStudy);
-
         var studyComplete = new Views.StudyComplete({
-            model: currentStudy
+            model: currentStudy,
+            safetyTriggered: safetyTriggered
         });
-
         mainView.contentRegion.show(studyComplete);
     };
 
@@ -16,7 +14,10 @@ define(["app", "apps/study/views"], function(App, Views ){
         var calendar = new Views.Calendar({
             model: currentStudy
         });
+        calendar.on('study:complete', function(safetyTriggered){
+            displayStudyComplete(currentStudy, safetyTriggered);
 
+        });
         mainView.contentRegion.show(calendar);
     };
 
@@ -36,18 +37,16 @@ define(["app", "apps/study/views"], function(App, Views ){
     var display = function(currentStudy){
         mainView = new Views.Main();
         App.mainRegion.show(mainView);
-
-        //displayInstructions(currentStudy);
         $('body').addClass('study');
-        displayCalendar(currentStudy);
-        //displayStudyComplete(currentStudy);
+        if(currentStudy.get('complete') === true){
+            displayStudyComplete(currentStudy, currentStudy.get('safetyTriggered'));
+        } else {
+            displayInstructions(currentStudy);
+            
+            //displayCalendar(currentStudy);
+        }
 
     };
-
-    // var displayInstructions = function(currentStudy){
-    //     mainView = new Views.Main();
-    //     App.mainRegion.show(mainView);
-    // };
 
     return {
         show: function(studyId){
@@ -55,24 +54,23 @@ define(["app", "apps/study/views"], function(App, Views ){
             require(["entities/study"], function(){
                   var fetchStudy = App.request("study:show", studyId );
                   $.when(fetchStudy).done(function(currentStudy, xhr){          
-                   display(currentStudy);
-
+                        display(currentStudy);
                    //displayInstructions(currentStudy);
                   });
             });
         },
+        /*
         studyComplete: function(study){
             if(study){
                 //displayStudyComplete(study);
-                displayStudyComplete(study);
-
+                    displayStudyComplete(study);
+               
             } else {
                 displayStudyComplete(null);
-
                 //TODO: redirect
             }
         },
-
+        */
     };
 });
 

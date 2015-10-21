@@ -16,6 +16,9 @@ define(function(require, exports, module) {
 		studyList: function(){
 			return "/study/list";
 		},
+		studySafetyTrigger: function(){
+            return "/study/"+ encodeURIComponent(this.id)+"/safety";
+        },
 		exportStudies: function(){
 
 			return "/study/export";

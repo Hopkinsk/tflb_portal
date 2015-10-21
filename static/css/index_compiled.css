@@ -6571,7 +6571,6 @@ button.close {
 .new-participant-panel .btn-default {
   background-color: #003087 !important;
   color: white;
-  opacity: .80;
 }
 body {
   background: #D8D8D8 !important;
@@ -6655,27 +6654,29 @@ button {
 .clndr-bch-logo {
   background-image: url('../images/bch_logo.png');
   background-repeat: no-repeat;
-  background-size: 157px 77px;
+  background-size: 141px 77px;
   height: 102px;
 }
 .clndr-bch-logo.event-mode {
   background-image: url('../images/bch_logo_inverse.png');
 }
 .alcohol-icon-wrapper .alcohol-icon {
-  left: 3px;
+  left: -5px;
   bottom: 3px;
   position: absolute;
-  background-size: 30px;
+  background-size: 36px 58px;
   width: 30px;
-  height: 38px;
-  background-image: url('../images/alcohol.png');
+  height: 43px;
+  background-image: url('../images/alcohol_2.png');
   background-repeat: no-repeat;
 }
 .alcohol-icon-wrapper .drinks-number {
   left: 3px;
-  bottom: -2px;
+  bottom: 1px;
   position: absolute;
-  color: black;
+  color: #C7690F;
+  font-weight: 500;
+  font-size: 20px;
   margin-left: 23px;
 }
 .alcohol-icon-wrapper.event-mode {
@@ -6736,11 +6737,6 @@ button {
   margin-top: 10px;
   margin-left: 60px;
 }
-@media only screen and (device-width: 1024px) {
-  .finish-study-btn {
-    background: red;
-  }
-}
 .add-event {
   position: absolute;
   right: 4px;
@@ -6764,7 +6760,7 @@ button {
 .event-personal-label {
   font-size: 13px;
   font-family: helvetica;
-  color: #003087;
+  color: #777777;
   font-weight: 400;
   display: inline-block;
   float: left;
@@ -6911,20 +6907,6 @@ button {
   position: relative;
   z-index: 10000000;
 }
-.clndr-table tr .day.today .day-number,
-.clndr-table tr .day.my-today .day-number {
-  /*
-                    width: 39px;
-                    height: 39px;
-                    padding: 1px;
-                    border-radius: 50%;
-                    background: #CDDBF5;
-                    border: 1px solid #003087;
-                    color: white;
-                    text-align: center;
-                    font-size: 21px;
-                    */
-}
 .clndr-table tr .day.today:hover,
 .clndr-table tr .day.my-today:hover {
   background: #eee;
@@ -6965,8 +6947,10 @@ button {
   font-size: 24px;
   text-align: right;
 }
-.clndr-table tr .day .day-contents font .day-number {
-  font-size: 30px;
+.clndr-table tr .day .day-contents .day-number {
+  margin-top: -6px;
+  margin-right: -2px;
+  font-size: 21px;
 }
 .clndr-table tr .empty,
 .clndr-table tr .adjacent-month,
@@ -7173,6 +7157,7 @@ button {
   width: 125px;
   height: 47px;
   border-radius: 11px;
+  font-size: 23px;
 }
 @media only screen and (device-width: 1024px) {
   .calendar-input .drink-input .alcohol-btn-group .drink-btn {
@@ -7223,6 +7208,9 @@ button {
     margin: 0 0px 0px 17px;
   }
 }
+.calendar-input .marijuana-input .marijuana-btn-group .marijuana-btn.disabled {
+  opacity: 0.65;
+}
 .calendar-input .marijuana-input .marijuana-btn-group .marijuana-btn.active {
   background-color: #003087;
   color: white;
@@ -7234,8 +7222,12 @@ button {
   font-weight: 400;
   color: #003087;
 }
-.dailyMJ-modal .alert-wrapper {
-  padding: 20px;
+.calendar-input .marijuana-input .marijuana-btn-group .daily-mj-checkbox input[type="checkbox"] {
+  margin-left: -25px;
+  height: 24px;
+}
+.calendar-input .marijuana-input .marijuana-btn-group .daily-mj-checkbox.active label {
+  font-weight: 600;
 }
 .cal-icon {
   font-size: 27px;
@@ -7260,6 +7252,7 @@ button {
   font-weight: 500;
   background: #003087;
   color: white;
+  margin-top: 17px;
 }
 .user-instructions .js-begin-study-btn {
   width: 203px;
@@ -7273,10 +7266,11 @@ button {
   color: #003087;
 }
 .user-instructions .sub-title {
-  font-size: 20px;
+  font-size: 16px;
 }
 .user-instructions .heading {
   color: #003087;
+  font-size: 21px;
 }
 .user-instructions p {
   margin-left: 20px;
@@ -7285,18 +7279,34 @@ button {
   font-size: 20px;
 }
 .user-instructions .standard-drink-img {
-  height: 232px;
-  width: 578px;
+  height: 326px;
+  width: 687px;
   background-image: url('../images/standardDrink.png');
   background-repeat: no-repeat;
-  background-size: 529px;
+  background-size: 669px 261px;
+  position: relative;
+  bottom: 0;
+  margin-top: 32px;
+  margin-left: 234px;
+}
+@media only screen and (device-width: 1024px) {
+  .user-instructions .standard-drink-img {
+    margin-left: 138px;
+  }
+}
+.user-instructions .input-img {
+  height: 368px;
+  width: 578px;
+  background-image: url('../images/input.png');
+  background-repeat: no-repeat;
+  background-size: 466px 408px;
   position: relative;
   bottom: 0;
   left: 24%;
   margin-top: 6px;
 }
 @media only screen and (device-width: 1024px) {
-  .user-instructions .standard-drink-img {
+  .user-instructions .input-img {
     left: 24%;
   }
 }

@@ -12,6 +12,9 @@ define(function(require, exports, module) {
         studyDay: function(){
             return "/app/mockdata/day/" + encodeURIComponent(this.id)  + ".json";
         },
+        studySafetyTrigger: function(){
+            return "/app/mockdata/study/safety.json";
+        },
         personalEvent: function(){
             return "/app/mockdata/personal/" + encodeURIComponent(this.id);
         },
@@ -19,7 +22,6 @@ define(function(require, exports, module) {
             return "/app/mockdata/studies/all.json";
         },
         exportStudies: function(){
-
             return "/app/mockdata/study/export.csv";
         } 
     };

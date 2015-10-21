@@ -174,10 +174,9 @@
 				width: 125px;
 				height: 47px;
 			    border-radius: 11px;
-
+			    font-size: 23px;
 			     @media only screen and (device-width: 1024px) {
 			    	margin: 0 0px 0px 17px;
-
 			    }
 			}
 		}
@@ -217,10 +216,12 @@
 			    font-weight: 500;
 				height: 47px;
 			    border-radius: 11px;
-			     @media only screen and (device-width: 1024px) {
+			    @media only screen and (device-width: 1024px) {
 			    	margin: 0 0px 0px 17px;
 			    }
-			    
+			    &.disabled {
+			    	opacity: 0.65; 
+			    }
 			    &.active {
 			    	background-color: @darkAccent;
 			    	color: white;
@@ -233,18 +234,21 @@
 			    font-size: 22px;
 			    font-weight: 400;
 			    color: @darkAccent;
+			    input[type="checkbox"] {
+			        margin-left: -25px;
+    				height: 24px;			    
+			    }
+
+		    	&.active {
+		    		label {
+		    			font-weight: 600;
+			    	}
+		    	}			    
 			}
 		}
 	}
 } 
 
-.dailyMJ-modal {
-	//width: 400px;
-	//height: 500px;
-	.alert-wrapper {
-		padding: 20px;
-	}
-}
 
 
 

@@ -9,7 +9,7 @@
 			  <div class="col-sm-6 col-sm-offset-3">
 
 			    <div class="input-group">
-			      <input type="text" class="form-control js-studyId-input" placeholder="Participant ID">
+			      <input type="text" class="form-control js-studyId-input" placeholder="Study ID">
 			      <span class="input-group-btn">
 			        <button class="btn btn-default js-start-study" type="button">Start</button>
 			      </span>

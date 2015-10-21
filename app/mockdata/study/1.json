@@ -2,7 +2,7 @@
     "id": 1,
     "study_id": 1234,
     "safetyTriggered" : false,
-    "dailyMarijuana" : false,
+    "dailyMarijuana" : true,
     "adminPassphrase": "admin",
     "date" : "09/05/2015",
     "personal" : [
