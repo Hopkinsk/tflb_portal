@@ -48,13 +48,13 @@
       <div class="modal-header alert-header">Daily Marijuana Use </div>
       <div class="modal-body text-center alert-body">
         <br>
-      Set mariajuana use to <b>true</b> for every day on the calendar. 
+      	Do you want to set marijuana use as <b>yes</b> for the past 90 days?
       </div>
       <br>
       <div class="modal-footer">
         <div class="alert-btn-group">
        	<button type="button" class="alert-btn right js-dailyMJ-confirm" data-dismiss="modal">Yes</button>
-          <button type="button" class="alert-btn left" data-dismiss="modal">No</button>
+          <button type="button" class="alert-btn left js-dailyMJ-deny" data-dismiss="modal">No</button>
         </div>
       </div>
     </div>

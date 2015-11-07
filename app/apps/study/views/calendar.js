@@ -57,12 +57,13 @@ define(["app",
             this.eventMode = false;
             this.clndrTpl = clndrTpl;
             this.dailyMJ = this.model.get('dailyMarijuana');
+            this.firstMonth = true;
             console.log("setting daily Mj!");
         },
 
         onRender: function(){
             this.generateCalendar();
-            this.setAdjacentMonths(moment());
+           // this.setAdjacentMonths(moment());
             this.setDailyMarijuana();
         },
 
@@ -125,30 +126,50 @@ define(["app",
                 daysOfTheWeek: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
                 showAdjacentMonths: false,
                 clickEvents: {
-                    click: function(target){ 
-                        if(that.eventMode){
-                            that.showEventInputView(target);
-                        } else {
-                           // that.showEventInputView(target);
-                           that.showInputView(target);
+                    click: function(target){                         
+                        if($(target.element).hasClass('day') && !$(target.element).hasClass('inactive')){
+                            if(that.eventMode){
+                                that.showEventInputView(target);
+                            } else {
+                               // that.showEventInputView(target);
+                               that.showInputView(target);
+                            }
                         }
                     },
                     previousMonth: function(month){ 
                        that.onPreviousMonth(month);
                     },
+                    nextMonth: function(month){
+                        that.onPreviousMonth(month);
+                    }
                 },
                 extras: {
                     lastMonth: "last",
                     nextMonth: "next"
                 },
                 doneRendering: function(){ 
-                     console.log("render calendar!");
                     if(that.eventMode){
                         $('body').addClass('event-mode');
                         that.$('.js-event-mode-header').removeClass('hidden');
                         that.$('.js-cal-mode-header').addClass('hidden');
                         that.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
                     }
+                    if(that.lastMonth){
+                         that.$('.js-finish-study').toggleClass('hidden');
+
+                        that.$('.js-previous-month').addClass('hidden');
+                        that.$('.js-next-month').removeClass('hidden');
+                    } else {
+                        that.$('.js-finish-study').addClass('hidden');
+                        that.$('.js-previous-month').removeClass('hidden');
+                        that.$('.js-next-month').removeClass('hidden');
+
+                        
+                    }
+                    if(that.firstMonth){
+                        that.$('.js-next-month').addClass('hidden');
+                    } 
+
                 },
                 events: that.model.getEvents(),
                 constraints: {
@@ -232,28 +253,33 @@ define(["app",
         },
 
         onPreviousMonth: function(month){
-            
+            console.log("ON PREV MONTH");
+            this.firstMonth = false;
+            this.lastMonth = false;
             if(month.format('M') == this.endMonth){
-                this.$('.js-finish-study, .js-previous-month').toggleClass('hidden');
-                this.$('.js-next-month').toggleClass('hidden');
+                this.lastMonth = true;
+                this.$('.js-finish-study').toggleClass('hidden');
+                this.$('.js-previous-month').addClass('hidden');
+                this.$('.js-next-month').removeClass('hidden');
             } else {
                 this.$('.js-finish-study').addClass('hidden');
                 this.$('.js-previous-month').removeClass('hidden');
-                if(month.format('M') != this.startMonth){
-                    this.$('.js-next-month').toggleClass('hidden');
-                } else {
+                this.$('.js-next-month').removeClass('hidden');
+                if(month.format('M') == this.startMonth){
+                    this.firstMonth = true;
                     this.$('.js-next-month').addClass('hidden');
                 }
             }
-            this.setAdjacentMonths(month);
+           // this.setAdjacentMonths(month);
         },
 
+        /*
         setAdjacentMonths: function(month){
             this.$('.js-nextMonth').html(month.add(1, "month").format('MMMM'));
             var last = month.subtract(2, "month");
             this.$('.js-lastMonth').html(last.format('MMMM'));
         },
-
+        */
         onAddEvent: function(evt){
             this.trigger('event:add');
         },

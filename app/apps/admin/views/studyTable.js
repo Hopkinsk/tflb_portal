@@ -20,14 +20,10 @@ define(["app",
         },
 
         onContinueStudy: function(evt){
-
-            //this.trigger('studycontinue', this.model);
-            console.log("GOING TO TRIGGER");
-            App.trigger('study:show', this.model.get('id'));
+            App.trigger('study:show', this.model.get('studyId'), this.model.get('id'));
         },
 
         isSelected: function(){
-            console.log(this.$("[type=checkbox]"));
             if(this.$("[type=checkbox]").is(":checked")){
                 return true;
             }

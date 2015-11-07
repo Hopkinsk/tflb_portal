@@ -4,11 +4,6 @@ define(["app",
         "tpl!apps/study/templates/input.tpl"
         ],
         function(App, Marionette, moment, inputTpl ){
-    // events view is a collection view of events with the input 
-    // model is the day and collection is the personal events 
-    // save personal event, triggers to collection view which saves the day with the updated titles 
-    // gets a collection of study events that hit 
-
 
    var Input = Marionette.ItemView.extend({
         template: inputTpl,
@@ -25,7 +20,8 @@ define(["app",
             dailyMJCheckbox: '.js-dailyMJ-checkbox',
             dailyMJWrapper: '.js-dailyMJ-wrapper',
             dailyMJModal: '.dailyMJ-modal',
-            confirmDailyMJ: '.js-dailyMJ-confirm'
+            confirmDailyMJ: '.js-dailyMJ-confirm',
+            denyDailyMJ: '.js-dailyMJ-deny'
         },
 
         events: {
@@ -37,7 +33,8 @@ define(["app",
             'click @ui.prevDay': 'navigatePrevDay',
             'click @ui.nextDay': 'navigateNextDay',
             'click @ui.dailyMJCheckbox' : 'onSelectDailyMJ',
-            'click @ui.confirmDailyMJ': 'onConfirmDailyMJ'
+            'click @ui.confirmDailyMJ': 'onConfirmDailyMJ',
+            'click @ui.denyDailyMJ' : 'onDenyDailyMJ'
 
         },
 
@@ -125,6 +122,11 @@ define(["app",
             this.toggleMarijuanaButtons(true);
         },
 
+        onDenyDailyMJ: function(){
+             this.ui.dailyMJCheckbox.attr('checked', false);
+
+        },
+
         toggleMarijuanaButtons: function(use){
             if(use){
                 this.ui.noMarijuana.addClass('disabled');
@@ -161,7 +163,8 @@ define(["app",
 
                 var that=this;
                 this.calendar.removeEvents(function(event){
-                    return (event.formattedDate == that.model.get('date') && event.type != 'personal');
+                    var date = event.formattedDate || event.date;
+                    return (date == that.model.get('date') && event.type != 'personal');
                 });
 
                 if(this.currentNumberOfDrinks > 0){
@@ -219,7 +222,8 @@ define(["app",
         serializeData: function(){
             var data = Marionette.ItemView.prototype.serializeData.call(this);
             data.personalEvents = this.model.getPersonalEvents();
-            data.dateString = moment(this.model.get('date')._i).format("dddd, MMMM Do YYYY");
+            data.dateString = moment(this.model.get('date')).format("dddd, MMMM Do YYYY");
+            console.log('DATE STRING', data.dateString);
             data.dailyMJ = this.dailyMJ;
             return data;
         }

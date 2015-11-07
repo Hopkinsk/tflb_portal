@@ -21,6 +21,8 @@ define(["app", "marionette"], function(App, Marionette){
         API.show();
     });
 
+
+
     App.addInitializer(function(){
         new Router({
             controller: API

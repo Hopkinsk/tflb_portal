@@ -23,8 +23,6 @@ define(["app",
     },
     serializeData: function(){
         var data = Marionette.ItemView.prototype.serializeData.call(this);
-        console.log("serializing event");
-        console.log(data);
         return data;
     }
    });
@@ -110,7 +108,7 @@ define(["app",
 
         serializeData: function(){
             var data = Marionette.ItemView.prototype.serializeData.call(this);
-            data.dateString = moment(this.model.get('date')._i).format("dddd, MMMM Do YYYY");
+            data.dateString = moment(this.model.get('date')).format("dddd, MMMM Do YYYY");
             return data;
         }
 

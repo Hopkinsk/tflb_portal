@@ -5,12 +5,12 @@
 
           <ul class="nav navbar-nav"></ul>
         <div class="user pull-right">
-            <div class="info">
+<!--             <div class="info">
                 <div class="name"> <%= (user.name || user.username) %></div>
                 <div class="links">
                     <a class="js-logout">Log out</a>                    
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </nav>

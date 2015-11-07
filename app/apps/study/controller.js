@@ -2,7 +2,6 @@ define(["app", "apps/study/views"], function(App, Views ){
 
 
     var displayStudyComplete = function(currentStudy, safetyTriggered){
-        console.log("display study complete");
         var studyComplete = new Views.StudyComplete({
             model: currentStudy,
             safetyTriggered: safetyTriggered
@@ -41,9 +40,9 @@ define(["app", "apps/study/views"], function(App, Views ){
         if(currentStudy.get('complete') === true){
             displayStudyComplete(currentStudy, currentStudy.get('safetyTriggered'));
         } else {
-            displayInstructions(currentStudy);
+           // displayInstructions(currentStudy);
             
-            //displayCalendar(currentStudy);
+            displayCalendar(currentStudy);
         }
 
     };

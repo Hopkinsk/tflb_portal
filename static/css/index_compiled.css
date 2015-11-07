@@ -6530,6 +6530,9 @@ button.close {
     display: none !important;
   }
 }
+.nav {
+  display: none;
+}
 .navbar,
 .nav {
   margin: -1px;
@@ -6560,7 +6563,33 @@ button.close {
   background-repeat: no-repeat;
   background-size: 151px 78px;
 }
+.header-region {
+  display: none;
+}
+.login-wrapper {
+  font-size: 18px;
+  font-weight: 500;
+}
+.login-wrapper .new-participant-panel {
+  border-color: #003087 !important;
+  margin-top: 20%;
+}
+.login-wrapper .new-participant-panel .panel-heading {
+  background-color: #003087 !important;
+  color: #FFFFFF !important;
+}
+.login-wrapper .new-participant-panel .btn-default {
+  background-color: #003087 !important;
+  color: white;
+}
+.login-wrapper .login-btn {
+  margin-top: 13px;
+  font-weight: 500;
+  font-size: 17px;
+}
 .new-participant-panel {
+  font-size: 18px;
+  font-weight: 500;
   border-color: #003087 !important;
   margin-top: 20%;
 }
@@ -6712,6 +6741,10 @@ button {
 }
 .event-mode-btn.cal-return .glyphicon-calendar {
   font-size: 12px;
+}
+.event-mode-btn.instructions {
+  margin-top: 0px;
+  margin-right: 0px;
 }
 .event-instructions {
   font-size: 20px;
@@ -6907,13 +6940,11 @@ button {
   position: relative;
   z-index: 10000000;
 }
-.clndr-table tr .day.today:hover,
-.clndr-table tr .day.my-today:hover {
-  background: #eee;
-}
 .clndr-table tr .day.today.event,
 .clndr-table tr .day.my-today.event {
-  background: #a7dbc1;
+  box-shadow: 0 0 6px #51cbee;
+  border: 3px solid #337ab7;
+  background: rgba(217, 237, 247, 0.64);
 }
 .clndr-table tr .day.event,
 .clndr-table tr .day.my-event {
@@ -7041,7 +7072,7 @@ button {
 }
 .calendar-input {
   z-index: 1000;
-  top: 17%;
+  top: 5%;
   position: absolute;
 }
 @media only screen and (device-width: 1024px) {
@@ -7257,7 +7288,6 @@ button {
 .user-instructions .js-begin-study-btn {
   width: 203px;
   font-weight: 500;
-  margin-top: 39px;
 }
 .user-instructions .title {
   font-weight: 600;
@@ -7309,6 +7339,15 @@ button {
   .user-instructions .input-img {
     left: 24%;
   }
+}
+.user-instructions .add-event-img {
+  background-image: url('../images/add-event-panel.png');
+  background-repeat: no-repeat;
+  background-size: 492px 219px;
+  height: 222px;
+  width: 578px;
+  position: relative;
+  left: 24%;
 }
 .js-instructions-continue {
   background: #003087;

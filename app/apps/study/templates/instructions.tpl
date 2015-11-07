@@ -11,7 +11,7 @@
 
 <div class="js-page-1">
 	<span class="col-sm-12"> 
-		<p class="text-center sub-title"> 
+		<p class="text-center"> 
 			To help us understand your <b>alcohol</b> and <b>marijuana</b> use, we need to get an idea of what your use was like in the <b>past 90 days</b>. To do this, we would like you to fill out a <b>calendar</b>. 
 		</p>	
 	</span>
@@ -52,6 +52,9 @@
 		<span class="text-center">
 		 For example, if you had 6 beers, enter the number 6 for that day. If you drank two or more different kinds of alcoholic beverages in a day such as 2 beers and 3 glasses of wine, you would enter the number 5 for that day.</p>
 		</span>
+		<button class="btn btn-default continue-btn pull-left js-back-2"> Previous </button>
+
+
 		<button class="btn btn-default continue-btn pull-right js-continue-2"> Continue </button>
 
 	</span>
@@ -63,16 +66,20 @@
 	<p class="lg-text">
 	If you’ve had special occasions such as a birthday, a party, or celebration in the last 90 days – enter those events on the calendar to help jog your memory. 
 
-	Press the <b> Add Events</b> button at the top of the calendar to add/edit events 
+	Press the <b>Add Events</b> button at the top of the calendar to add/edit events 
 
 	If you have regular drinking or marijuana use patterns you can use these dates to help recall your use. For example, you may have a daily or a weekend-only pattern, or use more in the summer or on trips. 
 	</p>
+	
+	<div class="row">
+		<div class="col-sm-12 add-event-img"></div>
+	</div>
 
 	<h3 class="underline heading"> Your Best Estimate </h3>
 	<p class="lg-text">
 	We realize it isn’t easy to recall things with 100% accuracy.  </li> 
 	If you are not sure whether you drank 5 or 7 drinks or whether you used marijuana on a Thursday or a Friday, give it your 
-	<b> best guess!</b><br><br>
+	<b> best guess!</b><br>
 	What is important is that 5 or 7 drinks are very different from 1 or 2 drinks or 15 drinks. <b> The goal is to get a sense of how frequently you drank or used marijuana, how much you drank, and detect patterns of use.</b> </p>
 	<br>
 
@@ -81,6 +88,8 @@
 	  <li> Try to be as accurate as possible </li>
 	  <li> We recognize you won’t have perfect memory. That’s okay! </li>
 	</ul>
+
+	<button class="btn btn-default continue-btn pull-left js-back-3"> Previous </button>
 	<button class="btn btn-default continue-btn js-instructions-continue js-begin-study-btn pull-right"> Begin Study </button>
 	</div>
 	</span>

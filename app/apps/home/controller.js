@@ -2,29 +2,27 @@ define(["app", "apps/home/views"], function(App, Views ){
 
 
     var display = function(){
-        mainView = new Views.Main();
-        App.mainRegion.show(mainView);
-
         var newStudy = new Views.newStudyParticipant();
-        mainView.newStudyParticipantRegion.show(newStudy);
+        mainView.mainRegion.show(newStudy);
+    };
 
+    var login = function(){
+        var login = new Views.login();
+        mainView.mainRegion.show(login);
+        login.on('login', function(){
+            $('.nav').show();
+            display();
+        });
     };
 
     return {
         show: function(){
+            mainView = new Views.Main();
+            App.mainRegion.show(mainView);
             require(["entities/study"], function(){
                 $('body').removeClass('study');
                 $('#header-region').removeClass('hidden');
-                display();
-
-                // var monitor = App.request("study:monitor");
-                // $.when(monitor).done(function(currentStudy, xhr){  
-                //     if(currentStudy){
-                //         App.trigger('study:show', currentStudy);
-                //     } else {
-                //         display();
-                //     }
-                // });
+                login();
             });
         },
     };

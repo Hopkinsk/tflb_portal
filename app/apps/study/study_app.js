@@ -1,7 +1,7 @@
 define(["app", "marionette"], function(App, Marionette){
     var Router = Marionette.AppRouter.extend({
         appRoutes: {
-            "study/:id" : "show",
+            "study/:studyId" : "show",
             //"study/complete" : "studyComplete"
         }
     });
@@ -28,9 +28,9 @@ define(["app", "marionette"], function(App, Marionette){
     };
 
 
-    App.on("study:show", function(studyId){
+    App.on("study:show", function(studyId, id){
         App.navigate("study/" + encodeURIComponent(studyId));
-        API.show(studyId);
+        API.show(id);
     });
 
 /*
