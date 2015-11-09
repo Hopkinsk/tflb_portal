@@ -107,7 +107,19 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
 
             return events;
         },
+        hasEvents: function(){
+            var has = false;
 
+            _.each(this.get('marijuana'), function(evt){
+                has = true;
+            });
+
+            _.each(this.get('alcohol'), function(evt){
+                has = true;
+            });
+            console.log("events has ", this, has);
+            return has;
+        },
         getSafetyStatus: function(){
             var triggered = false;
             _.each(this.get('alcohol'), function(evt){
@@ -200,9 +212,9 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
             return defer.promise();
         },
 
-        getStudy: function(id){
+        getStudy: function(studyId){
             var defer = $.Deferred();
-            var study = new Entities.study({id: id});
+            var study = new Entities.study({id: studyId});
             study.fetch(
                 {
                     wait: true,
@@ -210,7 +222,7 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     dataType: "json",
                     success: function(model, response){
                         //set entities.currentStudy to response
-
+                        console.log("MODEL", model);
                         defer.resolve(model);
                     },
                     error: function(model, xhr){
@@ -225,10 +237,10 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
             var defer = $.Deferred();
             var study = new Entities.csvExport();
             
-
+            console.log("IDS: ", ids);
               $.ajax({
                  type: 'GET',
-                 data:{ids: JSON.stringify(ids)},
+                 data:{ ids: JSON.stringify(ids)},
                  datatype: 'json',
                  url: study.url(),
                  async: true,
@@ -267,8 +279,8 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         return API.getStudies();
     });
 
-    App.reqres.setHandler("study:show", function(id){
-        return API.getStudy(id);
+    App.reqres.setHandler("study:show", function(studyId){
+        return API.getStudy(studyId);
     });
 
     App.reqres.setHandler("study:save", function(data){

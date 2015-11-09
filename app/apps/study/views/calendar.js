@@ -35,13 +35,15 @@ define(["app",
             instructionsMode: '.js-instructions',
             month: '.js-month',
             year: '.js-year',
-            confirmFinish: '.js-confirm-finish'
+            confirmFinish: '.js-confirm-finish',
+            studyComplete: '.js-finish-study'
         },
 
         events: {
             'click @ui.eventMode' : 'onEventMode',
             'click @ui.instructionsMode' : 'onInstructionsMode',
-            'click @ui.confirmFinish' : 'onFinishStudy'
+            'click @ui.confirmFinish' : 'onFinishStudy',
+            'click @ui.studyComplete' : 'onStudyComplete'
         },
 
         regions: {
@@ -58,15 +60,20 @@ define(["app",
             this.clndrTpl = clndrTpl;
             this.dailyMJ = this.model.get('dailyMarijuana');
             this.firstMonth = true;
-            console.log("setting daily Mj!");
         },
 
         onRender: function(){
             this.generateCalendar();
-           // this.setAdjacentMonths(moment());
             this.setDailyMarijuana();
         },
-
+        onStudyComplete: function(evt){
+            this.hasEvents = this.model.hasEvents();
+            if(this.cal.options.events.length > 0){
+               this.$('.js-complete-txt').html('Are you finished entering your alcohol and/or marijuana use over the past 90 days?');
+            } else {
+                this.$('.js-complete-txt').html('You have not entered any drinking or marijuana use over the past 90 days, is this correct?');
+            }
+        },
         setDailyMarijuana: function(){
             if(this.dailyMJ){
                 var events = [];
@@ -144,8 +151,9 @@ define(["app",
                     }
                 },
                 extras: {
-                    lastMonth: "last",
-                    nextMonth: "next"
+                    //lastMonth: "last",
+                    //nextMonth: "next",
+                    studyComplete: "hi"
                 },
                 doneRendering: function(){ 
                     if(that.eventMode){
@@ -253,7 +261,6 @@ define(["app",
         },
 
         onPreviousMonth: function(month){
-            console.log("ON PREV MONTH");
             this.firstMonth = false;
             this.lastMonth = false;
             if(month.format('M') == this.endMonth){
@@ -295,17 +302,6 @@ define(["app",
                     console.log("ERROR !!!");
                 }
             });
-
-            /*
-            //TODO: save the model as complete
-            var that=this;
-            var studyComplete = this.model.getSafetyTrigger();
-            $.when(safetyTriggered).done(function(safetyTrigger, xhr){ 
-                that.trigger('study:complete', this.model);
-            });
-            */
-            //App.trigger("study:complete", this.model);
-          
         }
     });
 

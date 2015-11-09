@@ -26,7 +26,7 @@
 						<button class="marijuana-btn js-marijuana-btn js-yes-marijuana">Yes</button> 
 
 					<span class="js-dailyMJ-wrapper checkbox daily-mj-checkbox text-center">
-	  					<label><input type="checkbox" class="js-dailyMJ-checkbox" value=""<%= obj.dailyMJ == true ? "checked":"" %>>I smoke Marijuana Daily. </label>
+	  					<label><input type="checkbox" class="js-dailyMJ-checkbox" value=""<%= obj.dailyMJ == true ? "checked":"" %>>I smoke Marijuana Daily </label>
 					</span>
 
 				</span>

@@ -21,8 +21,8 @@ define(["app", "apps/study/views"], function(App, Views ){
     };
 
     var displayInstructions = function(currentStudy){
-        mainView = new Views.Main();
-        App.mainRegion.show(mainView);
+        //mainView = new Views.Main();
+        //App.mainRegion.show(mainView);
 
 
         var instructions = new Views.Instructions();
@@ -34,42 +34,37 @@ define(["app", "apps/study/views"], function(App, Views ){
     };
 
     var display = function(currentStudy){
-        mainView = new Views.Main();
-        App.mainRegion.show(mainView);
+        App.loggedIn = false;
         $('body').addClass('study');
         if(currentStudy.get('complete') === true){
             displayStudyComplete(currentStudy, currentStudy.get('safetyTriggered'));
         } else {
-           // displayInstructions(currentStudy);
+            displayInstructions(currentStudy);
             
-            displayCalendar(currentStudy);
+           // displayCalendar(currentStudy);
         }
 
     };
 
     return {
         show: function(studyId){
+            mainView = new Views.Main();
+            App.mainRegion.show(mainView);
             $('#header-region').addClass('hidden');
             require(["entities/study"], function(){
                   var fetchStudy = App.request("study:show", studyId );
-                  $.when(fetchStudy).done(function(currentStudy, xhr){          
-                        display(currentStudy);
+                  $.when(fetchStudy).done(function(currentStudy, xhr){   
+                        if(currentStudy){
+                            display(currentStudy);
+                        } else {
+                            $('body').addClass('study');
+                            mainView.contentRegion.show(new Views.StudyDoesNotExist());
+                        }     
+                        
                    //displayInstructions(currentStudy);
                   });
             });
-        },
-        /*
-        studyComplete: function(study){
-            if(study){
-                //displayStudyComplete(study);
-                    displayStudyComplete(study);
-               
-            } else {
-                displayStudyComplete(null);
-                //TODO: redirect
-            }
-        },
-        */
+        }
     };
 });
 

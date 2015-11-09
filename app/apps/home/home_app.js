@@ -15,13 +15,10 @@ define(["app", "marionette"], function(App, Marionette){
         },
     };
 
-
     App.on("home:show", function(){
         App.navigate("home");        
         API.show();
     });
-
-
 
     App.addInitializer(function(){
         new Router({

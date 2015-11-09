@@ -81,7 +81,9 @@
     width: 129px;
     border: solid 1px;
     border-radius: 5px;
-
+    @media only screen and (max-device-width: 1024px) {
+        width: 130px !important;
+    }
     &.cal-return {
         margin-top: 20px;
         font-weight: 500;
@@ -89,7 +91,6 @@
 
         .glyphicon-calendar {
             font-size: 12px;
-
         }
     }
 
@@ -129,6 +130,10 @@
     font-size: 15px;
     margin-top: 10px;
     margin-left: 60px;
+
+    @media only screen and (max-device-width: 1024px) {
+        margin-top: -26px;
+    }
 }
 
 
@@ -317,12 +322,15 @@
             }
             &.today, &.my-today
             {
-                &.event
-                {
+
+
+
+                //&.event
+                //{
                     box-shadow: 0 0 6px #51cbee;
                     border: 3px solid #337ab7;
                     background: rgba(217, 237, 247, 0.64);
-                }
+                //}
             }
 
             &.event, &.my-event

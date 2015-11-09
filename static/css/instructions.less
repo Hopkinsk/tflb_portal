@@ -2,15 +2,20 @@
 	color: #464646;
 	font-size: 14px;
 	background-color: white;
-
-
     padding-top: 20px;
     padding-bottom: 40px;
 
-    @media only screen and (device-width: 768px) {
-        overflow: hidden;
-        height: 768px;
+    @media only screen and (max-device-width: 1024px) {
+       // overflow: hidden;
+       // height: 768px;
     }
+
+
+    &.calendar {
+        overflow-y: scroll;
+        height: 600px;
+    }
+
     .continue-btn {
         width: 153px;
         height: 62px;
@@ -27,8 +32,8 @@
     }
     .title {
         font-weight: 600;
-        font-size: 40px;
-        margin-bottom: 24px;
+        font-size: 33px;
+        margin-bottom: 10px;
         color: @darkAccent;
     }
     .sub-title {
@@ -54,8 +59,12 @@
         bottom: 0;
         margin-top: 32px;
         margin-left: 234px;
-        
-         @media only screen and (device-width: 1024px) {
+            
+        &.calendar {
+            margin-left: 7%;
+        }
+
+        @media only screen and (max-device-width: 1024px) {
             margin-left: 138px;
         }
     }
@@ -71,7 +80,11 @@
         left: 24%;
         margin-top: 6px;
 
-        @media only screen and (device-width: 1024px) {
+        &.calendar {
+            left: 19%;
+        }
+
+        @media only screen and (max-device-width: 1024px) {
             left: 24%
         }
     }
@@ -83,6 +96,14 @@
         width: 578px;
         position: relative;
         left: 24%;
+
+
+        &.calendar {
+            left: 19%;
+            background-size: 495px 219px;
+            height: 237px;
+
+        }
     }
 }
 
@@ -92,7 +113,12 @@
 	background: @darkAccent;
 	color: white;
 }
-
+.js-close-instructions {
+    background: @darkAccent;
+    color: white;
+    font-size:18px;
+    font-weight: 500;
+}
 .instructions-btn {
     background: transparent;
     margin-top: -20px !important;

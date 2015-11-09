@@ -88,52 +88,20 @@ define(["app",
                     ids.push(child.model.get('id'));
                 }
             });    
-            console.log(ids);
 
-            // $.fileDownload(, {
-            //     httpMethod: "GET",
-            //     data: strData
-            //     successCallback: function (responseHtml, url) {
-            //         $preparingFileModal.dialog('close');
-            //         // In this case 
-            //         $.fileDownload("/pdf/"+responseHtml, {
-            //             preparingMessageHtml: "Download file",
-            //             failMessageHtml: "Not work"
-            //         });
-
-            //     },
-            //     failCallback: function (responseHtml, url) {
-            //         $preparingFileModal.dialog('close');
-            //         $("#error-modal").dialog({ modal: true });
-            //     }
-            // });
-           // var $link = $("#dataLink");
-            var fetch = App.request("studies:export", ids);
-            $.when(fetch).done(function(csvContent, xhr){  
-                console.log("DONE");
-                console.log(csvContent);
-                
-                
-               // console.log($link);
-
-                //var encodedUri = encodeURI(csvContent);
-               // window.open(encodedUri);
-
-
-                var a         = document.createElement('a');
-                a.href        = 'data:attachment/csv;charset=utf-8;base64,' + window.btoa(csvContent);
-                a.target      = '_blank';
-                a.download    = 'myFile.csv';
-
-                document.body.appendChild(a);
-                a.click();
-
+            var url = "/study/export?ids="+ encodeURIComponent(JSON.stringify(ids));
+            $.fileDownload(url, {
+                successCallback: function (url) {
+             
+                    alert('You just got a file download dialog or ribbon for this URL :' + url);
+                },
+                failCallback: function (html, url) {
+             
+                    alert('Your file download just failed for this URL:' + url + '\r\n' +
+                            'Here was the resulting error HTML: \r\n' + html
+                            );
+                }
             });
-
-
-
-
-
         },
         
         serializeData: function(){

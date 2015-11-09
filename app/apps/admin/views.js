@@ -4,10 +4,10 @@ define([
       "tpl!apps/admin/templates/main.tpl", 
       "apps/admin/views/studyTable",
       "tpl!apps/admin/templates/passphrase.tpl", 
-
-
+      "tpl!apps/admin/templates/loading.tpl", 
+      "tpl!apps/admin/templates/error.tpl", 
       ], 
-      function(App, Marionette, mainTpl, StudiesTable, passphraseTpl){
+      function(App, Marionette, mainTpl, StudiesTable, passphraseTpl, loadingTpl, errorTpl){
   
 
   return {
@@ -22,7 +22,13 @@ define([
 
     StudiesTable: StudiesTable,
 
+    Loading: Marionette.ItemView.extend({
+      template: loadingTpl
+    }),
 
+    Error: Marionette.ItemView.extend({
+      template: errorTpl
+    }),
 
     Passphrase: Marionette.ItemView.extend({
       template: passphraseTpl,

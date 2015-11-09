@@ -5,9 +5,9 @@ define([
       "apps/study/views/instructions",
       "apps/study/views/calendar",
       "tpl!apps/study/templates/studyComplete.tpl", 
-
+      "tpl!apps/study/templates/studyDoesNotExist.tpl", 
       ], 
-      function(App, Marionette, mainTpl, Instructions, Calendar, studyCompleteTpl){
+      function(App, Marionette, mainTpl, Instructions, Calendar, studyCompleteTpl, errorTpl){
   
 
   return {
@@ -27,7 +27,7 @@ define([
       },
 
       initialize: function(options){
-        this.passphrase = this.model.get('adminPassphrase');
+        this.passphrase = 'asap';//this.model.get('adminPassphrase');
         this.safetyTriggered = options.safetyTriggered;
       },
 
@@ -36,10 +36,9 @@ define([
         
         var password = this.$('.js-login-input').val();
         if(password != this.passphrase){
-          this.$('.js-invalid-login').toggleClass('hidden');
+          this.$('.js-invalid-login').removeClass('hidden');
         } else {
           App.trigger('home:show');
-          this.$('.js-invalid-login').removeClass('hidden');
         }
       },
 
@@ -47,6 +46,15 @@ define([
           return {
             safetyTriggered: this.safetyTriggered
           };
+        }
+    }),
+    StudyDoesNotExist: Marionette.LayoutView.extend({
+        template: errorTpl,
+        events: {
+          'click .js-home' : 'onReturnHome'
+        },
+        onReturnHome: function(){
+          App.trigger('home:show');
         }
     }),
 

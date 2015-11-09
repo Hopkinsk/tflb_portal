@@ -6601,6 +6601,20 @@ button.close {
   background-color: #003087 !important;
   color: white;
 }
+@media only screen and (max-device-width: 1024px) {
+  .new-participant-panel .study-input-field {
+    width: 200px;
+  }
+}
+.admin-table {
+  margin-top: 20px;
+}
+.admin-table .js-select-all {
+  margin-right: 10px;
+}
+.admin-table .js-export-selected {
+  margin-left: 10px;
+}
 body {
   background: #D8D8D8 !important;
 }
@@ -6609,9 +6623,6 @@ body.study {
 }
 body.event-mode {
   background: #444343 !important;
-}
-@media only screen and (device-width: 768px) {
-  /* For general iPad layouts */
 }
 button {
   outline: none;
@@ -6663,7 +6674,7 @@ button {
 .modal-overlay {
   position: absolute;
   z-index: 10000000;
-  top: 10%;
+  top: 5%;
 }
 .study-complete-tag {
   padding: 6px;
@@ -6734,6 +6745,11 @@ button {
   border: solid 1px;
   border-radius: 5px;
 }
+@media only screen and (max-device-width: 1024px) {
+  .event-mode-btn {
+    width: 130px !important;
+  }
+}
 .event-mode-btn.cal-return {
   margin-top: 20px;
   font-weight: 500;
@@ -6769,6 +6785,11 @@ button {
   font-size: 15px;
   margin-top: 10px;
   margin-left: 60px;
+}
+@media only screen and (max-device-width: 1024px) {
+  .finish-study-btn {
+    margin-top: -26px;
+  }
 }
 .add-event {
   position: absolute;
@@ -6940,8 +6961,8 @@ button {
   position: relative;
   z-index: 10000000;
 }
-.clndr-table tr .day.today.event,
-.clndr-table tr .day.my-today.event {
+.clndr-table tr .day.today,
+.clndr-table tr .day.my-today {
   box-shadow: 0 0 6px #51cbee;
   border: 3px solid #337ab7;
   background: rgba(217, 237, 247, 0.64);
@@ -7075,7 +7096,7 @@ button {
   top: 5%;
   position: absolute;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input {
     top: 3%;
   }
@@ -7095,7 +7116,7 @@ button {
 .calendar-input .panel .content {
   text-align: center;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .panel .content {
     text-align: normal;
   }
@@ -7115,7 +7136,7 @@ button {
   color: white;
   font-weight: 500;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .panel .panel-footer .iter-day-btn {
     font-size: 19px;
   }
@@ -7142,7 +7163,7 @@ button {
   left: 24%;
   margin-top: 20px;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .standard-drink-img {
     left: 12%;
   }
@@ -7160,10 +7181,9 @@ button {
   font-size: 28px;
   font-weight: 500;
   margin-top: 16px;
-  margin-left: 77px;
   margin-right: 17px;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .drink-input .drinks-label {
     margin-left: 10px;
     font-size: 20px;
@@ -7190,7 +7210,7 @@ button {
   border-radius: 11px;
   font-size: 23px;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .drink-input .alcohol-btn-group .drink-btn {
     margin: 0 0px 0px 17px;
   }
@@ -7200,7 +7220,7 @@ button {
   margin-left: 20px;
   color: #003087;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .marijuana-input {
     margin-left: 56px;
     margin-top: 5px;
@@ -7212,7 +7232,7 @@ button {
   margin-top: 16px;
   margin-right: 97px;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .marijuana-input .marijuana-label {
     margin-left: 10px;
     font-size: 20px;
@@ -7234,7 +7254,7 @@ button {
   height: 47px;
   border-radius: 11px;
 }
-@media only screen and (device-width: 1024px) {
+@media only screen and (max-device-width: 1024px) {
   .calendar-input .marijuana-input .marijuana-btn-group .marijuana-btn {
     margin: 0 0px 0px 17px;
   }
@@ -7270,11 +7290,9 @@ button {
   padding-top: 20px;
   padding-bottom: 40px;
 }
-@media only screen and (device-width: 768px) {
-  .user-instructions {
-    overflow: hidden;
-    height: 768px;
-  }
+.user-instructions.calendar {
+  overflow-y: scroll;
+  height: 600px;
 }
 .user-instructions .continue-btn {
   width: 153px;
@@ -7291,8 +7309,8 @@ button {
 }
 .user-instructions .title {
   font-weight: 600;
-  font-size: 40px;
-  margin-bottom: 24px;
+  font-size: 33px;
+  margin-bottom: 10px;
   color: #003087;
 }
 .user-instructions .sub-title {
@@ -7319,7 +7337,10 @@ button {
   margin-top: 32px;
   margin-left: 234px;
 }
-@media only screen and (device-width: 1024px) {
+.user-instructions .standard-drink-img.calendar {
+  margin-left: 7%;
+}
+@media only screen and (max-device-width: 1024px) {
   .user-instructions .standard-drink-img {
     margin-left: 138px;
   }
@@ -7335,7 +7356,10 @@ button {
   left: 24%;
   margin-top: 6px;
 }
-@media only screen and (device-width: 1024px) {
+.user-instructions .input-img.calendar {
+  left: 19%;
+}
+@media only screen and (max-device-width: 1024px) {
   .user-instructions .input-img {
     left: 24%;
   }
@@ -7349,9 +7373,20 @@ button {
   position: relative;
   left: 24%;
 }
+.user-instructions .add-event-img.calendar {
+  left: 19%;
+  background-size: 495px 219px;
+  height: 237px;
+}
 .js-instructions-continue {
   background: #003087;
   color: white;
+}
+.js-close-instructions {
+  background: #003087;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
 }
 .instructions-btn {
   background: transparent;

@@ -1,15 +1,16 @@
 define(["app", "apps/home/views"], function(App, Views ){
 
-
     var display = function(){
         var newStudy = new Views.newStudyParticipant();
         mainView.mainRegion.show(newStudy);
     };
 
     var login = function(){
+
         var login = new Views.login();
         mainView.mainRegion.show(login);
         login.on('login', function(){
+            App.loggedIn = true;
             $('.nav').show();
             display();
         });
@@ -22,7 +23,11 @@ define(["app", "apps/home/views"], function(App, Views ){
             require(["entities/study"], function(){
                 $('body').removeClass('study');
                 $('#header-region').removeClass('hidden');
-                login();
+                if(App.loggedIn){
+                    display();
+                } else {
+                    login();
+                }
             });
         },
     };

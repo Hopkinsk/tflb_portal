@@ -1,5 +1,5 @@
 <div class="col-sm-12">
-<div class="panel panel-default ">
+<div class="panel panel-default admin-table">
 
 <div class="panel-heading">
 <h4> Participants </h4> 
@@ -9,7 +9,7 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr class="table-headers">
-        	<th class="table-header" ><input type="checkbox" class="js-select-all"> Select All </th>
+        	<th class="table-header" ><input type="checkbox" class="js-select-all">Select All</th>
         	<th class="table-header" >Participant ID</th>
         	<th class="table-header" >Study Date </th>
         	<th class="table-header" >Status</th>
@@ -20,9 +20,9 @@
 </table>
 
 </div>
-<button class="btn btn-default js-export-selected pull-right" > Export Selected </button>
+<button class="btn btn-success js-export-selected pull-right" > Export Selected </button>
 
-<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
 Delete Selected
 </button>
 </div>

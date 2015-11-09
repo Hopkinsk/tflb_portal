@@ -102,7 +102,7 @@ define(function(require, exports, module) {
     App.getCurrentUser = function(){
         return window.server_session.user;
     };
-
+    App.loggedIn = false;
     App.on("start", function( /*SessionMonitor */){
         if (Backbone.history){
             require([

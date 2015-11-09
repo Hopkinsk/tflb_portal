@@ -6,11 +6,8 @@
         </div>       
 
             <div class="pull-right admin-enter">
-              <button type="button" class="btn btn-default admin-enter-btn pull-right" data-toggle="modal" data-target=".bs-example-modal-sm"> Admin <% if(obj.safetyTriggered){ %><span class="glyphicon glyphicon-flag"></span> <% } %> </button>
+              <button type="button" class="btn btn-default admin-enter-btn pull-right" data-toggle="modal" data-target=".bs-example-modal-sm"> Admin </button>
            </div>
-
-
-
     </div>
 </nav>
 </div>
@@ -20,7 +17,7 @@
 
 		<h4 class="text-center">
      Please notify the study administrator that the study is complete. <br>
-     [ help links + resources ]
+    <% if(obj.safetyTriggered){ %><span class="glyphicon glyphicon-flag"></span> <% } %> 
    </h4>
 </div>
 

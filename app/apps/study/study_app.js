@@ -9,7 +9,6 @@ define(["app", "marionette"], function(App, Marionette){
     var API = {
         show: function(studyId){
              //if there is no study redirect back to homepage 
-
             require(["apps/study/controller"], function(Controller){
                 App.startSubApp(null);
                 Controller.show(studyId);
@@ -29,8 +28,9 @@ define(["app", "marionette"], function(App, Marionette){
 
 
     App.on("study:show", function(studyId, id){
+        
         App.navigate("study/" + encodeURIComponent(studyId));
-        API.show(id);
+        API.show(studyId);
     });
 
 /*

@@ -6,7 +6,7 @@
 		<div class="panel panel-body">
 			<div class="js-invalid alert alert-danger hidden" role="alert"></div>
 
-			 <div class="col-sm-4 col-sm-offset-4">
+			 <div class="col-sm-4 col-sm-offset-4 study-input-field">
 
 			    <div class="input-group">
 			      <input type="text" class="form-control js-studyId-input" maxlength="4" placeholder="ID"
