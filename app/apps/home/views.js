@@ -60,9 +60,16 @@ define([
       },
 
        events: {
-        'click @ui.startStudy' : 'onStartStudy'
+        'click @ui.startStudy' : 'onStartStudy',
+        'keyup @ui.studyIdInput' : 'keyPressEnter'
        },
 
+      keyPressEnter: function(evt){
+        evt.preventDefault();
+        if(event.keyCode == 13){
+            this.ui.startStudy.click();
+        }
+      },
        onStartStudy: function(evt){
           var studyId = this.ui.studyIdInput.val();
           if(this.validStudyId()){

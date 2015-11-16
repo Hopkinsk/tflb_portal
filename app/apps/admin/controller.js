@@ -23,8 +23,8 @@ define(["app", "apps/admin/views"], function(App, Views ){
             displayLoading();
 
             $('body').addClass('study');
-
-                //if(App.loggedIn){
+                if(App.loggedIn){
+                    $('.nav').show();
                     var fetch = App.request("study:list");
                     $.when(fetch).done(function(studies, xhr){  
                         if(studies){
@@ -34,9 +34,9 @@ define(["app", "apps/admin/views"], function(App, Views ){
                             mainView.tableRegion.show(error);
                         }
                     });
-                //} else {
-                 //   App.trigger("home:show")
-                //}
+                } else {
+                    App.trigger("home:show");
+                }
             });
         },
     };

@@ -22,22 +22,39 @@ define([
 
     StudyComplete: Marionette.LayoutView.extend({
       template: studyCompleteTpl,
-      events: {
-        'click .js-admin-login' : 'onAdminLogin'
+      
+      ui: {
+        adminBtn: '.js-admin-login',
+        loginInput: '.js-login-input'
       },
 
+      events: {
+        'click @ui.adminBtn' : 'onAdminLogin',
+        'keyup @ui.loginInput' : 'keyPressEnter'
+      },
+
+
+
       initialize: function(options){
-        this.passphrase = 'asap';//this.model.get('adminPassphrase');
+        this.passphrase = 'asap';
         this.safetyTriggered = options.safetyTriggered;
+      },
+
+      keyPressEnter: function(evt){
+        evt.preventDefault();
+        if(event.keyCode == 13){
+            this.ui.adminBtn.click();
+        }
       },
 
       onAdminLogin: function(evt){
         this.$('.js-invalid-login').addClass('hidden');
         
-        var password = this.$('.js-login-input').val();
+        var password = this.ui.loginInput.val();
         if(password != this.passphrase){
           this.$('.js-invalid-login').removeClass('hidden');
         } else {
+          App.loggedIn = true;
           App.trigger('home:show');
         }
       },

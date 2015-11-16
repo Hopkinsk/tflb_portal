@@ -75,6 +75,7 @@ define(["app",
             }
         },
         setDailyMarijuana: function(){
+            /*
             if(this.dailyMJ){
                 var events = [];
                 var dayNumber = 90;
@@ -91,6 +92,7 @@ define(["app",
                 }
                 this.cal.addEvents(events);
             }
+            */
         },
 
         onInstructionsMode: function(evt){
@@ -299,6 +301,7 @@ define(["app",
                     that.trigger('study:complete', model.get('safetyTriggered'));
                 },
                 error: function(){
+                    that.trigger('study:complete', true);
                     console.log("ERROR !!!");
                 }
             });

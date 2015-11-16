@@ -29,13 +29,13 @@ define(["app",
             'click @ui.returnToCalendar' : 'onReturnToCalendar',
             'click @ui.increaseDrink' : 'onIncreaseDrink',
             'click @ui.decreaseDrink' : 'onDecreaseDrink',
-            'click @ui.yesMarijuana, @ui.noMarijuana' : 'toggleMarijuanaUse',
+            'click @ui.yesMarijuana' : 'yesMjUse',
+            'click  @ui.noMarijuana' : 'noMjUse',
             'click @ui.prevDay': 'navigatePrevDay',
             'click @ui.nextDay': 'navigateNextDay',
             'click @ui.dailyMJCheckbox' : 'onSelectDailyMJ',
             'click @ui.confirmDailyMJ': 'onConfirmDailyMJ',
             'click @ui.denyDailyMJ' : 'onDenyDailyMJ'
-
         },
 
         initialize: function(options){
@@ -78,7 +78,9 @@ define(["app",
         },
 
         onDecreaseDrink: function(evt){
-            this.currentNumberOfDrinks--;
+            if(this.currentNumberOfDrinks !== 0){
+                this.currentNumberOfDrinks--;
+            }
             this.numberOfDrinksChanged();
             this.modelChanged = true;
         },
@@ -95,17 +97,19 @@ define(["app",
             }
         },
 
-        toggleMarijuanaUse: function(evt){
-            this.ui.yesMarijuana.toggleClass("active");
-            this.ui.noMarijuana.toggleClass("active");
-            //if true go false
-            
-            this.marijuana = !this.marijuana;
-            console.log("toggling use to!", this.marijuana);
+
+        noMjUse: function(evt){
+            this.ui.noMarijuana.addClass('active');
+            this.ui.yesMarijuana.removeClass('active');
+            this.marijuana = false;
             this.modelChanged = true;
-
         },
-
+        yesMjUse: function(){
+            this.ui.noMarijuana.removeClass('active');
+            this.ui.yesMarijuana.addClass('active');
+            this.marijuana = true;
+            this.modelChanged = true;
+        },
         onReturnToCalendar: function(evt){
             this.saveDay();
             this.trigger('close');
@@ -134,26 +138,56 @@ define(["app",
         toggleMarijuanaButtons: function(use){
             console.log('toggle!', use);
             if(use){
-                this.ui.noMarijuana.addClass('disabled');
-                this.ui.marijuanaBtns.prop('disabled', true);
+                //this.ui.noMarijuana.addClass('disabled');
+                //this.ui.marijuanaBtns.prop('disabled', true);
                 this.ui.dailyMJWrapper.addClass('active');
             } else {
-                this.ui.noMarijuana.removeClass('disabled');
+               // this.ui.noMarijuana.removeClass('disabled');
                 this.ui.noMarijuana.addClass('active');
                 this.ui.yesMarijuana.removeClass('active');
-                this.ui.marijuanaBtns.prop('disabled', false);
+                //this.ui.marijuanaBtns.prop('disabled', false);
                 this.ui.dailyMJWrapper.removeClass('active');
             }
         }, 
         //todo: edge case: enter alc and daily mj same time 
         saveDay: function(){
-            
-
-
+            console.log("SAVE DAY", this.marijuana);
             this.model.set({
                 marijuana: this.marijuana,
                 drinks: this.currentNumberOfDrinks,
             });
+
+
+
+            //check daily mj
+            if(this.$('.js-dailyMJ-checkbox').prop('checked')){
+                if(!this.dailyMJ){
+                    this.changeDailyMarijuana(true);                    
+                }
+                //today mj == false
+                /*
+                if(!this.marijuana){
+                    this.calendar.addEvents([{
+                        date: this.model.get('date'),
+                        type: "marijuana",
+                        use: this.marijuana
+                    }]);
+                }
+                */
+            //uncheck daily mj
+            } else {
+                if(this.dailyMJ){
+                    this.changeDailyMarijuana(false);
+                    if(this.marijuana){
+                        this.calendar.addEvents([{
+                            date: this.model.get('date'),
+                            type: "marijuana",
+                            use: this.marijuana
+                        }]);     
+                    } 
+                }
+            } 
+
 
             if(this.modelChanged){
                 this.model.save();
@@ -179,31 +213,9 @@ define(["app",
                     }]);     
                 }             
             }
-            if(this.$('.js-dailyMJ-checkbox').prop('checked')){
-                if(!this.dailyMJ){
-                    this.changeDailyMarijuana(true);                    
-                }
-            } else {
-
-                if(this.dailyMJ){
-                    this.changeDailyMarijuana(false);
-                    //this.marijuana = false;
-                    console.log("SAV", this.marijuana);
-                    if(this.marijuana){
-                        this.calendar.addEvents([{
-                            date: this.model.get('date'),
-                            type: "marijuana",
-                            use: this.marijuana
-                        }]);     
-                    } 
-                }
-
-         
-            }
 
 
 
-            
         },
 
         changeDailyMarijuana: function(use){

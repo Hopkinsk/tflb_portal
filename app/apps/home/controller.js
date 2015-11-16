@@ -1,6 +1,7 @@
 define(["app", "apps/home/views"], function(App, Views ){
 
     var display = function(){
+        $('.nav').show();
         var newStudy = new Views.newStudyParticipant();
         mainView.mainRegion.show(newStudy);
     };
@@ -11,7 +12,7 @@ define(["app", "apps/home/views"], function(App, Views ){
         mainView.mainRegion.show(login);
         login.on('login', function(){
             App.loggedIn = true;
-            $('.nav').show();
+            //$('.nav').show();
             display();
         });
     };

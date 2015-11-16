@@ -1,10 +1,6 @@
 <div class="col-sm-8 col-sm-offset-2 calendar-input">
 	<div class="panel panel-default">
 		<div class="panel-heading input-header text-center"> <%= obj.dateString %> </div>
-			<% _.each(obj.personalEvents, function(event){ %>
-
-	          <!--   <%= event.title %> -->
-	         <% }) %>
 		<div class="content">
 			<div class="drink-input col-sm-12">
 				<span class="drinks-label"># Standard Drinks</span> 
