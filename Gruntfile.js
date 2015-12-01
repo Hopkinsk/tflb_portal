@@ -264,14 +264,14 @@ module.exports = function(grunt) {
                         src: ["index.css"],                
                         dest: "dist_bundle/css/"
                     },
-                    /* JUST NOW
+                    
                     {
                         expand: true,
                         cwd: "dist/css/fonts/",
                         src: "**",
                         dest: "dist_bundle/css/fonts/"
                     },
-                    */
+                    
 
                     {
                         expand: true,

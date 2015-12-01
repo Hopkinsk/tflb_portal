@@ -39,9 +39,9 @@ define(["app", "apps/study/views"], function(App, Views ){
         if(currentStudy.get('complete') === true){
             displayStudyComplete(currentStudy, currentStudy.get('safetyTriggered'));
         } else {
-          //  displayInstructions(currentStudy);
+            displayInstructions(currentStudy);
             
-            displayCalendar(currentStudy);
+           // displayCalendar(currentStudy);
         }
 
     };
