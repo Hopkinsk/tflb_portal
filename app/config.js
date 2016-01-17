@@ -6,7 +6,7 @@ require.config({
         "vendor": "../vendor",
 
         // Almond is used to lighten the output filesize.
-        "almond": "../vendor/bower/almond/almond",
+        //"almond": "../vendor/bower/almond/almond",
 
         // Opt for Lo-Dash Underscore compatibility build over Underscore.
         "underscore": "../vendor/bower/lodash/dist/lodash.underscore",
@@ -23,7 +23,7 @@ require.config({
         "bootstrap-dialog": "../vendor/bower/bootstrap3-dialog/src/js/bootstrap-dialog",
         "moment": "../vendor/bower/moment/min/moment.min",
         "clndr": "../vendor/bower/clndr/clndr.min",
-        "qtip": "../vendor/bower/qtip2/jquery.qtip.min",
+        //"qtip": "../vendor/bower/qtip2/jquery.qtip.min",
         "jquery-file-download" : "../vendor/bower/jquery-file-download/src/Scripts/jquery.fileDownload"
     },
 
@@ -61,10 +61,10 @@ require.config({
         //     deps: ["moment", "jquery", "underscore"],
         //     exports: "clndr"
         //},
-        "qtip": {
-            deps: ["jquery"],
-            exports: "qtip"
-        }
+        // "qtip": {
+        //     deps: ["jquery"],
+        //     exports: "qtip"
+        // }
 
     }
 });

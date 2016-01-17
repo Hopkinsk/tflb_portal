@@ -1,7 +1,7 @@
 define(["app",
         "marionette",
         "clndr",
-        "qtip",
+        //"qtip",
         "moment",
         "tpl!apps/study/templates/calendar.tpl",
         "tpl!apps/study/templates/instructionsCalendar.tpl",
@@ -9,7 +9,7 @@ define(["app",
         "apps/study/views/events",
         "apps/study/views/input"
         ],
-        function(App, Marionette, clndr, qtip, moment, calendarTpl, instructionsTpl, clndrTpl, Events, Input){
+        function(App, Marionette, clndr, moment, calendarTpl, instructionsTpl, clndrTpl, Events, Input){
 
    var Instructions = Marionette.ItemView.extend({
         template: instructionsTpl,

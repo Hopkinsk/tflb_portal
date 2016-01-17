@@ -7,6 +7,7 @@ This application structure was based upon:
 1. tbranyen's [GitHub Viewer](https://github.com/tbranyen/github-viewer) application which serves as an example of a simple BBB app
 1. davidsulc's [RequireJS and Marionette](https://github.com/davidsulc/structuring-backbone-with-requirejs-and-marionette) example app which accompanies his [book](https://leanpub.com/structuring-backbone-with-requirejs-and-marionette)
 
+
 Libraries
 ---------
 
@@ -17,6 +18,10 @@ Libraries
 * JQuery 2.x
 * Underscore
 * [Bootstrap](http://getbootstrap.com/css/) 3.x
+
+
+
+
 
 See bower.json for exact versions.
 
@@ -35,5 +40,4 @@ Development
 * Run:
     * ```grunt```   // builds everything. Release files are put in /dist
     * ```grunt server:development```
-    * ```grunt server:release```
     * ```grunt watch``` // run in background while developing to compile LESS and run JSHint
