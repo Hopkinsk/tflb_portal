@@ -1,0 +1,417 @@
+@clndr-border: 2px solid @darkAccent;
+@inactive: #BCBCBC;
+
+@inactiveFont: #DDDDDD;
+@inactiveFontSize: 20px;
+@eventModeZindex: 10000000;
+.noselect
+{
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+
+
+
+.hidden {
+    display: none;
+}
+
+.clndr-bch-logo {
+    
+    background-image: url('../images/bch_logo.png');
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-size: 141px 77px;
+    height: 102px;
+    &.event-mode {
+         background-image: url('../images/bch_logo_inverse.png');
+    }
+}
+
+.alcohol-icon-wrapper {
+
+    .alcohol-icon {
+        left: -5px;
+        bottom: 3px;
+        position: absolute;
+        background-size: 36px 58px;
+        width: 30px;
+        height: 43px;
+        background-image: url('../images/alcohol_2.png');
+        background-repeat: no-repeat;
+    }
+
+    .drinks-number {
+        left: 3px;
+        bottom: 1px;
+        position: absolute;
+        color: #C7690F;
+        font-weight: 500;
+        font-size: 20px;
+        margin-left: 23px;
+    }
+
+    &.event-mode {
+        display: none;
+    }
+}
+
+.marijuana-icon {
+    right: 3px;
+    bottom: 3px;
+    position: absolute;
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../images/marijuana.png');
+    background-repeat: no-repeat;
+
+    &.event-mode {
+        display: none;
+    }
+}
+
+.event-mode-btn {
+    margin-top: 23px;
+    margin-right: -16px;
+    background: #CDDBF5;
+    color: @darkAccent;
+    height: 37px;
+    width: 129px;
+    border: solid 1px;
+    border-radius: 5px;
+    @media only screen and (max-device-width: 1024px) {
+        width: 130px !important;
+    }
+    &.cal-return {
+        margin-top: 20px;
+        font-weight: 500;
+        background: white;
+
+        .glyphicon-calendar {
+            font-size: 12px;
+        }
+    }
+
+    &.instructions {
+        margin-top: 0px;
+        margin-right: 0px;
+
+    }
+}
+
+
+.event-instructions {
+    font-size: 20px;
+    background: white;
+    color: #003087;
+    border: solid 3px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+    height: 61px;
+    font-size: 21px;
+    height: 61px;
+
+}
+
+
+
+.finish-study-btn {
+    background: #C3EAD3;
+    color: #113821;
+    border: solid 1px #113821;
+    height: 57px;
+    width: 165px;
+    border-radius: 5px;
+    padding: 1px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: 60px;
+
+    @media only screen and (max-device-width: 1024px) {
+        margin-top: -26px;
+    }
+}
+
+
+.add-event {
+    position: absolute;
+    right: 4px;
+    top: 44px;
+    height: 34px;
+    background: #D6D6D6;
+    opacity: 0.6;
+    border-radius: 12px;
+    color: #6B6B6B;
+    border: 1px solid #8A8A8A;
+}
+
+.event-label-bullet {
+    height: 5px;
+    width: 5px;
+    background: #003087;
+    border-radius: 5px;
+    float: left;
+    margin-top: 6px;
+    margin-right: 5px;
+
+
+}
+.event-personal-label {
+    font-size: 13px;
+    font-family: helvetica;
+    color: #777777;;
+    font-weight: 400;
+    display: inline-block;
+    float: left;
+    clear: left;
+
+    &.event-mode {
+        font-weight: 600;
+    }
+}
+
+
+.event-controls {
+    display: none;
+    background: white;
+}
+
+
+.iter-months-btn {
+    background: white;
+    
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    font-size: 33px;
+    margin-top: 8px;
+    margin-right: 16px;
+    .glyphicon {
+        color: #003087;
+
+    }
+}
+
+
+.clndr {
+    margin-top: 20px;
+}
+
+.clndr-controls {
+    .clearfix;
+    //width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    //margin-left: 148px;
+
+
+    .month
+    {
+        float: left;
+        width: 33%;
+        text-align: center;
+    }
+
+    .clndr-control-button
+    {
+        float: left;
+        //width: 33%;
+
+        &.rightalign
+        {
+            text-align: right;
+            //width: 34%;
+        }
+        .clndr-next-button
+        {
+            cursor: pointer;
+            
+            .noselect;
+            &:hover { background: #ddd; }
+            &.inactive
+            {
+                opacity: 0.5;
+                &:hover
+                {
+                    background: none;
+                    cursor: default;
+                }
+            }
+        }
+        .clndr-previous-button
+        {
+            cursor: pointer;
+            .noselect;
+            &:hover { background: #ddd; }
+            &.inactive
+            {
+                opacity: 0.5;
+                &:hover
+                {
+                    background: none;
+                    cursor: default;
+                }
+            }
+        }
+    }
+}
+
+.clndr-table {
+    table-layout: fixed;
+    width: 100%;
+
+    .header-days
+    {
+        height: 30px;
+        font-size: 10px;
+        background: @darkAccent;
+
+        &.event-mode {
+            position: relative;
+            z-index: @eventModeZindex;
+        }
+
+        .header-day
+        {
+            &.event-mode {
+                position: relative;
+                z-index: @eventModeZindex;
+            }
+            vertical-align: middle;
+            text-align: center;
+            border-left: @clndr-border;
+            border-top: @clndr-border;
+            font-size: 14px;
+            color: #fff;
+
+            &:last-child
+            {
+                border-right: @clndr-border;
+            }
+        }
+    }
+
+    tr
+    {
+        height: 106px;
+
+        td
+        {
+            vertical-align: top;
+        }
+
+        .day
+        {
+            position: relative;
+            border-left: @clndr-border;
+            border-top: @clndr-border;
+            width: 100%;
+            height: inherit;
+            background: white;
+
+            &:hover { background: #eee; }
+
+            &.event-mode {
+                position: relative;
+                z-index: @eventModeZindex;
+            }
+            &.today, &.my-today
+            {
+
+
+
+                //&.event
+                //{
+                    box-shadow: 0 0 6px #51cbee;
+                    border: 3px solid #337ab7;
+                    background: rgba(217, 237, 247, 0.64);
+                //}
+            }
+
+            &.event, &.my-event
+            {
+                background: white;
+                &:hover
+                {
+                  background: #eee;
+                }
+            }
+
+            &.inactive, &.my-inactive
+            {
+                background: @inactive;
+                color: @inactiveFont;
+                font-size: @inactiveFontSize;
+                &.event-mode {
+                    position: relative;
+                    z-index: 1;
+                }
+                .add-event {
+                    display: none;
+                }
+            }
+
+            &:last-child
+            {
+                border-right: @clndr-border;
+            }
+
+            .day-contents
+            {
+                box-sizing: border-box;
+                padding: 8px;
+                font-size: 24px;
+                text-align: right;
+
+                .day-number {
+                    margin-top: -6px;
+                    margin-right: -2px;
+                    font-size: 21px;
+                }
+            }
+        }
+
+        .empty, .adjacent-month, .my-empty, .my-adjacent-month
+        {
+            border-left: @clndr-border;
+            border-top: @clndr-border;
+            width: 100%;
+            height: inherit;
+            background: @inactive;
+            color: @inactiveFont;
+            &.event-mode {
+                position: relative;
+                z-index: 1;
+            }
+            &:last-child
+            {
+                border-right: @clndr-border;
+            }
+            .add-event {
+                display: none;
+            }
+        }
+
+        &:last-child
+        {
+            .day, .my-day
+            {
+                border-bottom: @clndr-border;
+            }
+
+            .empty, .my-empty
+            {
+                border-bottom: @clndr-border;
+            }
+        }
+    }
+}
+
+
+
+

@@ -1,0 +1,134 @@
+<div class="js-cal-mode-header">
+  <span class="clndr-bch-logo col-sm-5"></span>
+
+  <div class='js-clndr-controls clndr-controls col-sm-5'> 
+
+
+    
+        <button class="pull-left js-previous-month clndr-previous-button iter-months-btn">
+      <span class="iter-months-btn glyphicon glyphicon-circle-arrow-left"></span> 
+     </button>
+     <h3 class="pull-left"> 
+      <span class="js-month"><%= month %></span> 
+      <small class="js-year"><%= year %></small>
+     </h3> 
+     
+      <button class="pull-left js-next-month clndr-next-button hidden iter-months-btn"> 
+        <span class="iter-months-btn glyphicon glyphicon-circle-arrow-right"></span> 
+      </button>
+
+    <button type="button" class="js-finish-study finish-study-btn hidden pull-right" data-toggle="modal" data-target="#finishStudy">
+      Study Complete
+    </button>
+
+ </div>
+
+ <div class="col-sm-2">
+  <button class="event-mode-btn js-event-mode pull-right" type="button"> Add Events </button>
+  <button class="js-instructions instructions-btn glyphicon glyphicon-question-sign pull-right"></button><br>
+</div>
+</div>
+
+
+
+<div class="js-event-mode-header hidden">
+  <span class="clndr-bch-logo event-mode col-sm-4"></span>
+
+  <div class="col-sm-4 js-event-instructions">
+    <div class="panel panel-default event-instructions">
+
+      Select a Day to Edit Events
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <button class="event-mode-btn cal-return js-event-mode pull-right" type="button"> 
+      Back to Calendar </button>
+    <button class="js-instructions instructions-btn glyphicon glyphicon-question-sign pull-right"></button><br>
+  </div>
+</div>
+
+
+
+
+<table class='clndr-table' border='0' cellspacing='0' cellpadding='0'>
+  
+  <!-- WEEKDAY HEADER -->
+  <thead>  
+    <tr class='header-days'>
+      <% for(var i = 0; i < daysOfTheWeek.length; i++) { %>
+      <td class='header-day'><%= daysOfTheWeek[i] %></td>
+      <% } %>
+    </tr>
+  </thead>
+
+  <!-- CALENDAR -->
+  <tbody>
+    <% for(var i = 0; i < numberOfRows; i++){ %>
+    
+    <tr>
+
+
+
+      <% for(var j = 0; j < 7; j++){ %>
+      <!-- DAYS -->
+      <% var d = j + i * 7; %>
+      <td class='<%= days[d].classes %>' >
+
+        <div class='day-contents' data-day=<%= days[d].day %> data-test="test">
+
+           <span class="day-number pull-right"><%= days[d].day %></span>
+
+
+          <% _.each(days[d].events, function(event){ %>
+           
+            <% if(event.type == "personal"){ %>
+               <div class="event-personal-label pull-left"> <%= event.title %></div>
+            <% } else if(event.type == "alcohol" && event.drinks > 0) { %>
+
+
+                <div class="alcohol-icon-wrapper pull-left">
+                  <span class="alcohol-icon"></span>
+                  <div class="drinks-number"><%= event.drinks %></div> 
+                  
+                </div>
+
+              <% } %>
+          
+              <% if(event.type == "marijuana" && event.use){ %> 
+                <div class="marijuana-icon pull-left"></div>
+            <% } %>
+
+
+          <% }) %>
+         </div>
+      </td>
+      <% } %>
+    </tr>
+    <% } %>
+  </tbody>
+</table>"
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="finishStudy" tabindex="-1" role="dialog" aria-labelledby="finishStudy">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content alert-wrapper">
+      <div class="modal-header alert-header"> Study Complete </div>
+      <div class="modal-body text-center alert-body">
+        <br>
+        <span class="js-complete-txt"></span>
+      </div>
+      <br>
+      <div class="modal-footer">
+        <div class="alert-btn-group">
+          <button type="button" class="alert-btn left" data-dismiss="modal">No</button>
+           <button type="button" class="alert-btn right js-confirm-finish" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

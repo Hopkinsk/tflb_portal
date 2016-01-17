@@ -8,7 +8,6 @@ This application structure was based upon:
 1. davidsulc's [RequireJS and Marionette](https://github.com/davidsulc/structuring-backbone-with-requirejs-and-marionette) example app which accompanies his [book](https://leanpub.com/structuring-backbone-with-requirejs-and-marionette)
 
 
-
 Libraries
 ---------
 
@@ -29,8 +28,6 @@ Development
     * JSHint
     * LESS and cssmin
     * RequireJS
-    
-
 * Set up:
     * install node.js on your system
     * in the project directory, run:

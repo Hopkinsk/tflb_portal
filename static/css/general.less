@@ -1,0 +1,97 @@
+@darkAccent: #003087;
+@lightAccent: #41B6E6;
+@lightShade: #EBF2FF;
+@lightBlue: #CDDBF5;
+
+body {
+    &.study {
+        background: white !important;
+    }
+    &.event-mode {
+        background: #444343 !important;
+    }
+	background: #D8D8D8 !important;
+}
+@media only screen and (max-device-width: 1024px) {
+body {
+    //background: red !important;
+}
+}
+
+
+button {
+    outline: none;
+}
+
+.alert-wrapper {
+
+    .alert-header {
+        font-weight: 500;
+        font-size: 20px;
+        background: @darkAccent;
+        color: white;
+    }
+    .alert-body {
+        font-weight: 400;
+        font-size: 18px;
+    }
+    .alert-btn-group {
+
+        .alert-btn {
+            width: 118px;
+            height: 37px;
+            border: solid 2px @darkAccent;
+            border-radius: 4px;
+            font-size: 20px;
+
+            &.left {
+                background-color: white;
+                color: black;
+
+            }
+
+            &.right {
+                background-color: @darkAccent;
+                color: white;
+            }
+        }
+    }    
+}
+
+
+.no-gutter {
+    padding-right:0;
+    padding-left:0;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+.disable-overlay {
+    background-color: #333;
+    opacity: 0.8;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    //display: none;
+}
+
+.modal-overlay {
+    
+    position: absolute;
+    z-index: @eventModeZindex;
+    top: 5%;
+
+}
+
+.study-complete-tag {
+    
+    padding: 6px;
+    border-radius: 5px;
+}

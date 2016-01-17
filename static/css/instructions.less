@@ -1,0 +1,140 @@
+.user-instructions {
+	color: #464646;
+	font-size: 14px;
+	background-color: white;
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    @media only screen and (max-device-width: 1024px) {
+       // overflow: hidden;
+       // height: 768px;
+    }
+
+
+    &.calendar {
+        overflow-y: scroll;
+        height: 600px;
+    }
+
+    .continue-btn {
+        width: 153px;
+        height: 62px;
+        font-size: 26px;
+        font-weight: 500;
+        background: #003087;
+        color: white;
+        margin-top: 17px;
+
+    }
+    .js-begin-study-btn {
+        width: 203px;
+        font-weight: 500;
+    }
+    .title {
+        font-weight: 600;
+        font-size: 33px;
+        margin-bottom: 10px;
+        color: @darkAccent;
+    }
+    .sub-title {
+        font-size: 16px;;
+    }
+    .heading {
+        color: @darkAccent;
+        font-size: 21px;
+    }
+    p {
+        margin-left: 20px;
+    }
+    .lg-text {
+        font-size: 20px;
+    }
+    .standard-drink-img {
+        height: 326px;
+        width: 687px;
+        background-image: url('../images/standardDrink.png');
+        background-repeat: no-repeat;
+        background-size: 669px 261px;
+        position: relative;
+        bottom: 0;
+        margin-top: 32px;
+        margin-left: 234px;
+            
+        &.calendar {
+            margin-left: 7%;
+        }
+
+        @media only screen and (max-device-width: 1024px) {
+            margin-left: 138px;
+        }
+    }
+
+    .input-img {
+        height: 368px;
+        width: 578px;
+        background-image: url('../images/input.png');
+        background-repeat: no-repeat;
+        background-size: 466px 408px;
+        position: relative;
+        bottom: 0;
+        left: 24%;
+        margin-top: 6px;
+
+        &.calendar {
+            left: 19%;
+        }
+
+        @media only screen and (max-device-width: 1024px) {
+            left: 24%
+        }
+    }
+    .add-event-img {
+        background-image: url('../images/add-event-panel.png');
+        background-repeat: no-repeat;
+        background-size: 492px 219px;
+        height: 222px;
+        width: 578px;
+        position: relative;
+        left: 24%;
+
+
+        &.calendar {
+            left: 19%;
+            background-size: 495px 219px;
+            height: 237px;
+
+        }
+    }
+}
+
+
+
+.js-instructions-continue {
+	background: @darkAccent;
+	color: white;
+}
+.js-close-instructions {
+    background: @darkAccent;
+    color: white;
+    font-size:18px;
+    font-weight: 500;
+}
+.instructions-btn {
+    background: transparent;
+    margin-top: -20px !important;
+    margin-right: -142px !important;
+    height: 40px;
+    font-size: 24px;
+    width: 48px;
+    border: none;
+}
+
+.instructions-text {
+    font-size: 18px;
+
+}
+
+.underline {
+    text-decoration: underline;
+}
+

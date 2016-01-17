@@ -17,7 +17,7 @@
   
 
     <!-- Logged in -->
-      <script>          
+     <!--  <script>          
         window.server_session = {
             timeout: 30,
             timeout_warning: 5,
@@ -28,8 +28,7 @@
               id: "<sec:loggedInUserInfo field='id'/>"
             } 
         };        
-      </script>
-      <!-- -->
+      </script> -->
 
 </head>
 

@@ -5,11 +5,26 @@ define(function(require, exports, module) {
     var Urls = {
         logout: "/j_spring_security_logout",
         keepAlive: "/keepAlive",
-    };
 
-    // test with local grails
-    //Urls.findingSearch = "http://localhost:38080/curation_server/curation/curationElement/findingSearch";
-    //Urls.findingSearch = "/curation_server/curation/curationElement/findingSearch";
+        study: function(){
+             return "/app/mockdata/study/" + encodeURIComponent(this.id) + ".json";
+        },
+        studyDay: function(){
+            return "/app/mockdata/day/" + encodeURIComponent(this.id)  + ".json";
+        },
+        studySafetyTrigger: function(){
+            return "/app/mockdata/study/safety.json";
+        },
+        personalEvent: function(){
+            return "/app/mockdata/personal/" + encodeURIComponent(this.id);
+        },
+        studyList: function(){
+            return "/app/mockdata/studies/all.json";
+        },
+        exportStudies: function(){
+            return "/app/mockdata/study/export.csv";
+        } 
+    };
 
     return Urls;    
 });

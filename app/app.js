@@ -102,15 +102,17 @@ define(function(require, exports, module) {
     App.getCurrentUser = function(){
         return window.server_session.user;
     };
-
-    App.on("start", function( SessionMonitor ){
+    App.loggedIn = false;
+    App.on("start", function( /*SessionMonitor */){
         if (Backbone.history){
             require([
-
+                "apps/home/home_app",
+                "apps/study/study_app",
+                "apps/admin/admin_app"
                 ], 
                 function () {    
-                    App.interceptUnauthorized();  
-                    App.sessionMonitor = new App.SessionMonitor(window.server_session);
+                    //App.interceptUnauthorized();  
+                    //App.sessionMonitor = new App.SessionMonitor(window.server_session);
                     if (App.sessionMonitor){
                         var that = App;
 
@@ -126,8 +128,9 @@ define(function(require, exports, module) {
                     }
 
                     Backbone.history.start();
+
                     if (App.getCurrentRoute() === ""){
-                        App.trigger("curation:show");
+                        App.trigger("home:show");
                     }
                 }
             );
