@@ -27,22 +27,22 @@ See bower.json for exact versions.
 Development
 -----------
 
-* Build: [Grunt](http://gruntjs.com/), including:
+* Build System: [Grunt](http://gruntjs.com/), including:
     * JSHint
     * LESS and cssmin
     * RequireJS
 
-* Set up:
-    * Using homebrew: ```brew install node``` // install node.js on your system. 
+* Homebrew Set up:
+    * ```brew install node``` // install node.js on your system. 
     * ```sudo npm install -g grunt-cli``` // install grunt using npm.
     * In the project directory, run:
     * ```npm install```   // Installs all node modules. ```npm list``` to show packages
     * ```bower install```   // Installs all dependencies. Run ```bower list``` to show packages
     
-* Run:
+* Run Locally:
     * Ensure testUrls are turned on in server_config.js
     * ```grunt```   // Builds everything. Release files are put in /dist
-    * ```grunt server:development``` // Run front-end locally, accessible on http://0.0.0.0:9000
+    * ```grunt server:development``` // Runs front-end locally, accessible on http://0.0.0.0:9000
     * ```grunt watch``` // Run in background while developing to automatically compile
 
 
@@ -51,7 +51,11 @@ Development
 
 Application Overview
 --------------------
-
+* Configurations
+    * Url Configurations: /app/server_config.js
+    * Dependencies
+        * bower.json
+        * app/config.js
 * Admin: 
     * The administration tab responsible for downloading patient data
 * Header
