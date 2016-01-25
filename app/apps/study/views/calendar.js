@@ -230,7 +230,7 @@ define(["app",
             });
 
         },
-        
+
         enableOverlay: function(){
             if($('.js-body-overlay').length === 0){
                 $('body').addClass('stop-scrolling');
@@ -268,6 +268,8 @@ define(["app",
         },
 
         onFinishStudy: function(evt){
+            $('.modal-backdrop').remove();
+
             var that=this;
             this.model.save({"studyComplete": true},{
                 patch: true,

@@ -23,11 +23,6 @@ module.exports = function(grunt) {
                 spawn: false,
                 interval: 1000
             },
-            // css: {
-            //     files: "app/styles/*.less",
-            //     tasks: ["less","styles","cssmin"]
-            // },
-
             css: {
                 files: ["static/css/*.less", "static/css/index.css"],
                 tasks: ["less","cssmin"]
@@ -77,57 +72,13 @@ module.exports = function(grunt) {
         less: {
             compile: {
                 options: {
-                    paths: ["static/css", /*"app/styles",*/ "vendor/bower/bootstrap/less"]
+                    paths: ["static/css", "vendor/bower/bootstrap/less"]
                 },
                 files: {
-                    //"app/styles/index_compiled.css": "app/styles/index.less"
                     "static/css/index_compiled.css": "static/css/index.less"
                 }
             }
         },
-
-
-        // This task simplifies working with CSS inside Backbone Boilerplate
-        // projects.  Instead of manually specifying your stylesheets inside the
-        // HTML, you can use `@imports` and this task will concatenate only those
-        // paths.
-
-
-        // styles: {
-        //     // Out the concatenated contents of the following styles into the below
-        //     // development file path.
-        //     "dist/css/styles.css": {
-        //         // Point this to where your `index.css` file is location.
-        //        // src: "app/styles/index.css",
-        //         src: "static/css/index.css",
-
-        //         // The relative path to use for the @imports.
-        //        // paths: ["app/styles"],
-
-        //         paths: ["static/css"],
-        //         // Rewrite image paths during release to be relative to the specified directory.
-        //         // comment out to disable: url() in styles already relative and should be kept the same                
-        //        // forceRelative: "/app/styles/images/"
-        //        forceRelative: "static/images/"
-        //     }
-        // },
-
-
-
-
-
-
-        // Minfiy the distribution CSS.
-        // cssmin: {
-        //     release: {
-        //         files: {
-        //             "dist/css/styles.min.css": ["dist/css/styles.css"]
-        //         }
-        //     }
-        // },
-
-
-
 
         cssmin: {
           all: {
@@ -187,19 +138,7 @@ module.exports = function(grunt) {
                     {
                         src: "vendor/**",
                         dest: "dist/"
-                    },
-                    // {
-                    //     expand: true,
-                    //     cwd: "app/styles/fonts/",
-                    //     src: "**",
-                    //     dest: "dist/css/fonts/"
-                    // },
-                    // {
-                    //     expand: true,
-                    //     cwd: "app/styles/images/",
-                    //     src: "**",
-                    //     dest: "dist/css/images/"
-                    // },     
+                    },    
                     {
                         expand: true,
                         cwd: "static/css/",
@@ -226,58 +165,28 @@ module.exports = function(grunt) {
             },
             release_bundle: {
                 files: [
-                    // {                    
-                    //     src: "dist/index.html",
-                    //     dest: "dist_bundle/index.gsp"
-                    // },
                     {
                         src: "dist/index.gsp",
                         dest: "dist_bundle/index.gsp"
                     },
-                    // {                    
-                    //     src: "dist/css/styles.min.css",
-                    //     dest: "dist_bundle/css/styles.min.css"
-                    // },                                                           
-                    // {
-                    //     expand: true,
-                    //     cwd: "dist/css/fonts/",
-                    //     src: "**",
-                    //     dest: "dist_bundle/css/fonts/"
-                    // },                                                           
-                    // {
-                    //     expand: true,
-                    //     cwd: "dist/css/images/",
-                    //     src: "**",
-                    //     dest: "dist_bundle/css/images/"
-                    // },
-
-                    // {
-                    //     src: "dist/css/index_compiled.css",
-                    //     dest: "dist_bundle/css/index_compiled.css"
-                    // },
                     {
                         expand: true,              
                         cwd: "dist/css/",
                         src: ["index.css"],                
                         dest: "dist_bundle/css/"
                     },
-                    
                     {
                         expand: true,
                         cwd: "dist/css/fonts/",
                         src: "**",
                         dest: "dist_bundle/css/fonts/"
                     },
-                    
-
                     {
                         expand: true,
                         cwd: "dist/images/",
                         src: "**",
                         dest: "dist_bundle/images/"
                     },
-
-
                 ]              
             },
             release_bundle2: {
@@ -326,12 +235,12 @@ module.exports = function(grunt) {
                 frameworks: ["mocha"],
 
                 plugins: [
-          "karma-jasmine",
-          "karma-mocha",
-          "karma-qunit",
-          "karma-phantomjs-launcher",
-          "karma-coverage"
-        ],
+                  "karma-jasmine",
+                  "karma-mocha",
+                  "karma-qunit",
+                  "karma-phantomjs-launcher",
+                  "karma-coverage"
+                ],
 
                 preprocessors: {
                     "app/**/*.js": "coverage"
@@ -343,10 +252,10 @@ module.exports = function(grunt) {
                 },
 
                 files: [
-          // You can optionally remove this or swap out for a different expect.
-          "vendor/bower/chai/chai.js",
-          "vendor/bower/requirejs/require.js",
-          "test/runner.js",
+                      // You can optionally remove this or swap out for a different expect.
+                      "vendor/bower/chai/chai.js",
+                      "vendor/bower/requirejs/require.js",
+                      "test/runner.js",
 
                     {
                         pattern: "app/**/*.*",
@@ -422,7 +331,6 @@ module.exports = function(grunt) {
     "copy:release",
     "requirejs",
     "less",
-   //"styles",
     "cssmin",
     "copy:release_bundle",
     "copy:release_bundle2"

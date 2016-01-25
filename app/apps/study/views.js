@@ -50,22 +50,23 @@ define([
 
       onAdminLogin: function(evt){
         this.$('.js-invalid-login').addClass('hidden');
-        
         var password = this.ui.loginInput.val();
         if(password != this.passphrase){
           this.$('.js-invalid-login').removeClass('hidden');
         } else {
+          $('.modal-backdrop').remove();
+          $('body').removeClass('modal-open');
           App.loggedIn = true;
           App.trigger('home:show');
         }
       },
-
       serializeData: function(){
           return {
             safetyTriggered: this.safetyTriggered
           };
         }
     }),
+
     StudyDoesNotExist: Marionette.LayoutView.extend({
         template: errorTpl,
         events: {

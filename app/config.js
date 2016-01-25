@@ -6,7 +6,7 @@ require.config({
         "vendor": "../vendor",
 
         // Almond is used to lighten the output filesize.
-        //"almond": "../vendor/bower/almond/almond",
+        "almond": "../vendor/bower/almond/almond",
 
         // Opt for Lo-Dash Underscore compatibility build over Underscore.
         "underscore": "../vendor/bower/lodash/dist/lodash.underscore",
