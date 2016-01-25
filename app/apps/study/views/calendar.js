@@ -66,6 +66,7 @@ define(["app",
             this.generateCalendar();
             this.setDailyMarijuana();
         },
+
         onStudyComplete: function(evt){
             this.hasEvents = this.model.hasEvents();
             if(this.cal.options.events.length > 0){
@@ -125,8 +126,8 @@ define(["app",
                 this.$('.event-personal-label, .marijuana-icon, .alcohol-icon').addClass('event-mode');
             }
         },
+
         generateCalendar: function(){
-            
             var that=this;
             this.cal = this.$('.js-calendar').clndr({
                 template: that.clndrTpl,
@@ -140,8 +141,7 @@ define(["app",
                             if(that.eventMode){
                                 that.showEventInputView(target);
                             } else {
-                               // that.showEventInputView(target);
-                               that.showInputView(target);
+                                that.showInputView(target);
                             }
                         }
                     },
@@ -151,11 +151,6 @@ define(["app",
                     nextMonth: function(month){
                         that.onPreviousMonth(month);
                     }
-                },
-                extras: {
-                    //lastMonth: "last",
-                    //nextMonth: "next",
-                    studyComplete: "hi"
                 },
                 doneRendering: function(){ 
                     if(that.eventMode){
@@ -173,13 +168,10 @@ define(["app",
                         that.$('.js-finish-study').addClass('hidden');
                         that.$('.js-previous-month').removeClass('hidden');
                         that.$('.js-next-month').removeClass('hidden');
-
-                        
                     }
                     if(that.firstMonth){
                         that.$('.js-next-month').addClass('hidden');
                     } 
-
                 },
                 events: that.model.getEvents(),
                 constraints: {
@@ -188,10 +180,9 @@ define(["app",
                 }
             });
         },
+
         showEventInputView: function(day){
             this.enableOverlay();
-
-
             var dayModel = this.model.createDay(day);
             this.eventView = new Events({
                 model: dayModel,
@@ -201,7 +192,6 @@ define(["app",
             });
 
             this.inputRegion.show(this.eventView);
-            
             var that=this;
             this.eventView.on('close', function(){
                 that.eventView.destroy();
@@ -211,9 +201,7 @@ define(["app",
                 that.$('.js-event-mode-header').addClass('hidden');
                 that.$('.js-cal-mode-header').removeClass('hidden');
                 that.$('.event-personal-label, .marijuana-icon, .alcohol-icon').removeClass('event-mode');
-
             });  
-
         },
 
         showInputView: function(day){
@@ -226,9 +214,8 @@ define(["app",
                 endDate: this.endDate.clone(),
                 dailyMarijuana: this.dailyMJ
             });
-
-
             this.inputRegion.show(this.inputView);
+            
             var that=this;
             this.inputView.on('changeDailyMarijuana', function(use){
                 that.model.set({
@@ -241,11 +228,6 @@ define(["app",
                 that.inputView.destroy();
                 that.disableOverlay();
             });
-
-        },
-
-        toggleEventMode: function(){
-
 
         },
         
@@ -279,16 +261,8 @@ define(["app",
                     this.$('.js-next-month').addClass('hidden');
                 }
             }
-           // this.setAdjacentMonths(month);
         },
 
-        /*
-        setAdjacentMonths: function(month){
-            this.$('.js-nextMonth').html(month.add(1, "month").format('MMMM'));
-            var last = month.subtract(2, "month");
-            this.$('.js-lastMonth').html(last.format('MMMM'));
-        },
-        */
         onAddEvent: function(evt){
             this.trigger('event:add');
         },
@@ -301,8 +275,7 @@ define(["app",
                     that.trigger('study:complete', model.get('safetyTriggered'));
                 },
                 error: function(){
-                    that.trigger('study:complete', true);
-                    console.log("ERROR !!!");
+                    console.log("Error Marking Study Complete.");
                 }
             });
         }

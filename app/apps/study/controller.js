@@ -21,10 +21,6 @@ define(["app", "apps/study/views"], function(App, Views ){
     };
 
     var displayInstructions = function(currentStudy){
-        //mainView = new Views.Main();
-        //App.mainRegion.show(mainView);
-
-
         var instructions = new Views.Instructions();
         mainView.contentRegion.show(instructions);
 
@@ -40,8 +36,6 @@ define(["app", "apps/study/views"], function(App, Views ){
             displayStudyComplete(currentStudy, currentStudy.get('safetyTriggered'));
         } else {
             displayInstructions(currentStudy);
-            
-           // displayCalendar(currentStudy);
         }
 
     };
@@ -52,17 +46,15 @@ define(["app", "apps/study/views"], function(App, Views ){
             App.mainRegion.show(mainView);
             $('#header-region').addClass('hidden');
             require(["entities/study"], function(){
-                  var fetchStudy = App.request("study:show", studyId );
-                  $.when(fetchStudy).done(function(currentStudy, xhr){   
-                        if(currentStudy){
-                            display(currentStudy);
-                        } else {
-                            $('body').addClass('study');
-                            mainView.contentRegion.show(new Views.StudyDoesNotExist());
-                        }     
-                        
-                   //displayInstructions(currentStudy);
-                  });
+              var fetchStudy = App.request("study:show", studyId );
+              $.when(fetchStudy).done(function(currentStudy, xhr){   
+                    if(currentStudy){
+                        display(currentStudy);
+                    } else {
+                        $('body').addClass('study');
+                        mainView.contentRegion.show(new Views.StudyDoesNotExist());
+                    }     
+                });
             });
         }
     };

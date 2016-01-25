@@ -138,18 +138,14 @@ define(["app",
         toggleMarijuanaButtons: function(use){
             console.log('toggle!', use);
             if(use){
-                //this.ui.noMarijuana.addClass('disabled');
-                //this.ui.marijuanaBtns.prop('disabled', true);
                 this.ui.dailyMJWrapper.addClass('active');
             } else {
-               // this.ui.noMarijuana.removeClass('disabled');
                 this.ui.noMarijuana.addClass('active');
                 this.ui.yesMarijuana.removeClass('active');
-                //this.ui.marijuanaBtns.prop('disabled', false);
                 this.ui.dailyMJWrapper.removeClass('active');
             }
         }, 
-        //todo: edge case: enter alc and daily mj same time 
+
         saveDay: function(){
             console.log("SAVE DAY", this.marijuana);
             this.model.set({
@@ -164,16 +160,7 @@ define(["app",
                 if(!this.dailyMJ){
                     this.changeDailyMarijuana(true);                    
                 }
-                //today mj == false
-                /*
-                if(!this.marijuana){
-                    this.calendar.addEvents([{
-                        date: this.model.get('date'),
-                        type: "marijuana",
-                        use: this.marijuana
-                    }]);
-                }
-                */
+
             //uncheck daily mj
             } else {
                 if(this.dailyMJ){
@@ -213,9 +200,6 @@ define(["app",
                     }]);     
                 }             
             }
-
-
-
         },
 
         changeDailyMarijuana: function(use){
@@ -225,6 +209,7 @@ define(["app",
                     return (event.type == 'marijuana');
                 });                
             }
+
             //if model wasnt already set to dailyMarijuana: true then do this 
             var events = [];
             var dayNumber = 90;
@@ -253,7 +238,6 @@ define(["app",
             var data = Marionette.ItemView.prototype.serializeData.call(this);
             data.personalEvents = this.model.getPersonalEvents();
             data.dateString = moment(this.model.get('date')).format("dddd, MMMM Do YYYY");
-            console.log('DATE STRING', data.dateString);
             data.dailyMJ = this.dailyMJ;
             return data;
         }

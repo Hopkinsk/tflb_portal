@@ -36,6 +36,7 @@ define([
 
 
       initialize: function(options){
+        /* STATICALLY SET PASSWORD TO ENTER SITE */
         this.passphrase = 'asap';
         this.safetyTriggered = options.safetyTriggered;
       },

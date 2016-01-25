@@ -33,8 +33,9 @@ Development
     * RequireJS
 
 * Set up:
-    * install node.js on your system
-    * in the project directory, run:
+    * Using homebrew: ```brew install node``` // install node.js on your system. 
+    * ```sudo npm install -g grunt-cli``` // install grunt using npm.
+    * In the project directory, run:
     * ```npm install```   // Installs all node modules. ```npm list``` to show packages
     * ```bower install```   // Installs all dependencies. Run ```bower list``` to show packages
     
@@ -61,6 +62,8 @@ Application Overview
         * Generic login password hardcoded: apps/home/views.js
         * Valid study id logic: apps/home/views.js
 * Study 
-    * The study itself. Flow: Instructions -> Calendar -> Study Complete
+    * Flow: Instructions -> Calendar -> Study Complete
+    * Calendar built using clndr.js plugin
+    * Model for study: /app/entities/study.js
 
 

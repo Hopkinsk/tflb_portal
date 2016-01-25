@@ -81,7 +81,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
     Entities.study = Backbone.Model.extend({
         url: Entities.urls.study,
 
-
         createDay: function(data){
             data.date = moment(data.date).format('L');
             data.study_id = this.id;
@@ -109,7 +108,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         },
         hasEvents: function(){
             var has = false;
-
             _.each(this.get('marijuana'), function(evt){
                 has = true;
             });
@@ -117,7 +115,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
             _.each(this.get('alcohol'), function(evt){
                 has = true;
             });
-            console.log("events has ", this, has);
             return has;
         },
         getSafetyStatus: function(){
@@ -131,16 +128,13 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
             return triggered;
         },
         getSafetyTrigger: function(){
-            console.log("get safety trigger!");
             var defer = $.Deferred();
-
             var safetyModel = new Entities.studySafetyTrigger({
                 id: this.id
             });
 
             safetyModel.fetch({
                 success: function(model, response){
-                    console.log("GOT SAFETY", model);
                     defer.resolve(model.get('safetyTriggered'));
                 },
                 error: function(model, xhr){
@@ -176,7 +170,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     patch: true,
                     dataType: "json",
                     success: function(collection, response){
-                        //set entities.currentStudy to response
                         defer.resolve(collection);
                     },
                     error: function(model, xhr){
@@ -191,7 +184,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         saveStudy: function(data){
             var defer = $.Deferred();
             var study = new Entities.study(data);
-            console.log("about to save");
             study.save(
                 data,
                 {
@@ -199,11 +191,9 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     patch: true,
                     dataType: "json",
                     success: function(model, response){
-                        console.log("save success");
                         defer.resolve(model);                        
                     },
                     error: function(model, xhr){
-                        console.log("save error");
                         defer.resolve(false, xhr, model);
                     }
                 }
@@ -221,8 +211,6 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                     patch: true,
                     dataType: "json",
                     success: function(model, response){
-                        //set entities.currentStudy to response
-                        console.log("MODEL", model);
                         defer.resolve(model);
                     },
                     error: function(model, xhr){
@@ -236,9 +224,7 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
         exportStudies: function(ids){
             var defer = $.Deferred();
             var study = new Entities.csvExport();
-            
-            console.log("IDS: ", ids);
-              $.ajax({
+            $.ajax({
                  type: 'GET',
                  data:{ ids: JSON.stringify(ids)},
                  datatype: 'json',
@@ -246,32 +232,10 @@ define(["app", "backbone", "moment"], function(App, Backbone, moment){
                  async: true,
                  cache: false,
                  success: function(response){
-
-                    console.log("SUCCESS AJAX");
-                    console.log(response);
                     defer.resolve(response);
                  }
-                });
-
-            // study.fetch(
-            //     {
-            //         wait: true,
-            //         data: {
-            //             ids: JSON.stringify(ids),
-            //         },
-            //         success: function(model, response){
-            //             //set entities.currentStudy to response
-            //             defer.resolve(model);
-            //         },
-            //         error: function(model, xhr){
-            //             defer.resolve(false, xhr, model);
-            //         }
-            //     }
-            // );
-
+            });
             return defer.promise();
-
-
         }
     };
 

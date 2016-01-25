@@ -45,10 +45,6 @@ define(["app",
         },
         onStartStudy: function(evt){
             this.trigger('study:start');
-        },
-        serializeData: function(){
-            // var data = Marionette.ItemView.prototype.serializeData.call(this);   
-            // return data;
         }
     });
 
