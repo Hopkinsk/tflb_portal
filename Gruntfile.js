@@ -177,7 +177,6 @@ module.exports = function(grunt) {
             }
         },
 
-        // Move vendor and app logic during a build.
         copy: {
             release: {
                 files: [
@@ -207,14 +206,12 @@ module.exports = function(grunt) {
                         src: "**",
                         dest: "dist/css/"
                     },
-
                     {
                         expand: true,
                         cwd: "static/css/fonts/",
                         src: "**",
                         dest: "dist/css/fonts/"
                     },
-
                     {
                         expand: true,
                         cwd: "static/images/",

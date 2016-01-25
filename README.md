@@ -18,8 +18,11 @@ Libraries
 * JQuery 2.x
 * Underscore
 * [Bootstrap](http://getbootstrap.com/css/) 3.x
-* Clndr (https://kylestetz.github.io/CLNDR/)
+* [Clndr](https://kylestetz.github.io/CLNDR/)
+* [Moment.js](http://momentjs.com/) 
+
 See bower.json for exact versions.
+
 
 Development
 -----------
@@ -28,6 +31,7 @@ Development
     * JSHint
     * LESS and cssmin
     * RequireJS
+
 * Set up:
     * install node.js on your system
     * in the project directory, run:
@@ -35,6 +39,28 @@ Development
     * ```bower install```   // Installs all dependencies. Run ```bower list``` to show packages
     
 * Run:
+    * Ensure testUrls are turned on in server_config.js
     * ```grunt```   // Builds everything. Release files are put in /dist
     * ```grunt server:development``` // Run front-end locally, accessible on http://0.0.0.0:9000
     * ```grunt watch``` // Run in background while developing to automatically compile
+
+
+
+
+
+Application Overview
+--------------------
+
+* Admin: 
+    * The administration tab responsible for downloading patient data
+* Header
+    * Application header
+* Home
+    * 'Login' view and 'New Participant' view
+    * Login password
+        * Generic login password hardcoded: apps/home/views.js
+        * Valid study id logic: apps/home/views.js
+* Study 
+    * The study itself. Flow: Instructions -> Calendar -> Study Complete
+
+

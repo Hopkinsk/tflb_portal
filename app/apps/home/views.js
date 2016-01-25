@@ -41,6 +41,7 @@ define([
             }
         },
         onLogin: function(){
+          // Generic Login password set to 'asap'
           if(this.ui.pswInput.val().toLowerCase() == 'asap'){
             this.trigger('login');
           } else {
@@ -89,18 +90,10 @@ define([
         validStudyId: function(){
             var validity = true;
             var input = this.ui.studyIdInput.val();
-            console.log(input.length);
             if(input.length < 4){
-              console.log('lett');
                 validity = false;
                  this.$('.js-invalid').removeClass('hidden');
                  this.$('.js-invalid').html("Study ID must be 4 digits.");
-                 //var that = this;
-                  //setTimeout(function() {
-                  // that.$('.js-invalid').fadeOut();
-                  // that.ui.studyIdInput.val('');
-                  //}, 1000);
-
             }
             return validity;
           }
